@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "484486e8-9fd1-4d55-bc4c-41a891acf353",
+		"name": "user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_email\": \"andrea.betti10@studio.unibo.it\",\r\n    \"user_username\": \"abetti\",\r\n    \"user_name\": \"Andrea\",\r\n    \"user_lastname\": \"Betti\",\r\n    \"user_gender\": \"male\",\r\n    \"user_password\": \"passwordSicura\",\r\n    \"user_birthDate\": \"1998-01-26\",\r\n    \"user_role\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_username\": \"abetti\",\r\n    \"user_password\": \"passwordSicura\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjEwNTUyNjNlMzYwNDYyYzkwYWRmNDBlIn0sImlhdCI6MTYyNzc0OTIyMywiZXhwIjoxNjI3NzUyODIzfQ.B-NY5kzxs-Gf0GBZOR3prfKjAAZ8CVdGk8E10KiWwMQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

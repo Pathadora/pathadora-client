@@ -1,0 +1,9 @@
+﻿<div class="card mt-4">
+    <div class="card-header">Pathadora</div>
+    <div class="card-body">
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <div *ngIf="currentUser">
+            <p>Benvenuto {{currentUser.user_username}}!</p>
+        </div>
+    </div>
+</div>
