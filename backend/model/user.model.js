@@ -44,7 +44,14 @@ let User = new Schema({
     type: String,
     enum : ['user','teacher','admin'],
     default: 'user'
-  }
+  },
+  user_courses: [
+    {
+      type : Schema.Types.ObjectId,
+      ref: 'Course',
+      required: false
+    }
+  ]
 });
 
 module.exports = mongoose.model('User', User);

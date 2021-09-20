@@ -8,7 +8,9 @@ let Course = new Schema({
         unique: true
     },
     course_degree: {
-        type: ['Bachelor', 'Master'],
+        type: String,
+        enum: ['Bachelor', 'Master'],
+        default: 'Bachelor',
         required: true
     },
     course_language: {
@@ -29,7 +31,13 @@ let Course = new Schema({
     },
     course_description: {
         type: String
-    }
+    },
+    course_resources: [
+        {
+            data: Buffer,
+            contentType: String
+        }
+    ]
 });
 
 module.exports = mongoose.model('Course', Course);

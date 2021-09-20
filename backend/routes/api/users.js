@@ -5,7 +5,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/default.json');
-const { check, validationResult } = require('express-validator');
+const { check, validationResult, oneOf } = require('express-validator');
 
 const User = require('../../model/user.model');
 
@@ -25,7 +25,14 @@ router.post(
     .not()
     .isEmpty(),
     check('user_password', 'La password deve contenere almeno 6 caratteri')
-    .isLength({ min: 6 })
+    .isLength({ min: 6 }),
+    oneOf([
+      check('user_courses').not().exists(),
+      [
+        check('user_courses').isArray(),
+        check('user_courses').isLength({ min: 1 })
+      ]
+    ])
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -69,15 +76,18 @@ router.post(
         user_password : hashedPassword,
         user_birthDate : req.body.user_birthDate,
         user_avatar : avatar,
-        user_role : req.body.user_role
+        user_role : role
       });
+      if (role === 'teacher' && req.body.user_courses && Array.isArray(req.body.user_courses) && req.body.user_courses.length > 0) {
+        user.user_courses = req.body.user_courses
+      }
       await user.save();
 
       // Return jsonwebtoken (login after registration)
 
       const payload = {
         user: {
-          id: user._id
+          _id: user._id
         }
       };
 
@@ -122,6 +132,50 @@ router.get(
       if (!user) {
         return res.status(400).json({ msg: 'User not found'});
       }
+      res.json(user);
+    } catch(err) {
+      console.error(err.message);
+      res.status(500).send(err.message);
+    }
+  }
+);
+
+router.post(
+  '/courses',
+  [
+    auth,
+    [
+      oneOf([
+        check('user_courses').not().exists(),
+        [
+          check('user_courses').isArray(),
+          check('user_courses').isLength({ min: 1 })
+        ]
+      ])
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const {
+      user_courses
+    } = req.body;
+    try {
+      const user = await User.findById(req.user._id)
+      if (!user) {
+        return res.status(400).json({ msg: 'User not found'});
+      }
+      if (user.user_role === "user") {
+        return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
+    }
+      if (!user.user_courses) {
+        user.user_courses = user_courses;
+      } else {
+        user.user_courses.push(user_courses);
+      }
+      await user.save();
       res.json(user);
     } catch(err) {
       console.error(err.message);
