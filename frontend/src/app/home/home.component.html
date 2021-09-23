@@ -5,5 +5,60 @@
         <div *ngIf="currentUser">
             <p>Benvenuto {{currentUser.user_username}}!</p>
         </div>
+        <div *ngIf="currentUser && currentUser.user_role === 'user'">
+            <!--<form>
+                <div class="form-group">
+                    <label for="passion">Passione</label>
+                    <input type="text" formControlName="passion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passion.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Inserisci una passione</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="period">Durata del percorso di studi</label>
+                    <input type="number" formControlName="period" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.period.errors }" />
+                    <div *ngIf="submitted && f.period.errors" class="invalid-feedback">
+                        <div *ngIf="f.period.errors.required">Inserisci la durata</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="language">Lingua del percorso di studi</label>
+                    <input type="text" formControlName="language" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.language.errors }" />
+                    <div *ngIf="submitted && f.language.errors" class="invalid-feedback">
+                        <div *ngIf="f.language.errors.required">Inserisci la lingua</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="presence">Presenza obbligatoria</label>
+                    <input type="checkbox" formControlName="presence" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.presence.errors }" />
+                    <div *ngIf="submitted && f.presence.errors" class="invalid-feedback">
+                        <div *ngIf="f.presence.errors.required">Inserisci la presenza</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="max-courses">Massimo di numero di corsi da seguire per semestre</label>
+                    <input type="number" formControlName="max-courses" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.max-courses.errors }" />
+                    <div *ngIf="submitted && f.max-courses.errors" class="invalid-feedback">
+                        <div *ngIf="f.max-courses.errors.required">Inserisci un numero massimo di corsi da seguire per semestre</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p>Corsi da evitare</p>
+                    <label formArrayName="courses-to-avoid" *ngFor="let course of coursesFormArray.controls; let i = index">
+                        <input type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.courses.errors }">
+                        {{coursesData[i].course_name}}
+                        <div *ngIf="submitted && f.courses.errors" class="invalid-feedback"></div>
+                      </label>
+                </div>
+                <div class="form-group">
+                    <p>Corsi da includere</p>
+                    <label formArrayName="courses-to-include" *ngFor="let course of coursesFormArray.controls; let i = index">
+                        <input type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.courses.errors }">
+                        {{coursesData[i].course_name}}
+                        <div *ngIf="submitted && f.courses.errors" class="invalid-feedback"></div>
+                      </label>
+                </div>
+            </form>-->
+        </div>
     </div>
 </div>

@@ -36,7 +36,7 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
     }
 
-    register(name: string, lastname: string, gender: string, birthdate: string, username: string, email: string, password: string) {
+    register(name: string, lastname: string, gender: string, birthdate: string, username: string, email: string, password: string, role: string, courses: string[] = []) {
         return this.http.post<any>(`${environment.apiUrl}/users/register`, { 
             user_name: name,
             user_lastname: lastname,
@@ -45,7 +45,8 @@ export class AuthenticationService {
             user_username: username,
             user_email: email,
             user_password: password,
-            user_role: "user"
+            user_role: role,
+            user_courses: courses
         })
         .pipe(mergeMap(user => {
             return this.login(username, password);

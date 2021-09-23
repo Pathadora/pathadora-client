@@ -1,0 +1,21 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Dashboard docente</h4>
+        <div class="card-body">
+            <form [formGroup]="dashboardTeacherForm" (ngSubmit)="onSubmit()">
+                <div *ngFor="let c of courses" class="form-group">
+                    <label for=c._id>Username</label>
+                    <div *ngFor="let r of c._course_resources" class="form-group">
+                        {{r}}
+                    </div>
+                    <input type="file" id="res" name="resource">
+                </div>
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Salva
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </div>
+    </div>
+</div>

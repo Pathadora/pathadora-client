@@ -28,10 +28,7 @@ router.post(
     .isLength({ min: 6 }),
     oneOf([
       check('user_courses').not().exists(),
-      [
-        check('user_courses').isArray(),
-        check('user_courses').isLength({ min: 1 })
-      ]
+      check('user_courses').isArray()
     ])
   ],
   async (req, res) => {
@@ -147,10 +144,7 @@ router.post(
     [
       oneOf([
         check('user_courses').not().exists(),
-        [
-          check('user_courses').isArray(),
-          check('user_courses').isLength({ min: 1 })
-        ]
+        check('user_courses').isArray()
       ])
     ]
   ],

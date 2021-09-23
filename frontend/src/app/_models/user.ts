@@ -9,5 +9,6 @@
     user_birthDate?: string;
     user_avatar?: string;
     user_registrationDate?: string;
+    user_courses?: string[];
     token?: string;
 }
