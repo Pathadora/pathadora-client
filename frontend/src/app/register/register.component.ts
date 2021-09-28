@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
 
     get coursesFormArray() {
         return this.registerForm.controls.courses as FormArray;
-      }
+    }
 
     onSubmit() {
         this.submitted = true;
