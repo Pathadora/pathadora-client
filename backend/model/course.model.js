@@ -34,9 +34,15 @@ let Course = new Schema({
     },
     course_resources: [
         {
-            data: Buffer,
-            contentType: String
-        }
+            createdAt: {
+              type: Date,
+              default: Date.now,
+            },
+            name: {
+              type: String,
+              required: [true, "Uploaded file must have a name"],
+            },
+          }
     ]
 });
 

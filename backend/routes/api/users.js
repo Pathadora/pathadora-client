@@ -8,6 +8,7 @@ const config = require('../../config/default.json');
 const { check, validationResult, oneOf } = require('express-validator');
 
 const User = require('../../model/user.model');
+const Course = require('../../model/course.model');
 
 router.post(
   '/register',
@@ -137,6 +138,34 @@ router.get(
   }
 );
 
+router.get(
+  '/courses',
+  auth,
+  async (req, res) => {
+    try {
+      const user = await User.findOne({ _id: req.user._id });
+      if (!user) {
+        return res.status(400).json({ msg: 'User not found'});
+      }
+      if (user.user_role === "user") {
+        return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
+      }
+      if (!user.user_courses || !Array.isArray(user.user_courses)) {
+        res.json([])
+      } else {
+
+        user_courses = await Promise.all(
+          user.user_courses.map(async (c_id, i) => await Course.findOne({ _id: c_id })).filter(c => c)
+        )
+        res.json(user_courses);
+      }
+    } catch(err) {
+      console.error(err.message);
+      res.status(500).send(err.message);
+    }
+  }
+);
+
 router.post(
   '/courses',
   [
@@ -163,7 +192,7 @@ router.post(
       }
       if (user.user_role === "user") {
         return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
-    }
+      }
       if (!user.user_courses) {
         user.user_courses = user_courses;
       } else {

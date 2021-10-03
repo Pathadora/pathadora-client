@@ -7,9 +7,12 @@ const path = require('path');
 const PORT = 4000;
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
 
-app.use(express.static(path.join(__dirname, "../backend")));
+app.use('/public', express.static(__dirname +'/public'));
 
 // Connect databasee
 connectDB();
@@ -21,5 +24,5 @@ app.use('/auth', require('./routes/api/auth'));
 app.use('/courses', require('./routes/api/courses'));
 
 app.listen(PORT, function() {
-  console.log("Server is running on Port: " + PORT);
+  console.log("Server is running on Port: " + PORT + " " + __dirname);
 });

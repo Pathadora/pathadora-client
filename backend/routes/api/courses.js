@@ -6,9 +6,23 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/default.json');
 const { check, validationResult, oneOf } = require('express-validator');
+const multer = require("multer");
 
 const Course = require('../../model/course.model');
 const User = require('../../model/user.model');
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, __dirname + '/../../public/');
+  },
+  filename: (req, file, cb) => {
+      cb(null, file.originalname);
+  },
+});
+
+const upload = multer({
+  storage: multerStorage
+});
 
 router.get(
     '/',
@@ -197,6 +211,48 @@ router.get(
       }
     }
   );
+
+router.post(
+  '/resource/:course_id',
+  [auth, upload.array("file")],
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.user._id).select('-password');
+      if (!user) {
+        return res.status(400).json({ errors: [{ msg: 'User not found' }] });
+      }
+      // only teachers can upload resource
+      if (user.user_role === "user") {
+          return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
+      }
+
+      const course = await Course.findById(req.params.course_id);
+      if (!course) {
+        return res.status(400).json({ msg: 'Course not found' });
+      }
+
+      const newResource = {
+        name: req.files[0].filename
+      };
+      if (!course.course_resources) {
+        course.course_resources = [ newResource ];
+      } else {
+        course.course_resources.unshift(newResource);
+      }
+      console.log(req.files[0].path)
+      console.log(__dirname)
+      course.save();
+      res.json({msg: "Resource uploaded"})
+    } catch (err) {
+      console.log("cazzo", req.file, req.files, req.body)
+      console.error(err.message);
+      if (err.kind === 'ObjectId') {
+        return res.status(400).json({ msg: 'Course not found' });
+      }
+      res.status(500).send(err.message);
+    }
+  }
+)
   
 
 module.exports = router;

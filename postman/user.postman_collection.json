@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "User register",
+			"name": "User register teacher",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"user_email\": \"andrea.betti10@studio.unibo.it\",\r\n    \"user_username\": \"abetti\",\r\n    \"user_name\": \"Andrea\",\r\n    \"user_lastname\": \"Betti\",\r\n    \"user_gender\": \"male\",\r\n    \"user_password\": \"passwordSicura\",\r\n    \"user_birthDate\": \"1998-01-26\",\r\n    \"user_role\": \"admin\"\r\n}",
+					"raw": "{\r\n    \"user_email\": \"teacher@studio.unibo.it\",\r\n    \"user_username\": \"teacher\",\r\n    \"user_name\": \"Teacher\",\r\n    \"user_lastname\": \"Betti\",\r\n    \"user_gender\": \"male\",\r\n    \"user_password\": \"passwordSicura\",\r\n    \"user_birthDate\": \"1998-01-26\",\r\n    \"user_role\": \"teacher\",\r\n    \"user_courses\": [\"6148bcaf56224d4b603e1859\"]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -93,6 +93,105 @@
 					"port": "4000",
 					"path": [
 						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User register admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_email\": \"andrea.betti10@studio.unibo.it\",\r\n    \"user_username\": \"abetti\",\r\n    \"user_name\": \"Andrea\",\r\n    \"user_lastname\": \"Betti\",\r\n    \"user_gender\": \"male\",\r\n    \"user_password\": \"passwordSicura\",\r\n    \"user_birthDate\": \"1998-01-26\",\r\n    \"user_role\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add teacher course",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZ2VuZGVyIjoibWFsZSIsInVzZXJfcm9sZSI6ImFkbWluIiwidXNlcl9jb3Vyc2VzIjpbXSwiX2lkIjoiNjE0OGRhMDEyNTUzYTgzNzU4YzliYjZkIiwidXNlcl9lbWFpbCI6ImFuZHJlYS5iZXR0aTEwQHN0dWRpby51bmliby5pdCIsInVzZXJfdXNlcm5hbWUiOiJhYmV0dGkiLCJ1c2VyX25hbWUiOiJBbmRyZWEiLCJ1c2VyX2xhc3RuYW1lIjoiQmV0dGkiLCJ1c2VyX3Bhc3N3b3JkIjoiJDJhJDEwJDlxQVZtNjhIRk8wV1N6SFdobFR0L09TdU5YcXFvNlRodUV3YksuR2d4TmNaSi5SM3E5QWlhIiwidXNlcl9iaXJ0aERhdGUiOiIxOTk4LTAxLTI2VDAwOjAwOjAwLjAwMFoiLCJ1c2VyX2F2YXRhciI6Ii8vd3d3LmdyYXZhdGFyLmNvbS9hdmF0YXIvZGVmODYwMTgwYmQxNmY3ZGI2ZjlhY2U4NWM4YTJhYzU_cz0yMDAmcj1wZyZkPW1tIiwidXNlcl9yZWdpc3RyYXRpb25EYXRlIjoiMjAyMS0wOS0yMFQxODo1OToxMy4wNjhaIiwiX192IjowfSwiaWF0IjoxNjMyMTY1MTM2LCJleHAiOjE2MzIxNjg3MzZ9.-LcyW3kz_XQkMtprns5xKVcDAggSBv3UHTvraQgJa6k",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_courses\": [\r\n        \"6148bcaf56224d4b603e1859\"\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "localhost:4000/users/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get teacher courses",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZ2VuZGVyIjoibWFsZSIsInVzZXJfcm9sZSI6InRlYWNoZXIiLCJ1c2VyX2NvdXJzZXMiOlsiNjE0OGRkNGJlMWNlMzQxNGI4ODQyNzNkIl0sIl9pZCI6IjYxNGNjNWM5MmQxOTMxMTE2ODhjNzRkMiIsInVzZXJfZW1haWwiOiJ0QGdtYWlsLmNvbSIsInVzZXJfdXNlcm5hbWUiOiJ0ZWFjaGVyIiwidXNlcl9uYW1lIjoidCIsInVzZXJfbGFzdG5hbWUiOiJiIiwidXNlcl9wYXNzd29yZCI6IiQyYSQxMCRUaUQ0RjZLOWkzVDRmc3V5dVZzZlAuLjF0R3JSaVdYNFhtUWRnTGhiYThybHhuNXJEeTlVeSIsInVzZXJfYmlydGhEYXRlIjoiMjAyMS0wOS0yNVQwMDowMDowMC4wMDBaIiwidXNlcl9hdmF0YXIiOiIvL3d3dy5ncmF2YXRhci5jb20vYXZhdGFyLzYzMTMwYTdmMmE5YjhkYzVhYzcxYjRjMDYyZTgwZTIwP3M9MjAwJnI9cGcmZD1tbSIsInVzZXJfcmVnaXN0cmF0aW9uRGF0ZSI6IjIwMjEtMDktMjNUMTg6MjI6MDEuOTg0WiIsIl9fdiI6MH0sImlhdCI6MTYzMzI5MDI4NCwiZXhwIjoxNjMzMjkzODg0fQ.Ttm2B9kNTM-JTtj9Z-XznIQoakNGiWcJwix-0aui53c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4000/users/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"courses"
 					]
 				}
 			},

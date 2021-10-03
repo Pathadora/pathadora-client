@@ -54,7 +54,7 @@ export class HomeComponent {
             error => {
                 this.error = error;
                 this.loading = false;
-            });
+        });
 
         this.loading = true;
         /*  this.userService.getAll().pipe(first()).subscribe(users => {

@@ -2,13 +2,26 @@
     <div class="card">
         <h4 class="card-header">Dashboard docente</h4>
         <div class="card-body">
-            <form [formGroup]="dashboardTeacherForm" (ngSubmit)="onSubmit()">
-                <div *ngFor="let c of courses" class="form-group">
-                    <label for=c._id>Username</label>
-                    <div *ngFor="let r of c._course_resources" class="form-group">
-                        {{r}}
+            <form enctype="multipart/form-data" [formGroup]="resourceForm" (ngSubmit)="onSubmit()">
+                <div id="courses" formArrayName="courses" *ngFor="let c of coursesData; let i = index">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                              <button mdbBtn class="btn btn-link" type="button" (click)="test.toggle()">
+                                {{c.course_name}}
+                              </button>
+                            </h5>
+                          </div>
+                        <div mdbCollapse #test="bs-collapse">
+                            <div *ngFor="let r of c.course_resources" class="form-group" >
+                                <div class="card-body" >
+                                    <a href="/public/{{r.name}}">{{r.name}}</a>
+                                </div>
+                            </div>
+                            <label class="d-none" for=c._id>{{c.course_name}}</label>
+                            <input class="form-control-file" type="file" (input)="fileChoosen($event, i)" [formControlName]="i" [id]="i" name="resource">    
+                        </div>
                     </div>
-                    <input type="file" id="res" name="resource">
                 </div>
                 <button [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>

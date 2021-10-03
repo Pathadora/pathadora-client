@@ -18,7 +18,6 @@ const routes: Routes = [
     { path: 'dashboard-teacher', component: DashboardTeacherComponent, canActivate: [AuthGuard], data : {
         "role" : "teacher"
     } },
-
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

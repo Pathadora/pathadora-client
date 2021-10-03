@@ -12,9 +12,17 @@ export class CoursesService {
         return this.http.get<Course[]>(`${environment.apiUrl}/courses`);
     }
 
-    addTeacherCourse(courses : string[]) {
+    getCurrentTeacherCourses() {
+        return this.http.get<Course[]>(`${environment.apiUrl}/users/courses`);
+    }
+
+    addTeacherCourse(courses: string[]) {
         return this.http.post<any>(`${environment.apiUrl}/users/courses`, { 
             user_courses: courses
         })
+    }
+
+    addResource(courseId: string, file: any) {
+        return this.http.post<any>(`${environment.apiUrl}/courses/resource/${courseId}`, file);
     }
 }

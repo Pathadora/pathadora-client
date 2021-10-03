@@ -19,6 +19,7 @@
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.22",
+    "multer": "^1.4.3",
     "stardog": "^3.2.0",
     "web-push": "^3.4.4"
   }
