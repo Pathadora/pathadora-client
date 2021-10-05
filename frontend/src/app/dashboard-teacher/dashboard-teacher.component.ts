@@ -8,7 +8,7 @@ import { Course } from '@app/_models';
 
 import { AuthenticationService, CoursesService } from '@app/_services';
 
-@Component({ templateUrl: 'dashboard-teacher.component.html' })
+@Component({ selector: 'dashboard-teacher', templateUrl: 'dashboard-teacher.component.html' })
 export class DashboardTeacherComponent implements OnInit {
     resourceForm: FormGroup;
     loading = false;

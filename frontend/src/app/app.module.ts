@@ -15,6 +15,7 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+import { DashboardUserComponent } from './dashboard-user';
 import { DashboardTeacherComponent } from './dashboard-teacher';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { DashboardTeacherComponent } from './dashboard-teacher';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
+        DashboardUserComponent,
         DashboardTeacherComponent
     ],
     providers: [

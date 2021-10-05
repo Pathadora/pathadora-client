@@ -3,7 +3,7 @@
     <div class="navbar-nav">
         <a class="navbar-brand" href="#">Pathadora</a>
         <a class="nav-item nav-link" *ngIf="currentUser" routerLink="/">Home</a>
-        <a class="nav-item nav-link" *ngIf="currentUser && currentUser.user_role === 'teacher'" routerLink="/dashboard-teacher">Dashboard docente</a>
+        <a class="nav-item nav-link" *ngIf="currentUser && currentUser.user_role === 'teacher'" routerLink="/profile-teacher">Profilo docente</a>
         <a class="nav-item nav-link" *ngIf="currentUser" (click)="logout()">Logout</a>
     </div>
 </nav>
