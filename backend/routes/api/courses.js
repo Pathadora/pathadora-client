@@ -244,7 +244,6 @@ router.post(
       course.save();
       res.json({msg: "Resource uploaded"})
     } catch (err) {
-      console.log("cazzo", req.file, req.files, req.body)
       console.error(err.message);
       if (err.kind === 'ObjectId') {
         return res.status(400).json({ msg: 'Course not found' });

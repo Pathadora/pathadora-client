@@ -16,10 +16,14 @@ export class CoursesService {
         return this.http.get<Course[]>(`${environment.apiUrl}/users/courses`);
     }
 
-    addTeacherCourse(courses: string[]) {
+    addTeacherCourse(courses_ids: string[]) {
         return this.http.post<any>(`${environment.apiUrl}/users/courses`, { 
-            user_courses: courses
+            user_courses_ids: courses_ids
         })
+    }
+
+    deleteTeacherCourse(course_id: string) {
+        return this.http.delete<any>(`${environment.apiUrl}/users/courses/${course_id}`)
     }
 
     addResource(courseId: string, file: any) {

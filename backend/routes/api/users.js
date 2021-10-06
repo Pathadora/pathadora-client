@@ -153,8 +153,7 @@ router.get(
       if (!user.user_courses || !Array.isArray(user.user_courses)) {
         res.json([])
       } else {
-
-        user_courses = await Promise.all(
+        const user_courses = await Promise.all(
           user.user_courses.map(async (c_id, i) => await Course.findOne({ _id: c_id })).filter(c => c)
         )
         res.json(user_courses);
@@ -166,6 +165,7 @@ router.get(
   }
 );
 
+// array of ids
 router.post(
   '/courses',
   [
@@ -183,7 +183,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     const {
-      user_courses
+      user_courses_ids
     } = req.body;
     try {
       const user = await User.findById(req.user._id)
@@ -194,12 +194,46 @@ router.post(
         return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
       }
       if (!user.user_courses) {
-        user.user_courses = user_courses;
+        user.user_courses = user_courses_ids;
       } else {
-        user.user_courses.push(user_courses);
+        user.user_courses.push(user_courses_ids);
       }
       await user.save();
-      res.json(user);
+
+      const user_courses = await Promise.all(
+        user.user_courses.map(async (c_id, i) => await Course.findOne({ _id: c_id })).filter(c => c)
+      )
+      res.json(user_courses);
+    } catch(err) {
+      console.error(err.message);
+      res.status(500).send(err.message);
+    }
+  }
+);
+
+router.delete(
+  '/courses/:id',
+  auth,
+  async (req, res) => {
+    try {
+      const user = await User.findOne({ _id: req.user._id });
+      if (!user) {
+        return res.status(400).json({ msg: 'User not found'});
+      }
+      if (user.user_role === "user") {
+        return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
+      }
+      if (!user.user_courses || !Array.isArray(user.user_courses)) {
+        res.json([])
+      } else {
+        user.user_courses = user.user_courses.filter(c => c._id != req.params.id)
+        await user.save();
+
+        const user_courses = await Promise.all(
+          user.user_courses.map(async (c_id, i) => await Course.findOne({ _id: c_id })).filter(c => c)
+        )
+        res.json(user_courses);
+      }
     } catch(err) {
       console.error(err.message);
       res.status(500).send(err.message);

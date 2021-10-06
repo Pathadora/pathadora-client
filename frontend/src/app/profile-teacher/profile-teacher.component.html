@@ -1,0 +1,18 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Area personale</h4>
+        <div class="card-body">
+            <div *ngFor="let c of coursesTeacherData; let i = index">
+                <label for="i">{{c.course_name}}</label>
+                <button id="i" (click)="remove(c._id)">Rimuovi corso</button>
+            </div>
+            <div *ngIf="selectableCourses.length > 0" >
+                <label class="d-none" for="addCourse">Aggiungo corso</label>
+                <select id="addCourse" [(ngModel)]="selectedCourse" class="form-control" >
+                    <option *ngFor="let c of selectableCourses" [ngValue]="c._id">{{c.course_name}}</option>
+                </select>
+                <button type="button" (click)="add()">Aggiungi corso</button>
+            </div>
+        </div>
+    </div>
+</div>

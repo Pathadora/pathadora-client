@@ -4,6 +4,7 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { DashboardTeacherComponent } from './dashboard-teacher';
+import { ProfileTeacherComponent } from './profile-teacher';
 import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
@@ -13,6 +14,9 @@ const routes: Routes = [
         "role" : "user"
     } },
     { path: 'register-teacher', component: RegisterComponent, data : {
+        "role" : "teacher"
+    }  },
+    { path: 'profile-teacher', component: ProfileTeacherComponent, canActivate: [AuthGuard], data : {
         "role" : "teacher"
     }  },
     // otherwise redirect to home

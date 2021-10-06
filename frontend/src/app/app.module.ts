@@ -1,6 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,10 +17,12 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { DashboardUserComponent } from './dashboard-user';
 import { DashboardTeacherComponent } from './dashboard-teacher';
+import { ProfileTeacherComponent } from './profile-teacher';
 
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         appRoutingModule,
@@ -34,7 +36,8 @@ import { DashboardTeacherComponent } from './dashboard-teacher';
         LoginComponent,
         RegisterComponent,
         DashboardUserComponent,
-        DashboardTeacherComponent
+        DashboardTeacherComponent,
+        ProfileTeacherComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
