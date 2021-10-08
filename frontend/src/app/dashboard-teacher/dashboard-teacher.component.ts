@@ -80,17 +80,16 @@ export class DashboardTeacherComponent implements OnInit {
             return;
         }
 
-        this.loading = true;
-
         this.coursesData.forEach((c, i) => {
-            console.log(this.resourceForm.value.courses)
+            this.loading = true;
             let fd = new FormData();
             if (this.files[i]) {
                 fd.append('file', this.files[i], this.files[i].name);
                 this.coursesService.addResource(c._id, fd)
                 .subscribe(
                     data => {
-                        this.router.navigate([this.returnUrl]);
+                        this.loading = false;
+                        this.router.navigate(['/']);
                     },
                     error => {
                         this.error = error;

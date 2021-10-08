@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config/default.json');
 const { check, validationResult, oneOf } = require('express-validator');
 const multer = require("multer");
+const extract = require('metadata-extract');
 
 const Course = require('../../model/course.model');
 const User = require('../../model/user.model');
@@ -232,15 +233,14 @@ router.post(
       }
 
       const newResource = {
-        name: req.files[0].filename
+        name: req.files[0].filename,
+        metadata: await extract(req.files[0].path)
       };
       if (!course.course_resources) {
         course.course_resources = [ newResource ];
       } else {
         course.course_resources.unshift(newResource);
       }
-      console.log(req.files[0].path)
-      console.log(__dirname)
       course.save();
       res.json({msg: "Resource uploaded"})
     } catch (err) {

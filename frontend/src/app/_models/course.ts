@@ -9,6 +9,7 @@ export class Course {
     course_description?: string;
     course_resources?: [{
         createdAt?: Date,
-        name?: string;
+        name?: string,
+        metadata?: {};
     }];
 }

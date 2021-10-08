@@ -42,6 +42,7 @@ let Course = new Schema({
               type: String,
               required: [true, "Uploaded file must have a name"],
             },
+            metadata: {}
           }
     ]
 });
