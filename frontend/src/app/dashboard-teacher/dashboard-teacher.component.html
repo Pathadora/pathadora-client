@@ -15,7 +15,7 @@
                         <div mdbCollapse #test="bs-collapse">
                             <div *ngFor="let r of c.course_resources" class="form-group" >
                                 <div class="card-body" >
-                                    <a href="/public/{{r.name}}">{{r.name}}</a>
+                                    <a href="{{apiUrl}}/public/{{r.name}}">{{r.name}}</a>
                                 </div>
                             </div>
                             <label class="d-none" for=c._id>{{c.course_name}}</label>

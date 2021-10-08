@@ -3,6 +3,7 @@ import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { environment } from '@environments/environment';
 
 import { Course } from '@app/_models';
 
@@ -18,6 +19,7 @@ export class DashboardTeacherComponent implements OnInit {
     coursesData: Course[] = [];
     files: File[] = [];
     choosen = false;
+    apiUrl = environment.apiUrl;
 
     constructor(
         private formBuilder: FormBuilder,
