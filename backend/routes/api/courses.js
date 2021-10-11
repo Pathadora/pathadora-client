@@ -8,6 +8,7 @@ const config = require('../../config/default.json');
 const { check, validationResult, oneOf } = require('express-validator');
 const multer = require("multer");
 const extract = require('metadata-extract');
+const { spawn } = require('child_process');
 
 const Course = require('../../model/course.model');
 const User = require('../../model/user.model');
@@ -232,17 +233,31 @@ router.post(
         return res.status(400).json({ msg: 'Course not found' });
       }
 
-      const newResource = {
-        name: req.files[0].filename,
-        metadata: await extract(req.files[0].path)
-      };
-      if (!course.course_resources) {
-        course.course_resources = [ newResource ];
-      } else {
-        course.course_resources.unshift(newResource);
-      }
-      course.save();
-      res.json({msg: "Resource uploaded"})
+      const originalMetadata = await extract(req.files[0].path)
+      const pythonProcess = spawn('python',[__dirname + '/../../utils/readibility.py', req.files[0].path])
+      let readingEase;
+
+      pythonProcess.stdout.on('data', (value) => {
+        // Do something with the data returned from python script
+        readingEase = value
+      });
+
+      pythonProcess.on('close', (code) => {
+        const newResource = {
+          name: req.files[0].filename,
+          metadata: {
+            ...originalMetadata,
+            readingEase: Number(readingEase.toString('utf8'))
+          }
+        };
+        if (!course.course_resources) {
+          course.course_resources = [ newResource ];
+        } else {
+          course.course_resources.unshift(newResource);
+        }
+        course.save();
+        res.json({msg: "Resource uploaded"})
+      });
     } catch (err) {
       console.error(err.message);
       if (err.kind === 'ObjectId') {
