@@ -147,7 +147,7 @@ router.get(
       if (!user) {
         return res.status(400).json({ msg: 'User not found'});
       }
-      if (user.user_role === "user") {
+      if (user.user_role !== "teacher" && user.user_role !== "admin") {
         return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
       }
       if (!user.user_courses || !Array.isArray(user.user_courses)) {
@@ -190,7 +190,7 @@ router.post(
       if (!user) {
         return res.status(400).json({ msg: 'User not found'});
       }
-      if (user.user_role === "user") {
+      if (user.user_role !== "teacher" && user.user_role !== "admin") {
         return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
       }
       if (!user.user_courses) {
@@ -220,7 +220,7 @@ router.delete(
       if (!user) {
         return res.status(400).json({ msg: 'User not found'});
       }
-      if (user.user_role === "user") {
+      if (user.user_role !== "teacher" && user.user_role !== "admin") {
         return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
       }
       if (!user.user_courses || !Array.isArray(user.user_courses)) {

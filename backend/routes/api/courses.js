@@ -80,7 +80,7 @@ router.get(
         if (!user) {
           return res.status(400).json({ errors: [{ msg: 'User not found' }] });
         }
-        if (user.user_role === "user" || user.user_role === "teacher") {
+        if (user.user_role !== "admin") {
             return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
         }
   
@@ -129,7 +129,7 @@ router.get(
         if (!user) {
           return res.status(400).json({ errors: [{ msg: 'User not found' }] });
         }
-        if (user.user_role === "user" || user.user_role === "teacher") {
+        if (user.user_role !== "admin") {
             return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
         }
 
@@ -192,7 +192,7 @@ router.get(
         if (!user) {
           return res.status(400).json({ errors: [{ msg: 'User not found' }] });
         }
-        if (user.user_role === "user" || user.user_role === "teacher") {
+        if (user.user_role !== "admin") {
             return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
         }
 
@@ -223,7 +223,7 @@ router.post(
         return res.status(400).json({ errors: [{ msg: 'User not found' }] });
       }
       // only teachers can upload resource
-      if (user.user_role === "user") {
+      if (user.user_role !== "teacher" && user.user_role !== "admin" ) {
           return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
       }
 
