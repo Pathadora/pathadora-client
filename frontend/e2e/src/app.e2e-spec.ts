@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to angular-8-jwt-authentication-example!');
+    expect(page.getTitleText()).toEqual('Welcome to pathadora-client!');
   });
 
   afterEach(async () => {
