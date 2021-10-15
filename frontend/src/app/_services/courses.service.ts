@@ -12,6 +12,10 @@ export class CoursesService {
         return this.http.get<Course[]>(`${environment.apiUrl}/courses`);
     }
 
+    updateCourse(course_id: string, body) {
+        return this.http.post<Course[]>(`${environment.apiUrl}/courses/${course_id}`, body);
+    }
+
     getCurrentTeacherCourses() {
         return this.http.get<Course[]>(`${environment.apiUrl}/users/courses`);
     }

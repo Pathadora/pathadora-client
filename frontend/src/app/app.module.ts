@@ -15,6 +15,7 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+import { DashboardCoursesComponent } from './dashboard-courses';
 import { DashboardUserComponent } from './dashboard-user';
 import { DashboardTeacherComponent } from './dashboard-teacher';
 import { ProfileTeacherComponent } from './profile-teacher';
@@ -35,6 +36,7 @@ import { ProfileTeacherComponent } from './profile-teacher';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
+        DashboardCoursesComponent,
         DashboardUserComponent,
         DashboardTeacherComponent,
         ProfileTeacherComponent

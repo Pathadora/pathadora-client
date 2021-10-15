@@ -2,16 +2,22 @@
     <div class="card">
         <h4 class="card-header">Area personale</h4>
         <div class="card-body">
-            <div *ngFor="let c of coursesTeacherData; let i = index">
-                <label for="i">{{c.course_name}}</label>
-                <button id="i" (click)="remove(c._id)">Rimuovi corso</button>
+            <div class="input-group" *ngFor="let c of coursesTeacherData; let i = index">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="i">{{c.course_name}}</label>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-danger" id="i" (click)="remove(c._id)">Rimuovi corso</button>
+                </div>
             </div>
-            <div *ngIf="selectableCourses.length > 0" >
+            <div class="input-group" *ngIf="selectableCourses.length > 0" >
                 <label class="d-none" for="addCourse">Aggiungo corso</label>
-                <select id="addCourse" [(ngModel)]="selectedCourse" class="form-control" >
+                <select class="form-control custom-select" id="addCourse" [(ngModel)]="selectedCourse" >
                     <option *ngFor="let c of selectableCourses" [ngValue]="c._id">{{c.course_name}}</option>
                 </select>
-                <button type="button" (click)="add()">Aggiungi corso</button>
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" (click)="add()">Aggiungi corso</button>
+                </div>
             </div>
         </div>
     </div>

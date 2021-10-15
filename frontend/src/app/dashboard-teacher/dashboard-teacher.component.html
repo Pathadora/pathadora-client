@@ -16,6 +16,11 @@
                             <div *ngFor="let r of c.course_resources" class="form-group" >
                                 <div class="card-body" >
                                     <a href="{{apiUrl}}/public/{{r.name}}">{{r.name}}</a>
+                                    <ul>
+                                        <li *ngFor="let m of r.metadata | keyvalue">
+                                            {{m.key}}: {{m.value}}
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <label class="d-none" for=c._id>{{c.course_name}}</label>

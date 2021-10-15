@@ -82,7 +82,7 @@ router.get(
           return res.status(400).json({ errors: [{ msg: 'User not found' }] });
         }
         if (user.user_role !== "admin") {
-            return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
+            return res.status(401).json({ errors: [{ msg: 'User not authorized' }] });
         }
   
         const new_course = new Course({
@@ -131,7 +131,7 @@ router.get(
           return res.status(400).json({ errors: [{ msg: 'User not found' }] });
         }
         if (user.user_role !== "admin") {
-            return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
+            return res.status(401).json({ errors: [{ msg: 'User not authorized' }] });
         }
 
         const {
@@ -194,7 +194,7 @@ router.get(
           return res.status(400).json({ errors: [{ msg: 'User not found' }] });
         }
         if (user.user_role !== "admin") {
-            return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
+            return res.status(401).json({ errors: [{ msg: 'User not authorized' }] });
         }
 
         const course = await Course.findById(req.params.id);
@@ -225,7 +225,7 @@ router.post(
       }
       // only teachers can upload resource
       if (user.user_role !== "teacher" && user.user_role !== "admin" ) {
-          return res.status(400).json({ errors: [{ msg: 'User not authorized' }] });
+          return res.status(401).json({ errors: [{ msg: 'User not authorized' }] });
       }
 
       const course = await Course.findById(req.params.course_id);

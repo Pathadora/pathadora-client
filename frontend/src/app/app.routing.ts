@@ -3,7 +3,7 @@
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
-import { DashboardTeacherComponent } from './dashboard-teacher';
+import { DashboardCoursesComponent } from './dashboard-courses';
 import { ProfileTeacherComponent } from './profile-teacher';
 import { AuthGuard } from './_helpers';
 
@@ -19,6 +19,7 @@ const routes: Routes = [
     { path: 'profile-teacher', component: ProfileTeacherComponent, canActivate: [AuthGuard], data : {
         "role" : "teacher"
     }  },
+    { path: 'dashboard-courses', component: DashboardCoursesComponent, canActivate: [AuthGuard] },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

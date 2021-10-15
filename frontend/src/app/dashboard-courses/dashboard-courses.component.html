@@ -1,0 +1,51 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Corsi</h4>
+        <div class="card-body">
+            <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+                <div id="courses" formArrayName="courses" *ngFor="let c of coursesData; let i = index">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                              <button mdbBtn class="btn btn-link" type="button" (click)="test.toggle()">
+                                {{c.course_name}}
+                              </button>
+                            </h5>
+                          </div>
+                        <div mdbCollapse #test="bs-collapse">
+                            <div class="card-body">
+                                <div [formGroupName]="i" class="form-group">
+                                    <label for="{{c.course_id}} course_name">Nome</label>
+                                    <input type="text" [readOnly]="readOnly" formControlName="course_name" id="{{c.course_id}} course_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_name.errors }" />
+
+                                    <label for="{{c.course_id}} course_degree">Laurea</label>
+                                    <input type="text" [readOnly]="readOnly" formControlName="course_degree" id="{{c.course_id}} course_degree" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_degree.errors }" />
+
+                                    <label for="{{c.course_id}} course_language">Lingua</label>
+                                    <input type="text" [readOnly]="readOnly" formControlName="course_language" id="{{c.course_id}} course_language" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_language.errors }" />
+                                
+                                    <label for="{{c.course_id}} course_year">Anno Accademico</label>
+                                    <input type="text" [readOnly]="readOnly" formControlName="course_year" id="{{c.course_id}} course_year" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_year.errors }" />
+                                
+                                    <label for="{{c.course_id}} course_start_date">Data di inizio</label>
+                                    <input type="date" [readOnly]="readOnly" formControlName="course_start_date" id="{{c.course_id}} course_start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_start_date.errors }" />
+
+                                    <label for="{{c.course_id}} course_end_date">Data di fine</label>
+                                    <input type="date" [readOnly]="readOnly" formControlName="course_end_date" id="{{c.course_id}} course_end_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_end_date.errors }" />
+                                
+                                    <label for="{{c.course_id}} course_description">Descrizione</label>
+                                    <input type="text" [readOnly]="readOnly" formControlName="course_description" id="{{c.course_id}} course_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_description.errors }"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button *ngIf="!readOnly" [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Salva
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </div>
+    </div>
+</div>
