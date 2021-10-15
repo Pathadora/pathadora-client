@@ -35,6 +35,18 @@
                                 
                                     <label for="{{c.course_id}} course_description">Descrizione</label>
                                     <input type="text" [readOnly]="readOnly" formControlName="course_description" id="{{c.course_id}} course_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_description.errors }"/>
+                                
+                                    <span>Risorse</span>
+                                    <div *ngFor="let r of c.course_resources" class="form-group" >
+                                        <div class="card-body" >
+                                            <a href="{{apiUrl}}/public/{{r.name}}">{{r.name}}</a>
+                                            <ul>
+                                                <li *ngFor="let m of r.metadata | keyvalue">
+                                                    {{m.key}}: {{m.value}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

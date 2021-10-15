@@ -17,7 +17,7 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { DashboardCoursesComponent } from './dashboard-courses';
 import { DashboardUserComponent } from './dashboard-user';
-import { DashboardTeacherComponent } from './dashboard-teacher';
+import { DashboardResourcesComponent } from './dashboard-resources';
 import { ProfileTeacherComponent } from './profile-teacher';
 
 @NgModule({
@@ -38,7 +38,7 @@ import { ProfileTeacherComponent } from './profile-teacher';
         RegisterComponent,
         DashboardCoursesComponent,
         DashboardUserComponent,
-        DashboardTeacherComponent,
+        DashboardResourcesComponent,
         ProfileTeacherComponent
     ],
     providers: [

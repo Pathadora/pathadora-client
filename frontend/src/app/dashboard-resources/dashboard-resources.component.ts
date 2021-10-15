@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn } from '@angular/forms';
+import { Observable, EMPTY } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 
@@ -8,8 +9,8 @@ import { Course } from '@app/_models';
 
 import { AuthenticationService, CoursesService } from '@app/_services';
 
-@Component({ selector: 'dashboard-teacher', templateUrl: 'dashboard-teacher.component.html' })
-export class DashboardTeacherComponent implements OnInit {
+@Component({ selector: 'dashboard-resources', templateUrl: 'dashboard-resources.component.html' })
+export class DashboardResourcesComponent implements OnInit {
     resourceForm: FormGroup;
     loading = false;
     submitted = false;
@@ -19,6 +20,7 @@ export class DashboardTeacherComponent implements OnInit {
     files: File[] = [];
     choosen = false;
     apiUrl = environment.apiUrl;
+    readOnly = true;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -26,19 +28,25 @@ export class DashboardTeacherComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService,
         private coursesService: CoursesService
-    ) { 
-        // redirect to home if current user is not a teacher
-        if (this.authenticationService.currentUserValue && this.authenticationService.currentUserValue.user_role !== "teacher") { 
-            this.router.navigate(['/']);
-        }
-    }
+    ) { }
 
     ngOnInit() {
          this.resourceForm = this.formBuilder.group({
             courses: new FormArray([]),
          })
 
-         this.coursesService.getCurrentTeacherCourses()
+         this.readOnly = (this.authenticationService.currentUserValue && this.authenticationService.currentUserValue.user_role === "admin") ? false : true
+        
+         let coursesObservable: Observable<Course[]> = EMPTY
+         if (this.authenticationService.currentUserValue) {
+            if (this.authenticationService.currentUserValue.user_role === "admin") {
+                coursesObservable = this.coursesService.getCourses()
+            } else if (this.authenticationService.currentUserValue.user_role === "teacher") {
+                coursesObservable = this.coursesService.getCurrentTeacherCourses()
+            }
+         }
+
+        coursesObservable
         .pipe(first())
         .subscribe(
             data => {

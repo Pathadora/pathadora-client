@@ -5,11 +5,9 @@
         <div *ngIf="currentUser">
             <p>Benvenuto {{currentUser.user_username}}!</p>
         </div>
-        <div *ngIf="currentUser && currentUser.user_role === 'teacher'">
-            <dashboard-teacher></dashboard-teacher>
-        </div>
-        <div *ngIf="currentUser && currentUser.user_role === 'user'">
-            <dashboard-user></dashboard-user>
+        <div >
+            <dashboard-resources *ngIf="currentUser && (currentUser.user_role === 'teacher' || currentUser.user_role === 'admin')"></dashboard-resources>
+            <dashboard-user *ngIf="currentUser && currentUser.user_role === 'user'"></dashboard-user>
         </div>
     </div>
 </div>

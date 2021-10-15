@@ -1,6 +1,6 @@
 <div class="col-md-6 offset-md-3 mt-5">
     <div class="card">
-        <h4 class="card-header">Dashboard docente</h4>
+        <h4 class="card-header">Dashboard risorse</h4>
         <div class="card-body">
             <form enctype="multipart/form-data" [formGroup]="resourceForm" (ngSubmit)="onSubmit()">
                 <div id="courses" formArrayName="courses" *ngFor="let c of coursesData; let i = index">
@@ -23,12 +23,14 @@
                                     </ul>
                                 </div>
                             </div>
-                            <label class="d-none" for=c._id>{{c.course_name}}</label>
-                            <input class="form-control-file" type="file" (input)="fileChoosen($event, i)" [formControlName]="i" [id]="i" name="resource">    
+                            <div class="form-group" *ngIf="!readOnly">
+                                <label class="d-none" for=c._id>{{c.course_name}}</label>
+                                <input class="form-control-file" type="file" (input)="fileChoosen($event, i)" [formControlName]="i" [id]="i" name="i">    
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button [disabled]="loading" class="btn btn-primary">
+                <button *ngIf="!readOnly" [disabled]="loading" class="btn btn-primary">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Salva
                 </button>
