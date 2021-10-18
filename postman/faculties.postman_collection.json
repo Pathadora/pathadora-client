@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "142e80be-dd53-4d56-ac1f-d7f5dfe8068a",
-		"name": "courses",
+		"_postman_id": "aba51da8-468b-473a-9760-ab920bf52a83",
+		"name": "faculties",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Courses get",
+			"name": "Faculties get",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -30,20 +30,59 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/courses",
+					"raw": "localhost:4000/faculties",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
-						"courses"
+						"faculties"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Course create",
+			"name": "Faculties get department",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/faculties/department/616df409b8868613c20fb0a35",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"faculties",
+						"department",
+						"616df409b8868613c20fb0a35"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Faculties create",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -61,7 +100,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"course_name\": \"Corso test\",\r\n    \"course_description\": \"Descrizione corso\",\r\n    \"course_start_date\": \"2020-01-01\",\r\n    \"course_end_date\": \"2020-12-31\",\r\n    \"course_degree\": \"Bachelor\",\r\n    \"course_language\": \"Italian\",\r\n    \"course_year\": \"I\",\r\n    \"course_type\": \"Type example\",\r\n    \"course_faculty\": \"616df6d5b886813c20fb0a3a\",\r\n    \"course_period\": \"I\",\r\n    \"course_cfu\": 8,\r\n    \"course_scientific_area\": \"Pro\",\r\n    \"course_mandatory\": true\r\n}",
+					"raw": "{\r\n    \"faculty_name\": \"Facoltà Prova\",\r\n    \"faculty_department\": \"616df409b886813c20fb0a35\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,20 +108,20 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/courses",
+					"raw": "localhost:4000/faculties",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
-						"courses"
+						"faculties"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Course delete",
+			"name": "Faculties delete",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -95,7 +134,7 @@
 					{
 						"key": "x-auth-token",
 						"type": "text",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZ2VuZGVyIjoibWFsZSIsInVzZXJfcm9sZSI6ImFkbWluIiwidXNlcl9jb3Vyc2VzIjpbXSwiX2lkIjoiNjE0OGRhMDEyNTUzYTgzNzU4YzliYjZkIiwidXNlcl9lbWFpbCI6ImFuZHJlYS5iZXR0aTEwQHN0dWRpby51bmliby5pdCIsInVzZXJfdXNlcm5hbWUiOiJhYmV0dGkiLCJ1c2VyX25hbWUiOiJBbmRyZWEiLCJ1c2VyX2xhc3RuYW1lIjoiQmV0dGkiLCJ1c2VyX3Bhc3N3b3JkIjoiJDJhJDEwJDlxQVZtNjhIRk8wV1N6SFdobFR0L09TdU5YcXFvNlRodUV3YksuR2d4TmNaSi5SM3E5QWlhIiwidXNlcl9iaXJ0aERhdGUiOiIxOTk4LTAxLTI2VDAwOjAwOjAwLjAwMFoiLCJ1c2VyX2F2YXRhciI6Ii8vd3d3LmdyYXZhdGFyLmNvbS9hdmF0YXIvZGVmODYwMTgwYmQxNmY3ZGI2ZjlhY2U4NWM4YTJhYzU_cz0yMDAmcj1wZyZkPW1tIiwidXNlcl9yZWdpc3RyYXRpb25EYXRlIjoiMjAyMS0wOS0yMFQxODo1OToxMy4wNjhaIiwiX192IjowfSwiaWF0IjoxNjMyMTY1MTM2LCJleHAiOjE2MzIxNjg3MzZ9.-LcyW3kz_XQkMtprns5xKVcDAggSBv3UHTvraQgJa6k"
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZ2VuZGVyIjoibWFsZSIsInVzZXJfcm9sZSI6ImFkbWluIiwidXNlcl9jb3Vyc2VzIjpbIjYxNDhkZDRiZTFjZTM0MTRiODg0MjczZCJdLCJfaWQiOiI2MTQ4ZGEwMTI1NTNhODM3NThjOWJiNmQiLCJ1c2VyX2VtYWlsIjoiYW5kcmVhLmJldHRpMTBAc3R1ZGlvLnVuaWJvLml0IiwidXNlcl91c2VybmFtZSI6ImFiZXR0aSIsInVzZXJfbmFtZSI6IkFuZHJlYSIsInVzZXJfbGFzdG5hbWUiOiJCZXR0aSIsInVzZXJfcGFzc3dvcmQiOiIkMmEkMTAkOXFBVm02OEhGTzBXU3pIV2hsVHQvT1N1TlhxcW82VGh1RXdiSy5HZ3hOY1pKLlIzcTlBaWEiLCJ1c2VyX2JpcnRoRGF0ZSI6IjE5OTgtMDEtMjZUMDA6MDA6MDAuMDAwWiIsInVzZXJfYXZhdGFyIjoiLy93d3cuZ3JhdmF0YXIuY29tL2F2YXRhci9kZWY4NjAxODBiZDE2ZjdkYjZmOWFjZTg1YzhhMmFjNT9zPTIwMCZyPXBnJmQ9bW0iLCJ1c2VyX3JlZ2lzdHJhdGlvbkRhdGUiOiIyMDIxLTA5LTIwVDE4OjU5OjEzLjA2OFoiLCJfX3YiOjF9LCJpYXQiOjE2MzQ1OTY1NTgsImV4cCI6MTYzNDYwMDE1OH0.0uqpB0s1K5xUW0G4uU5elqi07I9CiWTu2ydVuD9hotw"
 					}
 				],
 				"body": {
@@ -108,14 +147,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/courses/6148bcaf56224d4b603e1859",
+					"raw": "localhost:4000/faculties/616df8a1c42c385234f9c6f2",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
-						"courses",
-						"6148bcaf56224d4b603e1859"
+						"faculties",
+						"616df8a1c42c385234f9c6f2"
 					]
 				}
 			},

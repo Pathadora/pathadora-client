@@ -49,6 +49,23 @@ export class AuthenticationService {
             user_courses: courses
         })
         .pipe(mergeMap(user => {
+            if (role === "user") {
+                this.http.post<any>(`${environment.recommenderUrl}/pathadora`, {
+                    "action": "add", 
+                    "type": "learner",
+                    "class": "Learner",
+                    "annotation_properties":{
+                        "name": name,
+                        "last_name": lastname,
+                        "birthdate": birthdate,
+                        "gender": gender
+                    },
+                    "object_properties":{
+                        "canRead": "yes",
+                        "canWrite": "yes"
+                    } 
+                })
+            }
             return this.login(username, password);
         }));
     }

@@ -1,10 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('../../config/default.json');
 const { check, validationResult, oneOf } = require('express-validator');
 const multer = require("multer");
 const extract = require('metadata-extract');
@@ -62,13 +58,35 @@ router.get(
     '/',
     [ auth,
       [
-        check('course_name', 'Course name is required')
-        .not()
-        .isEmpty(),
-        check('course_degree', 'Course degree must be bachelor or master')
-            .isIn(['Bachelor', 'Master']),
-        check('course_start_date').isISO8601().toDate(),
-        check('course_end_date').isISO8601().toDate()
+          check('course_name', 'Course name is required')
+          .not()
+          .isEmpty(),
+          check('course_degree', 'Course degree must be bachelor or master')
+              .isIn(['Bachelor', 'Master']),
+          check('course_faculty', 'Course faculty is required')
+          .not()
+          .isEmpty(),
+          check('course_language', 'Course language is required')
+          .not()
+          .isEmpty(),
+          check('course_period', 'Course period must be I or II')
+              .isIn(['I', 'II']),
+          check('course_cfu', 'Course CFU is required')
+          .not()
+          .isEmpty(),
+          check('course_year', 'Course year must be I, II, III, IV or V')
+              .isIn(['I', 'II', 'III', 'IV', 'V']),
+          check('course_type', 'Course type is required')
+          .not()
+          .isEmpty(),
+          check('course_scientific_area', 'Course type is required')
+          .not()
+          .isEmpty(),
+          check('course_mandatory', 'Course type is required')
+          .not()
+          .isEmpty(),
+          check('course_start_date').isISO8601().toDate(),
+          check('course_end_date').isISO8601().toDate()
       ]
     ],
     async (req, res) => {
@@ -88,8 +106,14 @@ router.get(
         const new_course = new Course({
           course_name: req.body.course_name,
           course_degree: req.body.course_degree,
+          course_faculty: req.body.course_faculty,
           course_language: req.body.course_language,
+          course_period: req.body.course_period,
+          course_cfu: req.body.course_cfu,
           course_year: req.body.course_year,
+          course_type: req.body.course_type,
+          course_scientific_area: req.body.course_scientific_area,
+          course_mandatory: req.body.course_mandatory,
           course_start_date: req.body.course_start_date,
           course_end_date: req.body.course_end_date,
           course_description: req.body.course_description
@@ -112,6 +136,28 @@ router.get(
             .isEmpty(),
             check('course_degree', 'Course degree must be bachelor or master')
                 .isIn(['Bachelor', 'Master']),
+            check('course_faculty', 'Course faculty is required')
+            .not()
+            .isEmpty(),
+            check('course_language', 'Course language is required')
+            .not()
+            .isEmpty(),
+            check('course_period', 'Course period must be I or II')
+                .isIn(['I', 'II']),
+            check('course_cfu', 'Course CFU is required')
+            .not()
+            .isEmpty(),
+            check('course_year', 'Course year must be I, II, III, IV or V')
+                .isIn(['I', 'II', 'III', 'IV', 'V']),
+            check('course_type', 'Course type is required')
+            .not()
+            .isEmpty(),
+            check('course_scientific_area', 'Course type is required')
+            .not()
+            .isEmpty(),
+            check('course_mandatory', 'Course type is required')
+            .not()
+            .isEmpty(),
             check('course_start_date').isISO8601().toDate(),
             check('course_end_date').isISO8601().toDate()
         ]
@@ -137,8 +183,14 @@ router.get(
         const {
             course_name,
             course_degree,
+            course_faculty,
             course_language,
+            course_period,
+            course_cfu,
             course_year,
+            course_type,
+            course_scientific_area,
+            course_mandatory,
             course_start_date,
             course_end_date,
             course_description
@@ -150,11 +202,29 @@ router.get(
         if (course_degree) {
             courseFields.course_degree = course_degree;
         }
+        if (course_faculty) {
+            courseFields.course_faculty = course_faculty;
+        }
         if (course_language) {
             courseFields.course_language = course_language;
         }
+        if (course_period) {
+            courseFields.course_period = course_period;
+        }
+        if (course_cfu) {
+          courseFields.course_cfu = course_cfu;
+        }
         if (course_year) {
             courseFields.course_year = course_year;
+        }
+        if (course_type) {
+            courseFields.course_type = course_type;
+        }
+        if (course_scientific_area) {
+            courseFields.course_scientific_area = course_scientific_area;
+        }
+        if (course_mandatory) {
+            courseFields.course_mandatory = course_mandatory;
         }
         if (course_start_date) {
             courseFields.course_start_date = course_start_date;
@@ -267,6 +337,24 @@ router.post(
     }
   }
 )
-  
 
+router.get(
+  '/:facultyid',
+  async (req, res) => {
+    try {
+      const courses = await Course.find({course_faculty: req.params.facultyid});
+      if (!courses) {
+        return res.status(400).json({ msg: 'Courses not found '});
+      }
+      res.json(courses);
+    } catch (err) {
+      console.error(err.message);
+      if (err.kind === 'ObjectId') {
+        return res.status(400).json({ msg: 'Courses not found '});
+      }
+      res.status(500).send(err.message);
+    }
+  }
+);
+  
 module.exports = router;

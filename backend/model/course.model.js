@@ -13,12 +13,41 @@ let Course = new Schema({
         default: 'Bachelor',
         required: true
     },
+    course_faculty: {
+        type : Schema.Types.ObjectId,
+        ref: 'Faculty',
+        required: true
+    },
     course_language: {
         type: String,
         required: true
     },
+    course_period: {
+        type: String,
+        enum: ['I', 'II'],
+        default: 'I',
+        required: true
+    },
+    course_cfu: {
+        type: Number,
+        required: true
+    },
     course_year: {
         type: String,
+        enum: ['I', 'II', 'III', 'IV', 'V'],
+        default: 'I',
+        required: true
+    },
+    course_type: {
+        type: String,
+        required: true
+    },
+    course_scientific_area: {
+        type: String,
+        required: true
+    },
+    course_mandatory: {
+        type: Boolean,
         required: true
     },
     course_start_date: {
