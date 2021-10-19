@@ -45,6 +45,45 @@ let User = new Schema({
     enum : ['user','teacher','admin'],
     default: 'user'
   },
+  user_profile: {
+    user_language: {
+      type: String
+    },
+    user_degree: {
+      type: String
+    },
+    user_future_degree: {
+      type: String
+    },
+    user_passion: {
+      type: String
+    },
+    user_learning_style: {
+      active_reflective: {
+        type: String,
+        enum : ['Active','Reflective']
+      },
+      sensing_intuitive: {
+        type: String,
+        enum : ['Sensing','Intuitive']
+      },
+      visual_veral: {
+        type: String,
+        enum : ['Visual','Veral']
+      },
+      sequential_global: {
+        type: String,
+        enum : ['Sequential','Global']
+      }
+    },
+    user_goal: {
+      type: String,
+        enum : ['Deadline Driven','Score Driven','Learning Awards','User Competency','Shortest Path']
+    },
+    user_disability: {
+      type: String
+    }
+  },
   user_courses: [
     {
       type : Schema.Types.ObjectId,

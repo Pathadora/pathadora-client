@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
     returnUrl: string;
     coursesData: Course[] = [];
     error = '';
+    role = '';
 
     genders = [
         {id: "male", label: "Maschio"},
@@ -38,16 +39,27 @@ export class RegisterComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             name: ['', Validators.required],
             lastname: ['', Validators.required],
-            gender: ['', Validators.required],
+            gender: [null, Validators.required],
             birthdate: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', Validators.required],
+            language: '',
+            degree: null,
+            future_degree: null,
+            passion: '',
+            active_reflective: null,
+            sensing_intuitive: null,
+            visual_veral: null,
+            sequential_global: null,
+            goal: null,
+            disability: '',
             courses: new FormArray([], minSelectedCheckboxes(0)),
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required]
         });
 
         this.route.data.subscribe(data => {
+            this.role = data.role
             if (data.role === "teacher") {
                 this.coursesService.getCourses()
                 .pipe(first())
@@ -62,7 +74,6 @@ export class RegisterComponent implements OnInit {
                     });
             }
         })
-
 
         // go to home
         this.returnUrl = '/';
@@ -80,6 +91,7 @@ export class RegisterComponent implements OnInit {
 
         // stop here if form is invalid
         if (this.registerForm.invalid) {
+            console.log(this.registerForm)
             return;
         }
         
@@ -91,7 +103,26 @@ export class RegisterComponent implements OnInit {
                 .filter(v => v !== null);
             }
             this.loading = true;
-            this.authenticationService.register(this.f.name.value, this.f.lastname.value, this.f.gender.value, this.f.birthdate.value, this.f.username.value, this.f.email.value, this.f.password.value, data.role, selectedCoursesIds)
+            this.authenticationService.register(
+                this.f.name.value,
+                this.f.lastname.value,
+                this.f.gender.value,
+                this.f.birthdate.value,
+                this.f.username.value,
+                this.f.email.value,
+                this.f.password.value,
+                data.role,
+                this.f.language.value,
+                this.f.degree.value,
+                this.f.future_degree.value,
+                this.f.passion.value,
+                this.f.active_reflective.value,
+                this.f.sensing_intuitive.value,
+                this.f.visual_veral.value,
+                this.f.sequential_global.value,
+                this.f.goal.value,
+                this.f.disability.value,
+                selectedCoursesIds)
                 .pipe(first())
                 .subscribe(
                     data => {

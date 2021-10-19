@@ -24,7 +24,8 @@
                                     <label for="{{c.course_id}} course_degree">Laurea</label>
                                     <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_degree" id="{{c.course_id}} course_degree" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_degree.errors }" >
                                         <option value="Bachelor">Triennale</option>
-                                        <option value="Master">Magistrale</option>  
+                                        <option value="Master">Magistrale</option>
+                                        <option value="Doctoral">Dottorato</option>
                                     </select>
 
                                     <label for="{{c.course_id}} course_faculty">Facoltà</label>

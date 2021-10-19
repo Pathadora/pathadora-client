@@ -36,7 +36,25 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
     }
 
-    register(name: string, lastname: string, gender: string, birthdate: string, username: string, email: string, password: string, role: string, courses: string[] = []) {
+    register(name: string,
+        lastname: string,
+        gender: string,
+        birthdate: string,
+        username: string,
+        email: string,
+        password: string,
+        role: string,
+        language: string,
+        degree: string,
+        future_degree: string,
+        passion: string,
+        active_reflective: string,
+        sensing_intuitive: string,
+        visual_veral: string,
+        sequential_global: string,
+        goal: string,
+        disability: string,
+        courses: string[] = []) {
         return this.http.post<any>(`${environment.apiUrl}/users/register`, { 
             user_name: name,
             user_lastname: lastname,
@@ -46,10 +64,27 @@ export class AuthenticationService {
             user_email: email,
             user_password: password,
             user_role: role,
+            user_profile: {
+                user_language: language,
+                user_degree: degree,
+                user_future_degree: future_degree,
+                user_passion: passion,
+                user_learning_style: {
+                    active_reflective: active_reflective,
+                    sensing_intuitive: sensing_intuitive,
+                    visual_veral: visual_veral,
+                    sequential_global: sequential_global,
+                },
+                user_goal: goal,
+                user_disability: disability
+            },
             user_courses: courses
         })
         .pipe(mergeMap(user => {
+            console.log("ok", user)
             if (role === "user") {
+                /*
+                TODO RECOMMENDER
                 this.http.post<any>(`${environment.recommenderUrl}/pathadora`, {
                     "action": "add", 
                     "type": "learner",
@@ -59,12 +94,25 @@ export class AuthenticationService {
                         "last_name": lastname,
                         "birthdate": birthdate,
                         "gender": gender
+                        "language": language,
+                        "degree": degree,
+                        "future_degree": future_degree,
+                        "passion": passion,
+                        "learning_style": {
+                            "active_reflective": active_reflective,
+                            "sensing_intuitive": sensing_intuitive,
+                            "visual_veral": visual_veral,
+                            "sequential_global": sequential_global,
+                        },
+                        "goal": goal,
+                        "disability": disability
                     },
                     "object_properties":{
                         "canRead": "yes",
                         "canWrite": "yes"
                     } 
                 })
+                */
             }
             return this.login(username, password);
         }));

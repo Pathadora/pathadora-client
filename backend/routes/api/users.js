@@ -5,7 +5,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/default.json');
-const { check, validationResult, oneOf } = require('express-validator');
+const { check, validationResult, oneOf, body } = require('express-validator');
 
 const User = require('../../model/user.model');
 const Course = require('../../model/course.model');
@@ -27,6 +27,31 @@ router.post(
     .isEmpty(),
     check('user_password', 'La password deve contenere almeno 6 caratteri')
     .isLength({ min: 6 }),
+    check('user_profile.user_degree', 'Degree must be Bachelor, Master or Doctoral')
+    .if(body('user_profile').exists())
+    .isIn([null, 'Bachelor', 'Master', 'Doctoral']),
+    check('user_profile.user_future_degree', 'Future degree must be Bachelor, Master or Doctoral')
+    .if(body('user_profile').exists())
+      .isIn([null, 'Bachelor', 'Master', 'Doctoral']),
+    check('user_profile.user_learning_style.active_reflective', 'Active or reflective')
+    .if(body('user_profile').exists())
+    .if(body('user_profile.user_learning_style').exists())
+              .isIn([null, 'Active', 'Reflective']),
+    check('user_profile.user_learning_style.sensing_intuitive', 'Sensing or Intuitive')
+    .if(body('user_profile').exists())
+    .if(body('user_profile.user_learning_style').exists())
+              .isIn([null, 'Sensing', 'Intuitive']),
+    check('user_profile.user_learning_style.visual_veral', 'Visual or Veral')
+    .if(body('user_profile').exists())
+    .if(body('user_profile.user_learning_style').exists())
+              .isIn([null, 'Visual', 'Veral']),
+    check('user_profile.user_learning_style.sequential_global', 'Sequential or Global')
+    .if(body('user_profile').exists())
+    .if(body('user_profile.user_learning_style').exists())
+              .isIn([null, 'Sequential', 'Global']),
+    check('user_profile.user_goal', 'Deadline Driven, Score Driven, Learning Awards, User Competency or Shortest Path')
+    .if(body('user_profile').exists())
+              .isIn([null, 'Deadline Driven','Score Driven','Learning Awards','User Competency','Shortest Path']),
     oneOf([
       check('user_courses').not().exists(),
       check('user_courses').isArray()
@@ -76,6 +101,9 @@ router.post(
         user_avatar : avatar,
         user_role : role
       });
+      if (role === 'user') {
+        user.user_profile = req.body.user_profile
+      }
       if (role === 'teacher' && req.body.user_courses && Array.isArray(req.body.user_courses) && req.body.user_courses.length > 0) {
         user.user_courses = req.body.user_courses
       }

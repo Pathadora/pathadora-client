@@ -3,17 +3,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn } from '@angular/forms';
 
-import { User, Course } from '@app/_models';
+import { User, Course, Faculty, Department } from '@app/_models';
 import { UserService, CoursesService } from '@app/_services';
 import { RecommenderService } from '@app/_services/recommender.service';
 
 @Component({ selector: 'dashboard-user', templateUrl: 'dashboard-user.component.html' })
 export class DashboardUserComponent {
-    learningPathForm: FormGroup;
+    secondStepForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
     error = '';
+    facultiesData: Faculty[] = [];
+    departmentsData: Department[] = [];
     coursesData: Course[] = [];
     //users: User[];
     currentUser: User;
@@ -28,54 +30,22 @@ export class DashboardUserComponent {
         private router: Router) { }
 
     ngOnInit() {
-        this.learningPathForm = this.formBuilder.group({
-            "passion": '',
-            "period": '',
-            "language": '',
-            "presence": '',
-            "max-courses": '',
-            "courses-to-avoid": new FormArray([]),
-            "courses-to-include": new FormArray([]),
-            "active-reflective": '',
-            "sensing-intuitive": '',
-            "visual-veral": '',
-            "sequential-global": '',
-            "knowledge-background": '',
-            "user-goal": ''
-        });
-
-        this.coursesService.getCourses()
-        .pipe(first())
-        .subscribe(
-            data => {
-                this.coursesData = data;
-                data.forEach(() => {
-                    this.coursesToAvoidFormArray.push(new FormControl(false))
-                    this.coursesToIncludeFormArray.push(new FormControl(false))
-                });
-            },
-            error => {
-                this.error = error;
-                this.loading = false;
-        });
+        this.secondStepForm = this.formBuilder.group({
+            "faculty": [null, Validators.required],
+            "department": [null, Validators.required],
+            "year": [null, Validators.required],
+        });        
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.learningPathForm.controls; }
+    get f() { return this.secondStepForm.controls; }
 
-    get coursesToAvoidFormArray() {
-        return this.learningPathForm.controls["courses-to-avoid"] as FormArray;
-    }
-
-    get coursesToIncludeFormArray() {
-        return this.learningPathForm.controls["courses-to-include"] as FormArray;
-    }
 
     firstStepSubmit() {
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.learningPathForm.invalid) {
+        if (this.secondStepForm.invalid) {
             return;
         }
 

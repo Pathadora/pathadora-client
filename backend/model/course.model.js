@@ -9,7 +9,7 @@ let Course = new Schema({
     },
     course_degree: {
         type: String,
-        enum: ['Bachelor', 'Master'],
+        enum: ['Bachelor', 'Master', 'Doctoral'],
         default: 'Bachelor',
         required: true
     },
