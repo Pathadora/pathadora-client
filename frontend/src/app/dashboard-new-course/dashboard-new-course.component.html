@@ -1,0 +1,113 @@
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Crea un nuovo corso</h4>
+        <div class="card-body">
+            <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+                <div id="newCourse" >
+                    <div class="form-group">
+                        <label for="course_name">Nome</label>
+                        <input type="text" formControlName="course_name" id="course_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.course_name.errors }" />
+                        <div *ngIf="submitted && f.course_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_name.errors.required">Inserisci un nome</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_degree">Laurea</label>
+                        <select type="text" formControlName="course_degree" id="course_degree" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && f.course_degree.errors }" >
+                            <option value="null" disabled>Seleziona il tipo di laurea</option>
+                            <option value="Bachelor">Triennale</option>
+                            <option value="Master">Magistrale</option>
+                        </select>
+                        <div *ngIf="submitted && f.course_degree.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_degree.errors.required">Inserisci il tipo di laurea</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_faculty">Facoltà</label>
+                        <select type="text" formControlName="course_faculty" id="course_faculty" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && f.course_faculty.errors }" >
+                            <option value="null" disabled>Seleziona la facoltà</option>
+                            <option *ngFor="let f of facultiesData; let i = index" [ngValue]="f._id">{{f.faculty_name}}</option>
+                        </select>
+                        <div *ngIf="submitted && f.course_faculty.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_faculty.errors.required">Inserisci la facoltà</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_language">Lingua</label>
+                        <input type="text" formControlName="course_language" id="course_language" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.course_language.errors }" />
+                        <div *ngIf="submitted && f.course_language.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_language.errors.required">Inserisci la lingua</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_period">Semestre</label>
+                        <select type="text" formControlName="course_period" id="course_period" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && f.course_period.errors }" >
+                            <option value="null" disabled>Seleziona il semestre</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>  
+                        </select>
+                        <div *ngIf="submitted && f.course_period.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_period.errors.required">Inserisci il semestre</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_cfu">CFU</label>
+                        <input type="number" formControlName="course_cfu" id="course_cfu" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.course_cfu.errors }" />
+                        <div *ngIf="submitted && f.course_cfu.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_cfu.errors.required">Inserisci il numero CFU</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_year">Anno</label>
+                        <select type="text" formControlName="course_year" id="course_year" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && f.course_year.errors }" >
+                            <option value="null" disabled>Seleziona l'anno</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
+                        </select>
+                        <div *ngIf="submitted && f.course_year.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_year.errors.required">Inserisci l'anno</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_type">Tipo</label>
+                        <input type="type" formControlName="course_type" id="course_type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.course_type.errors }" />
+                        <div *ngIf="submitted && f.course_type.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_type.errors.required">Inserisci il tipo</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="course_scientific_area">Area scientifica</label>
+                        <input type="type" formControlName="course_scientific_area" id="course_scientific_area" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.course_scientific_area.errors }" />
+                        <div *ngIf="submitted && f.course_scientific_area.errors" class="invalid-feedback">
+                            <div *ngIf="f.course_scientific_area.errors.required">Inserisci l'area scientifica</div>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <label for="scientific_area" class="form-check-label">Corso obbligatorio</label>
+                        <input type="checkbox" formControlName="course_mandatory" id="course_mandatory" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.course_mandatory.errors }">
+                    </div>
+                    <div class="form-group">
+                        <label for="course_start_date">Data di inizio</label>
+                        <input type="date" formControlName="course_start_date" id="course_start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.course_start_date.errors }" />
+                    </div>
+                    <div class="form-group">
+                        <label for="course_end_date">Data di fine</label>
+                        <input type="date" formControlName="course_end_date" id="course_end_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.course_end_date.errors }" />
+                    </div>
+                    <div>
+                        <label for="course_description">Descrizione</label>
+                        <input type="text" formControlName="course_description" id="course_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.course_description.errors }"/>
+                    </div>
+                </div>
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Crea
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </div>
+    </div>
+</div>

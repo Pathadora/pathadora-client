@@ -1,8 +1,8 @@
 <div class="col-md-6 offset-md-3 mt-5">
-    <div class="card">
+    <div *ngIf="currentStep === 1" class="card">
         <h4 class="card-header">Ottieni un learning path</h4>
         <div class="card-body">
-            <form [formGroup]="learningPathForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="learningPathForm" (ngSubmit)="firstStepSubmit()">
                 <div class="form-group">
                     <label for="passion">Passione</label>
                     <input type="text" formControlName="passion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passion.errors }" />

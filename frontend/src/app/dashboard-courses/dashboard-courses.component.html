@@ -1,4 +1,7 @@
 <div class="col-md-6 offset-md-3 mt-5">
+    <div *ngIf="!readOnly" class="card">
+        <a class="btn btn-success" href="/new-course" role="button">Crea un nuovo corso</a>
+    </div>
     <div class="card">
         <h4 class="card-header">Corsi</h4>
         <div class="card-body">
@@ -26,7 +29,7 @@
 
                                     <label for="{{c.course_id}} course_faculty">Facoltà</label>
                                     <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_faculty" id="{{c.course_id}} course_faculty" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_faculty.errors }" >
-                                        <option *ngFor="let f of facultiesData; let i = index" value="f._id">{{f.faculty_name}}</option>
+                                        <option *ngFor="let f of facultiesData; let i = index" [ngValue]="f._id">{{f.faculty_name}}</option>
                                     </select>
                                     
                                     <label for="{{c.course_id}} course_language">Lingua</label>

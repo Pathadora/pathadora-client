@@ -5,6 +5,7 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { DashboardCoursesComponent } from './dashboard-courses';
 import { ProfileTeacherComponent } from './profile-teacher';
+import { DashboardNewCourseComponent } from './dashboard-new-course';
 import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
         "role" : "teacher"
     }  },
     { path: 'dashboard-courses', component: DashboardCoursesComponent, canActivate: [AuthGuard] },
+    { path: 'new-course', component: DashboardNewCourseComponent, canActivate: [AuthGuard], data : {
+        "role" : "admin"
+    } },
+
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

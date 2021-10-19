@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn
 
 import { User, Course } from '@app/_models';
 import { UserService, CoursesService } from '@app/_services';
+import { RecommenderService } from '@app/_services/recommender.service';
 
 @Component({ selector: 'dashboard-user', templateUrl: 'dashboard-user.component.html' })
 export class DashboardUserComponent {
@@ -16,10 +17,12 @@ export class DashboardUserComponent {
     coursesData: Course[] = [];
     //users: User[];
     currentUser: User;
+    currentStep = 1;
 
     constructor(
         private userService: UserService,
         private coursesService: CoursesService,
+        private recommenderService: RecommenderService,
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router) { }
@@ -68,7 +71,7 @@ export class DashboardUserComponent {
         return this.learningPathForm.controls["courses-to-include"] as FormArray;
     }
 
-    onSubmit() {
+    firstStepSubmit() {
         this.submitted = true;
 
         // stop here if form is invalid
@@ -77,6 +80,63 @@ export class DashboardUserComponent {
         }
 
         this.loading = true;
-        // TODO learning path
+        this.recommenderService.sendRequest({
+
+        }).subscribe(
+            data => {
+                this.loading = false;
+                this.currentStep = 2;
+            },
+            error => {
+                this.error = error;
+                this.loading = false;
+            }
+        );
     }
+    /*
+    secondStepSubmit() {
+        this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.learningPathForm.invalid) {
+            return;
+        }
+
+        this.loading = true;
+        this.recommenderService.sendRequest({
+
+        }).subscribe(
+            data => {
+                this.loading = false;
+                this.currentStep = 3;
+            },
+            error => {
+                this.error = error;
+                this.loading = false;
+            }
+        );
+    }
+
+    thirdStepSubmit() {
+        this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.learningPathForm.invalid) {
+            return;
+        }
+
+        this.loading = true;
+        this.recommenderService.sendRequest({
+
+        }).subscribe(
+            data => {
+                this.loading = false;
+                this.currentStep = 4;
+            },
+            error => {
+                this.error = error;
+                this.loading = false;
+            }
+        ); 
+    }*/
 }

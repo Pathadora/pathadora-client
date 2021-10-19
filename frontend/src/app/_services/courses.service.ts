@@ -33,4 +33,8 @@ export class CoursesService {
     addResource(courseId: string, file: any) {
         return this.http.post<any>(`${environment.apiUrl}/courses/resource/${courseId}`, file);
     }
+
+    createCourse(body: any) {
+        return this.http.post<Course[]>(`${environment.apiUrl}/courses`, body);
+    }
 }

@@ -19,6 +19,7 @@ import { DashboardCoursesComponent } from './dashboard-courses';
 import { DashboardUserComponent } from './dashboard-user';
 import { DashboardResourcesComponent } from './dashboard-resources';
 import { ProfileTeacherComponent } from './profile-teacher';
+import { DashboardNewCourseComponent } from './dashboard-new-course';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { ProfileTeacherComponent } from './profile-teacher';
         DashboardCoursesComponent,
         DashboardUserComponent,
         DashboardResourcesComponent,
-        ProfileTeacherComponent
+        ProfileTeacherComponent,
+        DashboardNewCourseComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
