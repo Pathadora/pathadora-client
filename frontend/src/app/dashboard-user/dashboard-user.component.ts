@@ -4,8 +4,9 @@ import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn } from '@angular/forms';
 
 import { User, Course, Faculty, Department } from '@app/_models';
-import { UserService, CoursesService } from '@app/_services';
+import { AuthenticationService, UserService, CoursesService } from '@app/_services';
 import { RecommenderService } from '@app/_services/recommender.service';
+import { ObjectUnsubscribedError } from 'rxjs';
 
 @Component({ selector: 'dashboard-user', templateUrl: 'dashboard-user.component.html' })
 export class DashboardUserComponent {
@@ -22,6 +23,7 @@ export class DashboardUserComponent {
     currentStep = 1;
 
     constructor(
+        private authenticationService: AuthenticationService,
         private userService: UserService,
         private coursesService: CoursesService,
         private recommenderService: RecommenderService,
@@ -30,6 +32,8 @@ export class DashboardUserComponent {
         private router: Router) { }
 
     ngOnInit() {
+        this.currentUser = this.authenticationService.currentUserValue;
+
         this.secondStepForm = this.formBuilder.group({
             "faculty": [null, Validators.required],
             "department": [null, Validators.required],
@@ -44,18 +48,29 @@ export class DashboardUserComponent {
     firstStepSubmit() {
         this.submitted = true;
 
-        // stop here if form is invalid
-        if (this.secondStepForm.invalid) {
-            return;
-        }
-
         this.loading = true;
         this.recommenderService.sendRequest({
-
+            "action": "next_dep_generation",
+            "learner": this.currentUser.user_name + " " + this.currentUser.user_lastname
         }).subscribe(
             data => {
                 this.loading = false;
                 this.currentStep = 2;
+                if (data.departments) {
+                    Object.keys(data.departments).forEach((k, i) => {
+                        this.departmentsData.push({
+                            department_name: data.departments[k].department
+                        })
+                        if (data.departments[k].faculties) {
+                            Object.keys(data.departments[k].faculties).forEach((k2, i2) => {
+                                this.facultiesData.push({
+                                    faculty_name: data.departments[k].faculties[k2],
+                                    faculty_department: data.departments[k].department
+                                })
+                            })
+                        }
+                    })
+                }
             },
             error => {
                 this.error = error;
@@ -63,18 +78,22 @@ export class DashboardUserComponent {
             }
         );
     }
-    /*
+
     secondStepSubmit() {
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.learningPathForm.invalid) {
+        if (this.secondStepForm.invalid) {
             return;
         }
 
         this.loading = true;
         this.recommenderService.sendRequest({
-
+            "action": "course_generation",
+            "learner": this.currentUser.user_name + " " + this.currentUser.user_lastname,
+            "faculty": this.f.faculty,
+            "department": this.f.department,
+            "year": this.f.year
         }).subscribe(
             data => {
                 this.loading = false;
@@ -86,7 +105,7 @@ export class DashboardUserComponent {
             }
         );
     }
-
+/*
     thirdStepSubmit() {
         this.submitted = true;
 

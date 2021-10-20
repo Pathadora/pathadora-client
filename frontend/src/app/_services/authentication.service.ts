@@ -81,10 +81,7 @@ export class AuthenticationService {
             user_courses: courses
         })
         .pipe(mergeMap(user => {
-            console.log("ok", user)
             if (role === "user") {
-                /*
-                TODO RECOMMENDER
                 this.http.post<any>(`${environment.recommenderUrl}/pathadora`, {
                     "action": "add", 
                     "type": "learner",
@@ -93,7 +90,7 @@ export class AuthenticationService {
                         "name": name,
                         "last_name": lastname,
                         "birthdate": birthdate,
-                        "gender": gender
+                        "gender": gender,
                         "language": language,
                         "degree": degree,
                         "future_degree": future_degree,
@@ -112,7 +109,6 @@ export class AuthenticationService {
                         "canWrite": "yes"
                     } 
                 })
-                */
             }
             return this.login(username, password);
         }));
