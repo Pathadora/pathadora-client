@@ -14,75 +14,101 @@
                                 {{c.course_name}}
                               </button>
                             </h5>
-                          </div>
+                        </div>
                         <div mdbCollapse #test="bs-collapse">
                             <div class="card-body">
                                 <div [formGroupName]="i" class="form-group">
-                                    <label for="{{c.course_id}} course_name">Nome</label>
-                                    <input type="text" [readOnly]="readOnly" formControlName="course_name" id="{{c.course_id}} course_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_name.errors }" />
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_name">Nome</label>
+                                        <input type="text" [readOnly]="readOnly" formControlName="course_name" id="{{c.course_id}} course_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_name.errors }" />
+                                    </div>
 
-                                    <label for="{{c.course_id}} course_degree">Laurea</label>
-                                    <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_degree" id="{{c.course_id}} course_degree" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_degree.errors }" >
-                                        <option value="Bachelor">Triennale</option>
-                                        <option value="Master">Magistrale</option>
-                                        <option value="Doctoral">Dottorato</option>
-                                    </select>
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_degree">Laurea</label>
+                                        <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_degree" id="{{c.course_id}} course_degree" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_degree.errors }" >
+                                            <option value="Bachelor">Triennale</option>
+                                            <option value="Master">Magistrale</option>
+                                            <option value="Doctoral">Dottorato</option>
+                                        </select>
+                                    </div>
 
-                                    <label for="{{c.course_id}} course_faculty">Facoltà</label>
-                                    <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_faculty" id="{{c.course_id}} course_faculty" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_faculty.errors }" >
-                                        <option *ngFor="let f of facultiesData; let i = index" [ngValue]="f._id">{{f.faculty_name}}</option>
-                                    </select>
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_faculty">Facoltà</label>
+                                        <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_faculty" id="{{c.course_id}} course_faculty" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_faculty.errors }" >
+                                            <option *ngFor="let f of facultiesData; let i = index" [ngValue]="f._id">{{f.faculty_name}}</option>
+                                        </select>
+                                    </div>
                                     
-                                    <label for="{{c.course_id}} course_language">Lingua</label>
-                                    <input type="text" [readOnly]="readOnly" formControlName="course_language" id="{{c.course_id}} course_language" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_language.errors }" />
-                                
-                                    <label for="{{c.course_id}} course_period">Semestre</label>
-                                    <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_period" id="{{c.course_id}} course_period" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_period.errors }" >
-                                        <option value="I">I</option>
-                                        <option value="II">II</option>  
-                                    </select>
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_language">Lingua</label>
+                                        <input type="text" [readOnly]="readOnly" formControlName="course_language" id="{{c.course_id}} course_language" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_language.errors }" />
+                                    </div>
 
-                                    <label for="{{c.course_id}} course_cfu">CFU</label>
-                                    <input type="number" [readOnly]="readOnly" formControlName="course_cfu" id="{{c.course_id}} course_cfu" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_cfu.errors }" />
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_period">Semestre</label>
+                                        <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_period" id="{{c.course_id}} course_period" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_period.errors }" >
+                                            <option value="I">I</option>
+                                            <option value="II">II</option>  
+                                        </select>
+                                    </div>
 
-                                    <label for="{{c.course_id}} course_year">Anno</label>
-                                    <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_year" id="{{c.course_id}} course_year" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_year.errors }" >
-                                        <option value="I">I</option>
-                                        <option value="II">II</option>
-                                        <option value="III">III</option>
-                                        <option value="IV">IV</option>
-                                        <option value="V">V</option>
-                                    </select>
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_cfu">CFU</label>
+                                        <input type="number" [readOnly]="readOnly" formControlName="course_cfu" id="{{c.course_id}} course_cfu" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_cfu.errors }" />
+                                    </div>
 
-                                    <label for="{{c.course_id}} course_type">Tipo</label>
-                                    <input type="type" [readOnly]="readOnly" formControlName="course_type" id="{{c.course_id}} course_type" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_type.errors }" />
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_year">Anno</label>
+                                        <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_year" id="{{c.course_id}} course_year" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_year.errors }" >
+                                            <option value="I">I</option>
+                                            <option value="II">II</option>
+                                            <option value="III">III</option>
+                                            <option value="IV">IV</option>
+                                            <option value="V">V</option>
+                                        </select>
+                                    </div>
 
-                                    <label for="{{c.course_id}} course_scientific_area">Area scientifica</label>
-                                    <input type="type" [readOnly]="readOnly" formControlName="course_scientific_area" id="{{c.course_id}} course_scientific_area" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_scientific_area.errors }" />
-
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_type">Tipo</label>
+                                        <input type="type" [readOnly]="readOnly" formControlName="course_type" id="{{c.course_id}} course_type" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_type.errors }" />
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_scientific_area">Area scientifica</label>
+                                        <input type="type" [readOnly]="readOnly" formControlName="course_scientific_area" id="{{c.course_id}} course_scientific_area" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_scientific_area.errors }" />
+                                    </div>
+                                    
                                     <div class="form-check">
-                                        <label for="{{c.course_id}} scientific_area" class="form-check-label">Corso obbligatorio</label>
+                                        <label for="{{c.course_id}} course_mandatory" class="form-check-label">Corso obbligatorio</label>
                                         <input type="checkbox" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_mandatory" id="{{c.course_id}} course_mandatory" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_mandatory.errors }">
                                     </div>
 
-                                    <label for="{{c.course_id}} course_start_date">Data di inizio</label>
-                                    <input type="date" [readOnly]="readOnly" formControlName="course_start_date" id="{{c.course_id}} course_start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_start_date.errors }" />
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_start_date">Data di inizio</label>
+                                        <input type="date" [readOnly]="readOnly" formControlName="course_start_date" id="{{c.course_id}} course_start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_start_date.errors }" />
+                                    </div>
 
-                                    <label for="{{c.course_id}} course_end_date">Data di fine</label>
-                                    <input type="date" [readOnly]="readOnly" formControlName="course_end_date" id="{{c.course_id}} course_end_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_end_date.errors }" />
-                                
-                                    <label for="{{c.course_id}} course_description">Descrizione</label>
-                                    <input type="text" [readOnly]="readOnly" formControlName="course_description" id="{{c.course_id}} course_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_description.errors }"/>
-                                
-                                    <span>Risorse</span>
-                                    <div *ngFor="let r of c.course_resources" class="form-group" >
-                                        <div class="card-body" >
-                                            <a href="{{apiUrl}}/public/{{r.name}}">{{r.name}}</a>
-                                            <ul>
-                                                <li *ngFor="let m of r.metadata | keyvalue">
-                                                    {{m.key}}: {{m.value}}
-                                                </li>
-                                            </ul>
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_end_date">Data di fine</label>
+                                        <input type="date" [readOnly]="readOnly" formControlName="course_end_date" id="{{c.course_id}} course_end_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_end_date.errors }" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="{{c.course_id}} course_description">Descrizione</label>
+                                        <input type="text" [readOnly]="readOnly" formControlName="course_description" id="{{c.course_id}} course_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_description.errors }"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span>Risorse</span>
+                                        <div *ngFor="let r of c.course_resources" class="form-group" >
+                                            <div class="card-body" >
+                                                <a href="{{apiUrl}}/public/{{r.name}}">{{r.name}}</a>
+                                                <ul>
+                                                    <li *ngFor="let m of r.metadata | keyvalue">
+                                                        {{m.key}}: {{m.value}}
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -90,11 +116,13 @@
                         </div>
                     </div>
                 </div>
-                <button *ngIf="!readOnly" [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Salva
-                </button>
-                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                <div class="form-group">
+                    <button *ngIf="!readOnly" [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Salva
+                    </button>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                </div>
             </form>
         </div>
     </div>

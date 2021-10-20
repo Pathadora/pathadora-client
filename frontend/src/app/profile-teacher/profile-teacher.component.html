@@ -12,7 +12,7 @@
             </div>
             <div class="input-group" *ngIf="selectableCourses.length > 0" >
                 <label class="d-none" for="addCourse">Aggiungo corso</label>
-                <select class="form-control custom-select" id="addCourse" [(ngModel)]="selectedCourse" >
+                <select class="form-control form-select" id="addCourse" [(ngModel)]="selectedCourse" >
                     <option *ngFor="let c of selectableCourses" [ngValue]="c._id">{{c.course_name}}</option>
                 </select>
                 <div class="input-group-append">
