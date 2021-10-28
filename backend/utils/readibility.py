@@ -14,11 +14,8 @@ except:
     import nltk
     nltk.download('punkt')
 
-try:
-    import re
-except:
-    os.system("pip install re")
-    import re
+def inbetween(minv, val, maxv):
+    return min(maxv, max(minv, val))
 
 def syllable_count(word):
     word = word.lower()
@@ -71,7 +68,11 @@ text = str(textract.process(sys.argv[1])).encode('windows-1252').decode('utf-8')
 s = average_syllabs_for_word(text)
 p = average_words_for_sentence(text)
 
-print(206.835-(84.6*s)-(1.015*p))
+result = 206.835-(84.6*s)-(1.015*p)
+score = inbetween(0, result, 100)
+
+print(score)
+sys.stdout.flush()
 
 """
 with open(sys.argv[1], 'r') as f:

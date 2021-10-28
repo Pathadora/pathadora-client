@@ -18,6 +18,7 @@
     "gmail-send": "^1.8.10",
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
+    "keyword-extractor": "^0.0.20",
     "metadata-extract": "^2.0.2",
     "mongoose": "^5.9.22",
     "multer": "^1.4.3",
