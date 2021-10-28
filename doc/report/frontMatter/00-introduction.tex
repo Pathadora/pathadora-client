@@ -1,0 +1,26 @@
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{roman}                   %serve per mettere i numeri romani
+\chapter*{Introduzione}                 %crea l'introduzione (un capitolo
+                                        %   non numerato)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
+\rhead[\fancyplain{}{\bfseries
+INTRODUZIONE}]{\fancyplain{}{\bfseries\thepage}}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries
+INTRODUZIONE}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%aggiunge la voce Introduzione
+                                        %   nell'indice
+\addcontentsline{toc}{chapter}{Introduzione}
+
+Il progetto vede come oggetto lo sviluppo di un'applicazione web che raccolga informazioni relative a studenti universitari per sottoporle a un sistema di raccomandazione di corsi accademici e relative risorse didattiche associate.
+
+\vspace{5mm}
+
+L'applicazione permetterà inoltre ai docenti universitari di associare nuove risorse ai corsi di cui sono titolari, su cui verranno generati automaticamente metadati relativi alle proprietà del file e al suo contenuto.
+
+\vspace{5mm}
+
+Verrano inoltre analizzate varie tecniche di generazione automatica di metadati.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%non numera l'ultima pagina sinistra
+\clearpage{\pagestyle{empty}\cleardoublepage}

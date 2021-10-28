@@ -1,0 +1,90 @@
+\clearpage{\pagestyle{empty}\cleardoublepage}
+\chapter{Implementazione}                %crea il capitolo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
+\section{Frontend}
+Il frontend è stato sviluppato utilizzando Angular 8, utilizzando Angular CLI per installare librerie ed eseguire l'applicazione.
+
+L'applicazione è suddivisa in sottocartelle per ciascun componente:
+\begin{itemize}
+	\item \texttt{home}: componente il cui contenuto è accessibile solo a seguito dell'autenticazione. Nel caso l'utente autenticato sia uno studente, verrà renderizzato il componente \texttt{dashboard-user}.
+	\item \texttt{login}: permette l'accesso dell'utente registrato nel sistema, sarà accessibile a chi non ha eseguito l'accesso.
+	\item \texttt{register}: permette la registrazione di un utente. È utilizzato per due route diverse, relative alla registrazione dello studente e alla registrazione del docente, per cui verranno richiesti campi diversi.
+	\item \texttt{dashboard-user}: componente attraverso il quale vengono sottomesse al sistema di raccomandazione le diverse richieste per ottenere il learning path utilizzando come dati di input le informazioni associate all'utente autenticato. L'invio delle richieste avviene attraverso tre form corrispondenti all'invio di informazioni per ciascun step della produzione del learning path:
+\begin{itemize}
+\item \textit{richiesta dei dipartimenti e delle facoltà consigliate}: vengono utilizzate come input le informazioni dello studente associate al momento della registrazione
+\item \textit{richiesta dei corsi consigliati}: una volta ottenuti i dipartimenti e le facoltà consigliate, l'utente può inviare la richiesta per visualizzare i corsi consigliati dal sistema di raccomandazione selezionando il dipartimento, la facoltà e l'anno di interesse
+\item \textit{richiesta delle risorse consigliate}: una volta selezionato il corso di interesse tra quelli consigliati, verranno visualizzate le risorse suggerite sulla base dei dati dello studente
+\end{itemize}
+	\item \texttt{profile-teacher}: pannello che permette al docente di associare nuovi corsi al suo profilo tra quelli memorizzati nel sistema
+	\item \texttt{dashboard-courses}: vengono visualizzate le informazioni dei corsi. Gli amministratori possono modificarle.
+	\item \texttt{dashboard-resources}: pannello visualizzabile in home dai docenti e dagli amministratori, permette il caricamento di nuove risorse didattiche ai corsi di cui sono titolari.
+\end{itemize}
+
+La gestione delle richieste al server backend è contenuta nei metodi di servizi dedicati.
+
+\subsection{Servizio di autenticazione}
+Il servizio di autenticazione contiene la logica delle funzioni di login, logout e registrazione, utilizzabili dai componenti del sistema.
+
+I subject e gli observable della libreria RxJS sono usati per tenere traccia dell'utente attualmente loggato e notificare del login e del logout, mediante il metodo \texttt{this.currentUserSubject.next()}, i componenti che eseguono \texttt{subscribe()} sull'oggetto \texttt{currentUser}.
+
+Il metodo \texttt{login()} invia al server una richiesta POST per l'autenticazione utilizzando le credenziali dell'utente. Se l'utente è presente nel database, le sue informazioni verranno memorizzate nel local storage per tenere traccia del login in tutte le pagine.
+
+Il metodo \texttt{login()} rimuove dal local storage le informazioni relative all'utente loggato e imposta \texttt{currentUserSubject} a \texttt{null}, notificando i subscriber del logout.
+
+Il metodo \texttt{register()} invia al server una richiesta POST per la registrazione dell'utente, per poi proseguire con la chiamata di \texttt{login()}.
+
+\subsection{Classi di utilità}
+
+L'\textbf{Auth Guard} è un Route Guard usato per limitare l'accesso a determinati route a utenti autorizzati, passato come parametro \texttt{canActivate} ai percorsi di route interessati. Il metodo \texttt{canActivate()}, invocato ogni volta che qualcuno tenterà di accedere al route associato, restituisce un valore booleano che indica se consentire o meno la navigazione. Se l’utente non è autenticato, verrà reindirizzato alla route di login.
+
+\vspace{5mm}
+
+L'\textbf{Error Interceptor} intercetta le risposte delle richieste API e provvede a eseguire il logout dall'applicazione in caso di errori. Implementa la classe HttpInterceptor della libreria \texttt{@angular/common} ed è aggiunto tra i provider dell'applicazione. Grazie alle informazioni presenti nell'oggetto Provider, il Root Injector sa come creare e recuperare un'istanza dell'ErrorInterceptor quando serve e fornirla a qualsiasi componente, direttiva o altro servizio che ne faccia richiesta.
+
+\vspace{5mm}
+
+Il \textbf{JWT Interceptor} intercetta le richieste invocate per aggiungere un token JWT di autenticazione nell'header qualora l'utente dovesse essere loggato.
+
+\section{Backend}
+Il server viene avviato lanciando il file \texttt{server.js}, attraverso il quale viene creata un'istanza Express, viene stabilita una connessione col database MongoDB e vengono definite le diverse route utilizzate dall'applicazione.
+
+Le route sono suddivise nei seguenti moduli, ciascuno dei quali fa riferimento a uno schema Mongoose utilizzato nel database:
+\begin{itemize}
+	\item \texttt{users}
+	\begin{itemize}
+		\item \texttt{/register} (post): carica nel database un nuovo utente utilizzando le informazioni del corpo dell'oggetto richiesta e effettua il login di quest'ultimo assegnandogli un token
+		\item \texttt{/} (get): restituisce i dati di tutti gli utenti registrati nel database
+		\item \texttt{/me} (get): restituisce i dati dell'utente loggato
+		\item \texttt{/courses} (get): restituisce i dati dei corsi associati all'utente autenticato, nel caso quest'ultimo abbia il ruolo \texttt{teacher}
+		\item \texttt{/courses} (post): riceve come input un array di id di corsi e li associa al docente autenticato
+		\item \texttt{/courses/:id} (delete): rimuove il corso con id specificato dall'elenco dei corsi associati al docente autenticato autenticato
+	\end{itemize}
+	\item \texttt{auth}
+	\begin{itemize}
+		\item \texttt{/} (get): restituisce le informazioni relative all'utente loggato
+		\item \texttt{/} (post): effettua il login dell'utente con email e password sottomesse generando un token
+	\end{itemize}
+	\item \texttt{courses}
+	\begin{itemize}
+		\item \texttt{/} (get): restituisce i dati di tutti i corsi registrati nel database
+		\item \texttt{/:id} (get): restituisce le informazioni associate al corso con id specificato
+		\item \texttt{/} (post): se l'utente autenticato ha il ruolo \texttt{admin}, registra un nuovo corso
+		\item \texttt{/:id} (post): se l'utente autenticato ha il ruolo \texttt{admin}, aggiorna il corso con id specificato
+		\item \texttt{/:id} (delete): se l'utente autenticato ha il ruolo \texttt{admin}, rimuove il corso con id specificato
+		\item \texttt{/resource/:course\_id} (post): se l'utente autenticato ha il ruolo \texttt{teacher}, associa una risorsa al corso con id associato
+	\end{itemize}
+\end{itemize}
+
+Per le route che richiedono la verifica dell'identità dell'utente loggato è utilizzata una funzione middleware che accede al token associato all'header della richiesta, decodificandolo con JWT per ottenere come output le informazioni dell'utente che potranno poi essere utilizzate dall'handler associato alla route.
+
+\section{Estrazione e generazione dei metadati}
+
+Al caricamento di una risorsa associata a un corso, i metadati a essa associati vengono estratti mediante la libreria \texttt{metadata-extract}, che a sua volta fa uso di diversi estrattori per più estensioni.
+
+Viene inoltre calcolato attraverso uno script Python un metadato relativo al grado di leggibilità del testo contenuto nel file, calcolato utilizzando la formula di \textbf{Flesh-Kincaid}. Più il valore è alto, più il testo risulta essere semplice da leggere.
+
+\[ F=206,835-(84,6*S)-(1,015*P) \]
+
+La difficoltà di lettura dipende da S e da P, rispettivamente il numero medio di sillabe contenute in una parola e il numero medio di parole contenute in una frase.
+
+La scelta dei coefficienti è una conseguenza di un processo di affinamento del grado di istruzione di una persona in grado di leggere e comprendere la lingua inglese, ottimizzati in modo che venga restituito un valore compreso tra 0 e 100. Viene data più importanza al valore di S piuttosto che a P.\cite{readibility}
