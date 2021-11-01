@@ -73,15 +73,15 @@ I metodi basati su grafi generano un grafo dei termini correlati presenti nei do
 \textbf{TextRank} è un metodo di classificazione basato su grafi utilizzato per estrarre frasi pertinenti o trovare parole chiave. L'estrazione delle parole chiave avviene in cinque passaggi:
 
 \begin{itemize}
-\item Tokenizzazione e annotazione del testo con tag di Part of Speech (PoS) (nomi, articoli, verbi...)
-\item Costruzione del grafo di co-occorrenza di parole: i vertici nel grafo sono parole con tag PoS selezionati. Due vertici sono collegati con un bordo se compaiono all'interno della finestra di N parole nel testo. Il grafo è non orientato e non ponderato.
-\item Graph ranking: il punteggio di ciascun vertice è impostato su 1 e l'algoritmo di ranking viene eseguito sul grafo. L'algoritmo utilizza la seguente equazione:
+\item \textbf{Tokenizzazione e annotazione del testo} con tag di Part of Speech (PoS) (nomi, articoli, verbi...)
+\item \textbf{Costruzione del grafo di co-occorrenza di parole}: i vertici nel grafo sono parole con tag PoS selezionati. Due vertici sono collegati con un arco se compaiono all'interno della finestra di N parole nel testo. Il grafo è non orientato e non ponderato.
+\item \textbf{Graph ranking}: partendo con il punteggio di ciascun vertice inizializzato a 1, viene applicato sul grafo l'algoritmo di ranking utilizzando la seguente equazione:
 \begin{equation}
-S(Vi)=(1 - d) + d\left (\sum_{j \in In(Vi)} \frac{S(Vk)}{|Out(Vk)|}\right )
+S(Vi)=(1 - d) + d\left (\sum_{j \in In(Vi)} \frac{S(Vj)}{|Out(Vj)|}\right )
 \end{equation}
-Il peso S(Vi) di un vertice Vi è calcolato considerando i pesi dei vertici connessi al nodo Vi. Nell'equazione, d è il fattore di smorzamento impostato su 0,85, come suggerito nell'articolo di PageRank. In(Vi) sono collegamenti in entrata al vertice Vi e Out(Vj) sono collegamenti in uscita dal vertice Vj. Poiché stiamo considerando grafi non orientati, i collegamenti in entrata del vertice e i collegamenti in uscita del vertice sono gli stessi. L'algoritmo viene eseguito su ciascun nodo in diverse iterazioni fino a quando i pesi sui nodi convergono: la variazione tra le iterazioni è inferiore a 0,0001.
-\item Selezione delle parole con il punteggio più alto: le parole (quindi i vertici) sono ordinate dalle parole con il punteggio più alto a quelle con il punteggio più basso. Alla fine, l'algoritmo seleziona il primo terzo delle parole.
-\item Estrazione delle parole chiave: in questo passaggio, le parole selezionate nella fase precedente vengono unite in parole chiave composte da più parole se compaiono insieme nel testo. Il punteggio delle parole composte corrisponde alla somma dei punteggi delle parole singole che le compongono.
+Il peso \textit{S(Vi)} di un vertice \textit{Vi} è calcolato considerando i pesi dei vertici connessi al nodo \textit{Vi}. Nell'equazione, \textit{d} è il fattore di smorzamento impostato su 0,85. Gli \textit{In(Vi)} corrispondono ai collegamenti in entrata al vertice \textit{Vi} e gli \textit{Out(Vj)} ai collegamenti in uscita dal vertice \textit{Vj}. Poiché stiamo considerando grafi non orientati, un collegamenti in entrata verso un nodo è anche un collegamento in uscita dallo stesso nodo. L'algoritmo viene eseguito su ciascun nodo in diverse iterazioni fino a quando i pesi sui nodi convergono: la variazione tra le iterazioni è inferiore a 0,0001.
+\item \textbf{Selezione delle parole con il punteggio più alto}: le parole (quindi i vertici) sono ordinate per punteggio, dal più alto al più basso. Viene poi selezionato il primo terzo delle parole.
+\item \textbf{Estrazione delle parole chiave}: in questo passaggio, le parole selezionate nella fase precedente vengono unite in parole chiave composte da più parole se compaiono in una stessa frase. Il punteggio delle parole composte corrisponde alla somma dei punteggi delle parole singole che le compongono.
 \end{itemize}
 
 L'algoritmo viene eseguito su ciascun documento separatamente e non necessita di un corpus di documenti per eseguire l'estrazione delle parole chiave. TextRank è indipendente dalla lingua.
@@ -90,17 +90,17 @@ L'algoritmo viene eseguito su ciascun documento separatamente e non necessita di
 
 Include i seguenti passaggi:
 \begin{itemize}
-\item Estrazione delle parole chiave candidate: il testo viene suddiviso in base alle parole chiave candidate in base alle parole di arresto e al delimitatore di frase. Una parola chiave candidata è una frase che si trova tra due stop-word o delimitatori di frase. I delimitatori di frase sono, ad esempio, i caratteri di punteggiatura.
-\item Parole chiave costruzione del grafo di co-occorrenza: i vertici nel grafo sono parole. Sono collegati se compaiono insieme nelle parole chiave candidate. Il grafo è ponderato: il peso corrisponde al numero di volte in cui le parole collegate appaiono insieme nelle parole chiave candidate. Il grafo include anche le connessioni al vertice stesso (ogni parola appare in una parola chiave candidata con se stessa).
-\item Punteggio delle parole: ogni parola nel grafo è valutata con uno dei seguenti punteggi: 
+\item \textbf{Estrazione delle parole chiave candidate}: il testo viene suddiviso in base alle parole chiave candidate in base alle parole di arresto e al delimitatore di frase. Una parola chiave candidata è una frase che si trova tra due stop-word o delimitatori di frase. I delimitatori di frase sono, ad esempio, i caratteri di punteggiatura.
+\item \textbf{Costruzione del grafo di co-occorrenza delle parole chiave}: i vertici nel grafo corrispondono a parole. Sono collegati se compaiono insieme nelle parole chiave candidate. Il grafo è ponderato: il peso corrisponde al numero di volte in cui le parole collegate appaiono insieme nelle parole chiave candidate. Un vertice può essere collegato a sé stesso nel caso corrisponda a una parola che appare in una parola chiave candidata insieme a sé stessa.
+\item \textbf{Punteggio delle parole}: ogni parola nel grafo è valutata con uno dei seguenti punteggi: 
 \begin{itemize}
-\item Grado della parola deg(w): numero di parole con cui la parola w co-occorre (somma dei pesi degli archi). Il grado favorisce le parole che compaiono più spesso e in parole chiave più lunghe.
-\item Frequenza della parola freq(w): numero di volte che la parola appare in qualsiasi parola chiave candidata. Questo criterio favorisce le parole che appaiono più frequentemente.
-\item Rapporto tra grado e frequenza deg(w)/freq(w): favorisce le parole che ricorrono principalmente nelle parole chiave candidate più lunghe. Il grado favorirà le parole chiave più brevi.
+\item \textit{Grado della parola} (\texttt{deg(w)}): numero di parole con cui la parola w co-occorre (somma dei pesi degli archi). Il grado favorisce le parole che compaiono più spesso e in parole chiave più lunghe.
+\item \textit{Frequenza della parola} (\texttt{freq(w)}): numero di volte che la parola appare in qualsiasi parola chiave candidata. Questo criterio favorisce le parole che appaiono più frequentemente.
+\item \textit{Rapporto tra grado e frequenza} (\texttt{deg(w)/freq(w)}): favorisce le parole che ricorrono principalmente nelle parole chiave candidate più lunghe. Il grado favorirà le parole chiave più brevi.
 \end{itemize}
-\item Punteggio delle parole chiave candidate: il punteggio di ciascuna parola chiave candidata è la somma dei punteggi delle parole dei membri.
-\item Parole chiave adiacenti: le parole chiave candidate non includono parole non significative. Poiché a volte le parole non significative possono essere parte della parola chiave, vengono aggiunte in questo passaggio. L'algoritmo trova coppie di parole chiave unite con una parola non significativa in un testo e le aggiunge all'insieme di parole non significative esistenti. Devono apparire almeno due volte nel testo da aggiungere. Il punteggio della nuova parola chiave è la somma delle parole chiave dei suoi membri.
-\item Estrazione delle parole chiave: di conseguenza, viene estratto un terzo delle parole chiave con il punteggio migliore.
+\item \textbf{Punteggio delle parole chiave candidate}: il punteggio di ciascuna parola chiave candidata è la somma dei punteggi delle parole che la compongono.
+\item \textbf{Parole chiave adiacenti}: le parole chiave candidate non includono stopword. Poiché a volte le stopword possono essere parte della parola chiave, vengono aggiunte in questo passaggio. L'algoritmo individua le coppie di parole chiave di cui fa parte almeno una stopword e, nel caso quest'ultima sia presente almeno due volte nel testo, le aggiunge all'insieme delle stopword esistenti. Il punteggio della nuova parola chiave è la somma dei punteggi delle parole chiave che la compongono.
+\item \textbf{Estrazione delle parole chiave}: viene infine estratto il terzo delle parole chiave con il punteggio migliore.
 \end{itemize}
 
 La differenza principale tra RAKE e TextRank è che RAKE considera le ricorrenze all'interno delle parole chiave candidate invece di una finestra fissa. Utilizza una procedura di punteggio più semplice e statistica: non include l'ottimizzazione. L'algoritmo viene eseguito su ciascun documento separatamente, quindi non necessita di un corpus di documenti.
