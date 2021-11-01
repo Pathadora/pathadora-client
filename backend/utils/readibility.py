@@ -63,16 +63,16 @@ def average_words_for_sentence(text):
 
     return sum / count
 
-text = str(textract.process(sys.argv[1])).encode('windows-1252').decode('utf-8')
+def main(filePath):
+    text = str(textract.process(filePath)).encode('windows-1252').decode('utf-8')
 
-s = average_syllabs_for_word(text)
-p = average_words_for_sentence(text)
+    s = average_syllabs_for_word(text)
+    p = average_words_for_sentence(text)
 
-result = 206.835-(84.6*s)-(1.015*p)
-score = inbetween(0, result, 100)
+    result = 206.835-(84.6*s)-(1.015*p)
+    score = inbetween(0, result, 100)
 
-print(score)
-sys.stdout.flush()
+    return str(score)
 
 """
 with open(sys.argv[1], 'r') as f:

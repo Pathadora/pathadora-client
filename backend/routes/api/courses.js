@@ -304,12 +304,14 @@ router.post(
       }
 
       const originalMetadata = await extract(req.files[0].path)
-      const pythonProcess = spawn('python',[__dirname + '/../../utils/readibility.py', req.files[0].path])
+      const pythonProcess = spawn('python',[__dirname + '/../../utils/main.py', req.files[0].path])
       let readingEase;
 
       pythonProcess.stdout.on('data', (value) => {
         // Do something with the data returned from python script
-        readingEase = value
+        v = JSON.parse(value)
+        readingEase = v.readibility;
+        checkRatio = v.check_ratio;
       });
 
       pythonProcess.on('close', (code) => {
@@ -317,7 +319,8 @@ router.post(
           name: req.files[0].filename,
           metadata: {
             ...originalMetadata,
-            readingEase: Number(readingEase.toString('utf8'))
+            readingEase: readingEase,
+            checkRatio: checkRatio
           }
         };
         if (!course.course_resources) {

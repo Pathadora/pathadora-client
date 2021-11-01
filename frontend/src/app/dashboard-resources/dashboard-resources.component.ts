@@ -35,7 +35,7 @@ export class DashboardResourcesComponent implements OnInit {
             courses: new FormArray([]),
          })
 
-         this.readOnly = (this.authenticationService.currentUserValue && this.authenticationService.currentUserValue.user_role === "admin") ? false : true
+         this.readOnly = (this.authenticationService.currentUserValue && (this.authenticationService.currentUserValue.user_role === "admin" || this.authenticationService.currentUserValue.user_role === "teacher")) ? false : true
         
          let coursesObservable: Observable<Course[]> = EMPTY
          if (this.authenticationService.currentUserValue) {
