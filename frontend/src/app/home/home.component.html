@@ -1,13 +1,10 @@
-﻿<div class="card mt-4">
-    <div class="card-header">Pathadora</div>
-    <div class="card-body">
-        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <div *ngIf="currentUser">
-            <p>Benvenuto {{currentUser.user_username}}!</p>
-        </div>
-        <div >
-            <dashboard-resources *ngIf="currentUser && (currentUser.user_role === 'teacher' || currentUser.user_role === 'admin')"></dashboard-resources>
-            <dashboard-user *ngIf="currentUser && currentUser.user_role === 'user'"></dashboard-user>
-        </div>
+﻿<div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+<header *ngIf="currentUser">
+    <div class="container m-2 text-center">
+        <h1>Benvenuto {{currentUser.user_username}}!</h1>
     </div>
+</header>
+<div>
+    <dashboard-resources *ngIf="currentUser && (currentUser.user_role === 'teacher' || currentUser.user_role === 'admin')"></dashboard-resources>
+    <dashboard-user *ngIf="currentUser && currentUser.user_role === 'user'"></dashboard-user>
 </div>
