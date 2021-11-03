@@ -24,8 +24,8 @@
                                 </div>
                             </div>
                             <div class="form-group" *ngIf="!readOnly">
-                                <label class="d-none" for=c._id>{{c.course_name}}</label>
-                                <input class="form-control-file" type="file" (input)="fileChoosen($event, i)" [formControlName]="i" [id]="i" name="i">    
+                                <label class="form-label" for=c._id>Carica una nuova risorsa per il corso {{c.course_name}}</label>
+                                <input class="form-control" type="file" (input)="fileChoosen($event, i)" [formControlName]="i" [id]="i" name="i">    
                             </div>
                         </div>
                     </div>
