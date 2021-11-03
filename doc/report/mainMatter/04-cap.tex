@@ -78,13 +78,23 @@ Le route sono suddivise nei seguenti moduli, ciascuno dei quali fa riferimento a
 Per le route che richiedono la verifica dell'identità dell'utente loggato è utilizzata una funzione middleware che accede al token associato all'header della richiesta, decodificandolo con JWT per ottenere come output le informazioni dell'utente che potranno poi essere utilizzate dall'handler associato alla route.
 
 \section{Estrazione e generazione dei metadati}
+Al caricamento di una risorsa associata a un corso, vengono calcolati una serie di metadati relativi alle proprietà della risorsa e del suo contenuto di cui il modello di profilazione farà uso nel calcolo del suggerimento delle risorse consigliate.
 
+\subsection{Estrazione dei metadati intrinseci del file}
 Al caricamento di una risorsa associata a un corso, i metadati a essa associati vengono estratti mediante la libreria \texttt{metadata-extract}, che a sua volta fa uso di diversi estrattori per più estensioni.
 
-Viene inoltre calcolato attraverso uno script Python un metadato relativo al grado di leggibilità del testo contenuto nel file, calcolato utilizzando la formula di \textbf{Flesh-Kincaid}. Più il valore è alto, più il testo risulta essere semplice da leggere.
+\subsection{Grado di leggibilità di Flesh-Kincaid}
+Viene inoltre calcolato attraverso uno script Python un metadato relativo al grado di leggibilità del testo contenuto nel file, utilizzando la formula di \textbf{Flesh-Kincaid}. Più il valore è alto, più il testo risulta essere semplice da leggere.
 
 \[ F=206,835-(84,6*S)-(1,015*P) \]
 
 La difficoltà di lettura dipende da S e da P, rispettivamente il numero medio di sillabe contenute in una parola e il numero medio di parole contenute in una frase.
 
 La scelta dei coefficienti è una conseguenza di un processo di affinamento del grado di istruzione di una persona in grado di leggere e comprendere la lingua inglese, ottimizzati in modo che venga restituito un valore compreso tra 0 e 100. Viene data più importanza al valore di S piuttosto che a P.\cite{readibility}
+
+\subsection{Accessibilità delle immagini in un documento}
+È stato prodotto uno script attraverso in cui viene restituito un indicatore di accessibilità del testo contenuto nelle immagini presenti in un documento PDF.
+
+Per ciascuna immagine presente nel documento, vengono catturate le aree che contengono testo ed estratto il colore dei caratteri (prelevando il colore più rilevante nella textbox analizzata). Viene poi calcolato il rapporto di contrasto tra questo colore e il colore di sfondo dell'immagine, seguendo i criteri di WCAG 2 dove il range di differenza di luminosità tra i due colori varia da 1 (ad esempio bianco su bianco) a 21 (ad esempio nero su bianco).
+
+Viene poi calcolata la media dei rapporti relativi alle immagini di ciascun file, e il risultato finale corrisponderà alla media di questi risultati per ogni file.
