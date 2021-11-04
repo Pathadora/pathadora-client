@@ -15,7 +15,7 @@ Idealmente, questi strumenti sono capaci di estrarre informazioni da risorse str
 
 \vspace{5mm}
 
-Tra i benifici delle generazione automatica di metadati vi è la scalabilità, per coprire la metadatazione di grandi quantità di informazioni che richiederebbe molto tempo se venisse gestita tutta manualmente, e la consistenza nella generazione dei dati.
+Tra i benefici delle generazione automatica di metadati vi è la scalabilità, per coprire la metadatazione di grandi quantità di informazioni che richiederebbe molto tempo se venisse gestita tutta manualmente, e la consistenza nella generazione dei dati.
 
 \subsection{Metodi di generazione automatica}
 
@@ -24,7 +24,7 @@ L'estrazione dei metadati utilizza l'indicizzazione automatica e le tecniche di 
 
 \vspace{5mm}
 
-All'interno di questa dicotomia di metodi di estrazione, vi sono molte tecniche più specifiche che i ricercatori hanno sviluppato per la generazione automatica di metadati. Polfreman et al. ha identificato sei tecniche che sono state sviluppate nel corso degli anni: raccolta di meta-tag, estrazione di contenuti, indicizzazione automatica, text e data mining, autogenerazione di dati estrinseci e social tagging. Sebbene l'ultima tecnica non sia propriamente una tecnica di generazione automatica di metadati, poiché viene utilizzata per generare metadati con un intervento minimo richiesto dai professionisti dei metadati, può essere vista come una possibile modalità per semplificare il processo di creazione dei metadati\cite{semi}.
+All'interno di questa dicotomia di metodi di estrazione, vi sono molte tecniche più specifiche che i ricercatori hanno sviluppato per la generazione automatica di metadati. Polfreman et al. ha identificato sei tecniche che sono state sviluppate nel corso degli anni: \textit{raccolta di meta-tag}, \textit{estrazione di contenuti}, \textit{indicizzazione automatica}, \textit{text e data mining}, \textit{autogenerazione di dati estrinseci} e \textit{social tagging}. Sebbene l'ultima tecnica non sia propriamente una tecnica di generazione automatica di metadati, poiché viene utilizzata per generare metadati con un intervento minimo richiesto dai professionisti dei metadati, può essere vista come una possibile modalità per semplificare il processo di creazione dei metadati\cite{semi}.
 
 \subsubsection{Estrazione di meta-tag}
 L'\textbf{estrazione di meta-tag} è un processo dove vengono identificati valori per campi di metadati e popolati attraverso l'osservazione dei tag associati ai documenti, di fatto convertendo i metadati raccolti da più repository in formati diversi.
@@ -32,7 +32,7 @@ L'\textbf{estrazione di meta-tag} è un processo dove vengono identificati valor
 La più grande debolezza di questo tipo di tool è il fatto che la sua efficacia dipenda dalla qualità dei metadati raccolti.
 Tra i tool che sfruttano questa tecnica vi sono MarcEdit, che mediante appositi harvester raccoglie metadati da record conformi al protocollo \textbf{Open Archives Initiative Protocol for Metadata Harvesting} (\textbf{OAI-PMH}) e che può convertire in diversi formati (MARC, MARC XML, MODS, EAD), e tool come Editor-Converter Dublin Core Metadata e Firefox Dublin Core Viewer Extension che convertono informazioni trovate nei meta-tags dei file HTML trovati sul web in elementi Dublin Core.
 
-L'OAI-PMH fornisce un framework di interoperabilità, indipendente dall'applicazione, basata sul raccoglimento dei metadati. Il framework di OAI-PMH comprende i service provider, che eseguono richieste per effettuare la raccolta dei metadati, e i data provider, che espongono i metadati. OAI-PMH è largamente utilizzato da biblioteche digitale, repository istituzionali e archivi digitali\cite{harvesting}. Alcuni esempi di archivi che implementano OAI-PMH sono:
+L'OAI-PMH fornisce un framework di interoperabilità, indipendente dall'applicazione, basata sul raccoglimento dei metadati. Il framework di OAI-PMH comprende i service provider, che eseguono richieste per effettuare la raccolta dei metadati, e i data provider, che espongono i metadati. OAI-PMH è largamente utilizzato da biblioteche digitali, repository istituzionali e archivi digitali\cite{harvesting}. Alcuni esempi di archivi che implementano OAI-PMH sono:
 
 \begin{itemize}
 \item Digital Public Library of America (DPLA), aggrega metadati relativi a enti istituzionali americani
@@ -58,12 +58,12 @@ I \textbf{metodi statistici} sono i più semplici. Calcolano le statistiche per 
 \begin{itemize}
 \item Casing: conta il numero di volte (in proporzionale al numero complessivo di volte in cui compare) in cui il termine appare in maiuscolo o come acronimo nel testo. Un termine significativo di solito appare più spesso in maiuscolo.
 \item Posizione del termine: posizione mediana della frase del termine nel testo. I termini più vicini all'inizio tendono a essere i più significativi.
-\item Normalizzazione della frequenza dei termini: misura la frequenza equilibrata dei termini nel documento.
+\item Normalizzazione della frequenza dei termini: misura la frequenza bilanciata dei termini nel documento.
 \item Relazione del termine al contesto: misura con quanti termini diversi il termine candidato coesiste. Termini più significativi coesistono con termini meno diversi. 
 \item Termine in frasi diverse: misura quante volte i termini compaiono in frasi diverse. Un punteggio più alto indica un termine più significativo.
 \end{itemize}
 \item \textbf{Calcolo del punteggio del termine}: le funzioni del passaggio precedente vengono combinate in un unico punteggio con l'equazione creata dall'uomo.
-\item \textbf{Generazione di n-grammi e calcolo dei punteggi delle parole chiave}: l'algoritmo identifica tutti gli n-grammi validi. Le parole negli n-grammi devono appartenere allo stesso blocco e non devono iniziare o terminare con una stopword. Successivamente, ogni n-grammo viene valutato moltiplicando i punteggi dei suoi membri e normalizzato per ridurre l'impatto della lunghezza di n-gram. Le stopword vengono trattate in modo diverso per ridurre al minimo il loro impatto.
+\item \textbf{Generazione di n-grammi e calcolo dei punteggi delle parole chiave}: l'algoritmo identifica tutti gli n-grammi validi. Le parole negli n-grammi devono appartenere allo stesso blocco e non devono iniziare o terminare con una stopword. Successivamente, ogni n-gramma viene valutato moltiplicando i punteggi dei suoi membri e normalizzato per ridurre l'impatto della lunghezza dell'n-gramma. Le stopword vengono trattate in modo diverso per ridurre al minimo il loro impatto.
 \item \textbf{Deduplicazione e ranking dei dati}: vengono rimosse le parole chiavi simili tra loro.
 \end{enumerate}
 
