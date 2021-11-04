@@ -50,27 +50,26 @@ export class DashboardUserComponent {
 
         this.loading = true;
         this.recommenderService.sendRequest({
-            "action": "next_dep_generation",
+            "action": "fac_dep_generation",
+            "degree": this.currentUser.user_profile.user_degree,
             "learner": this.currentUser.user_name + " " + this.currentUser.user_lastname
         }).subscribe(
             data => {
                 this.loading = false;
                 this.currentStep = 2;
-                if (data.departments) {
-                    Object.keys(data.departments).forEach((k, i) => {
-                        this.departmentsData.push({
-                            department_name: data.departments[k].department
-                        })
-                        if (data.departments[k].faculties) {
-                            Object.keys(data.departments[k].faculties).forEach((k2, i2) => {
-                                this.facultiesData.push({
-                                    faculty_name: data.departments[k].faculties[k2],
-                                    faculty_department: data.departments[k].department
-                                })
-                            })
-                        }
+                Object.keys(data).forEach((k, i) => {
+                    this.departmentsData.push({
+                        department_name: data[k].department
                     })
-                }
+                    if (data[k].faculties) {
+                        Object.keys(data[k].faculties).forEach((k2, i2) => {
+                            this.facultiesData.push({
+                                faculty_name: data[k].faculties[k2],
+                                faculty_department: data[k].department
+                            })
+                        })
+                    }
+                })
             },
             error => {
                 this.error = error;

@@ -2,3 +2,4 @@
 export * from './user.service';
 export * from './courses.service';
 export * from './faculties.service';
+export * from './recommender.service';

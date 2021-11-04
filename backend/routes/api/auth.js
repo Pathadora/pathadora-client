@@ -70,7 +70,9 @@ router.post(
         user_role,
         user_birthDate,
         user_avatar,
-        user_registrationDate
+        user_registrationDate,
+        user_profile,
+        user_courses
       } = user
 
       jwt.sign(
@@ -89,6 +91,8 @@ router.post(
             user_birthDate,
             user_avatar,
             user_registrationDate,
+            user_profile,
+            user_courses,
             token });
         }
       );
