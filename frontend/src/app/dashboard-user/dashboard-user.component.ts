@@ -57,19 +57,21 @@ export class DashboardUserComponent {
             data => {
                 this.loading = false;
                 this.currentStep = 2;
-                Object.keys(data).forEach((k, i) => {
-                    this.departmentsData.push({
-                        department_name: data[k].department
-                    })
-                    if (data[k].faculties) {
-                        Object.keys(data[k].faculties).forEach((k2, i2) => {
-                            this.facultiesData.push({
-                                faculty_name: data[k].faculties[k2],
-                                faculty_department: data[k].department
-                            })
+                if (data.data) {
+                    Object.keys(data.data).forEach((k, i) => {
+                        this.departmentsData.push({
+                            department_name: data.data[k].department
                         })
-                    }
-                })
+                        if (data.data[k].faculties) {
+                            Object.keys(data.data[k].faculties).forEach((k2, i2) => {
+                                this.facultiesData.push({
+                                    faculty_name: data.data[k].faculties[k2],
+                                    faculty_department: data.data[k].department
+                                })
+                            })
+                        }
+                    })
+                }
             },
             error => {
                 this.error = error;
