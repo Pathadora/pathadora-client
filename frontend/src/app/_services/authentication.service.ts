@@ -96,10 +96,10 @@ export class AuthenticationService {
                         "future_degree": future_degree,
                         "passion": passion,
                         "learning_style": {
-                            "active_reflective": active_reflective,
-                            "sensing_intuitive": sensing_intuitive,
-                            "visual_veral": visual_veral,
-                            "sequential_global": sequential_global,
+                            "1": active_reflective,
+                            "2": sensing_intuitive,
+                            "3": visual_veral,
+                            "4": sequential_global,
                         },
                         "goal": goal,
                         "disability": disability

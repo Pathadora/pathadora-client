@@ -92,9 +92,9 @@ export class DashboardUserComponent {
         this.recommenderService.sendRequest({
             "action": "course_generation",
             "learner": this.currentUser.user_name + " " + this.currentUser.user_lastname,
-            "faculty": this.f.faculty,
-            "department": this.f.department,
-            "year": this.f.year
+            "faculty": this.f.faculty.value,
+            "department": this.f.department.value,
+            "year": this.f.year.value
         }).subscribe(
             data => {
                 this.loading = false;
