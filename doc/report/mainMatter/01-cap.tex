@@ -3,9 +3,23 @@
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \pagenumbering{arabic}                  %mette i numeri arabi
 \chapter{Stato dell'arte}
-
+\section{Metadati}
 I \textit{metadati} sono informazioni associate ad una pagina web o ad una porzione di essa che ne descrivono il contenuto, permettendo che i risultati delle ricerche degli utenti abbiano una maggiore efficacia.
 
+Una volta definiti, i metadati possono essere condivisi e riutilizzati in più occasioni. Questo riutilizzo comporta i seguenti vantaggi:
+\begin{itemize}
+\item aumentare l'interoperabilità tra diversi sistemi che condividono dati e servizi.
+\item ridurre i costi nello sviluppo di sistemi interoperabili, poiché il riutilizzo evita il trattamento delle ambiguità all'interno delle applicazioni.
+\item facilitare il trattamento dei dati nei sistemi informativi in genere, ed in particolare in quelli che integrano e condividono dati, ad esempio, sistemi di supporto per il processo decisionale.
+\end{itemize}
+
+I metadati possono essere raggruppati o strutturati come “schemi di metadati”, un insieme di metadati progettati per uno scopo specifico, come la descrizione di un tipo di informazioni su una risorsa. La definizione o il significato degli elementi in sé è noto come semantica dello schema. I valori dati agli elementi dei metadati sono il suo contenuto. Gli schemi di metadati di solito specificano i nomi degli elementi e la loro semantica.
+
+Facoltativamente, possono specificare regole di contenuto su come stabilire il loro contenuto (come stabilire il titolo principale) e i possibili valori per il contenuto. Così, ad esempio, i termini possono provenire da uno specifico vocabolario controllato. Potrebbero anche esserci regole di sintassi su come gli elementi e il loro contenuto dovrebbero essere codificati. Uno schema di metadati senza regole di sintassi stabilite è chiamato sintassi indipendente.
+
+I metadati possono essere codificati in qualsiasi sintassi definibile come SGML, XML o JSON.
+
+\section{Metodi di generazione automatica di metadati}
 Generare metadati di buona qualità in modo efficiente è essenziale per organizzare e rendere accessibile la grande quantità di risorse presente sul web. Il successo di biblioteche digitali, il sostenimento dell'interoperabilità e l'evoluzione del web semantico dipendono da una generazione di metadati efficiente\cite{metadata}.
 
 \vspace{5mm}
@@ -17,8 +31,6 @@ Idealmente, questi strumenti sono capaci di estrarre informazioni da risorse str
 
 Tra i benefici delle generazione automatica di metadati vi è la scalabilità, per coprire la metadatazione di grandi quantità di informazioni che richiederebbe molto tempo se venisse gestita tutta manualmente, e la consistenza nella generazione dei dati.
 
-\subsection{Metodi di generazione automatica}
-
 A differenza della generazione manuale dei metadati, la generazione automatica dei metadati si basa su metodi automatici per assistere o completare il processo di creazione dei metadati. Greenberg ha distinto due metodi di generazione automatica dei metadati: l'estrazione dei metadati (\textit{metadata extraction}) e la raccolta dei metadati (\textit{metadata harvesting}).
 L'estrazione dei metadati utilizza l'indicizzazione automatica e le tecniche di recupero delle informazioni per generare metadati strutturati utilizzando il contenuto originale delle risorse. La raccolta di metadati consiste invece nel raccogliere in modo automatico metadati già prodotti e archiviati da diversi repository.
 
@@ -26,7 +38,7 @@ L'estrazione dei metadati utilizza l'indicizzazione automatica e le tecniche di 
 
 All'interno di questa dicotomia di metodi di estrazione, vi sono molte tecniche più specifiche che i ricercatori hanno sviluppato per la generazione automatica di metadati. Polfreman et al. ha identificato sei tecniche che sono state sviluppate nel corso degli anni: \textit{raccolta di meta-tag}, \textit{estrazione di contenuti}, \textit{indicizzazione automatica}, \textit{text e data mining}, \textit{autogenerazione di dati estrinseci} e \textit{social tagging}. Sebbene l'ultima tecnica non sia propriamente una tecnica di generazione automatica di metadati, poiché viene utilizzata per generare metadati con un intervento minimo richiesto dai professionisti dei metadati, può essere vista come una possibile modalità per semplificare il processo di creazione dei metadati\cite{semi}.
 
-\subsubsection{Estrazione di meta-tag}
+\subsection{Estrazione di meta-tag}
 L'\textbf{estrazione di meta-tag} è un processo dove vengono identificati valori per campi di metadati e popolati attraverso l'osservazione dei tag associati ai documenti, di fatto convertendo i metadati raccolti da più repository in formati diversi.
 
 La più grande debolezza di questo tipo di tool è il fatto che la sua efficacia dipenda dalla qualità dei metadati raccolti.
@@ -41,12 +53,12 @@ L'OAI-PMH fornisce un framework di interoperabilità, indipendente dall'applicaz
 \item Open Language Archives Community (OLAC), una libreria virtuale di risorse linguistiche
 \end{itemize}
 
-\subsubsection{Estrazione di contenuti}
+\subsection{Estrazione di contenuti}
 L'\textbf{estrazione di contenuti} è una forma di estrazione di metadati che sfrutta algoritmi di machine learning per associare parole chiave al documento sulla base del suo contenuto. Il vantaggio di questo approccio è che il risultato è indipendente dalla qualità dei metadati associati alla risorsa. Esempi di applicazioni che impiegano questa tecnica sono Kea, che utilizza le tecniche TF-IDF e first-occurence per identificare e assegnare frasi chiave da risorse testuali, e Open Text Summarizer che esegue l'estrazione automatica di un riassunto del testo passato in input e delle relative parole chiave. 
 
 I metodi di estrazione di parole chiave possono essere suddivisi in tre categorie: metodi statistici, metodi basati sui grafi e metodi basati sul deep learning\cite{extraction}.
 
-\paragraph{Metodi statistici}
+\subsection{Metodi statistici}
 I \textbf{metodi statistici} sono i più semplici. Calcolano le statistiche per le parole chiave e utilizzano tali statistiche per valutarle. Tra questi metodi rientrano il calcolo la frequenza delle parole, la collocazione linguistica, la co-occorrenza e tecniche più sofisticate come TF-IDF e YAKE!.
 
 \textbf{TF-IDF} (Term Frequency–Inverse Document Frequency) stima l'importanza della parola nel documento rispetto all'intero corpus (insieme di più documenti). Calcola la frequenza di ogni termine nel documento e la pondera con l'inverso della frequenza del termine nell'intero corpus. Le parole chiave verranno selezionate tra i termini con i punteggi più alti. Questo algoritmo favorisce i termini frequenti nel documento di testo e non frequenti negli altri documenti. Il vantaggio di TF-IDF è che è veloce e lo svantaggio è che necessita di un corpus di almeno qualche dozzina di documenti. TF-IDF è indipendente dalla lingua.
@@ -67,7 +79,7 @@ I \textbf{metodi statistici} sono i più semplici. Calcolano le statistiche per 
 \item \textbf{Deduplicazione e ranking dei dati}: vengono rimosse le parole chiavi simili tra loro.
 \end{enumerate}
 
-\paragraph{Metodi basati sui grafi}
+\subsection{Metodi basati sui grafi}
 I metodi basati su grafi generano un grafo dei termini correlati presenti nei documenti. Un grafo, ad esempio, può collegare i termini che si verificano contemporaneamente nel testo. I metodi basati su grafi utilizzano metodi di classificazione che considerano la struttura del grafo per valutare l'importanza del vertice. Uno dei metodi di questa categoria più conosciuti è TextRank.
 
 \textbf{TextRank} è un metodo di classificazione basato su grafi utilizzato per estrarre frasi pertinenti o trovare parole chiave. L'estrazione delle parole chiave avviene in cinque passaggi:
@@ -105,25 +117,25 @@ Include i seguenti passaggi:
 
 La differenza principale tra RAKE e TextRank è che RAKE considera le ricorrenze all'interno delle parole chiave candidate invece di una finestra fissa. Utilizza una procedura di punteggio più semplice e statistica: non include l'ottimizzazione. L'algoritmo viene eseguito su ciascun documento separatamente, quindi non necessita di un corpus di documenti.
 
-\paragraph{Metodi basati sul deep learning}
+\subsection{Metodi basati sul deep learning}
 La comparsa del deep learning ha consentito metodi basati sull'embedding, un insieme di tecniche di modellazione in cui le parole vengono mappate in vettori di numeri reali. 
 
 Questi metodi trovano principalmente un elenco di parole chiave candidate (ad esempio, Bennani et al. considerano solo parole chiave costituite da nomi e aggettivi). Incorporano il documento e le parole chiave candidate nello stesso spazio di inclusione e misurano la similarità (ad es. similarità del coseno) tra i valori del documento e delle parole chiave. Selezionano le parole chiave più simili al testo del documento in base alla misura di similarità.
 
-\subsubsection{Indicizzazione automatica}
+\subsection{Indicizzazione automatica}
 Così come la content extraction, l'\textbf{indicizzazione automatica} prevede l'utilizzo di machine learning e algoritmi rule-based per estrarre metadati dalle risorse. La differenza sta nel fatto che i termini estratti vengono successivamente mappati in vocabolari controllati come Library of Congress Subject Headings (LCSH), Getty Thesaurus of Geographic Names (TGN), Library of Congress Name Authority (LCNA) o ontologie relative a un dominio specifico.
 
-\subsubsection{Text e data mining}
+\subsection{Text e data mining}
 A causa della complessità delle tecniche utilizzate per l'estrazione di metadati, la maggior parte degli usi di queste tecniche sono stati sviluppati per risolvere i problemi della generazione automatica di metadati nel contesto di specifici progetti di ricerca.
 I principali motivi sono il fatto che l'efficacia di queste tecniche dipende dalla qualità e dalla quantità dei dati di training, e che i vocabolari controllati come LCSH sono troppo complicati e diversificati per essere applicati con mezzi automatici.
 
-\subsubsection{Autogenerazione di dati estrinseci}
+\subsection{Autogenerazione di dati estrinseci}
 La generazione automatica di dati estrinseci è il processo di estrazione dei metadati su una risorsa informativa che non è contenuta all'interno della risorsa stessa. La generazione automatica di dati estrinseci può includere l'estrazione di metadati tecnici come il formato e le dimensioni del file, ma può essere anche l'estrazione di funzionalità più complesse come il livello di classe scolastica a cui è destinata una risorsa educativa o il tipo di lettori per cui è destinato un documento.
 Processi di questo tipo sono difficili da implementare a causa dell'assenza di informazioni sul contesto di una risorsa
 contenute nella risorsa stessa.
 Tra i tool che implementano questa tecnica di estrazione di metadati vi sono Dspace e JHove.
 
-\subsubsection{Social Tagging}
+\subsection{Social Tagging}
 Il social tagging è una forma di generazione di metadati, sebbene non propriamente automatica, che permette agli utenti di creare e assegnare tag alle risorse di un sito web. A causa del costo relativamente basso della generazione e del mantenimento dei metadati attraverso il social tagging e della sua attuale popolarità diffusa, alcuni progetti hanno tentato di utilizzare questi dati per migliorare i repository di archiviazione di metadati. Ad esempio, Linstaedt et al. usa sofisticati programmi per computer per analizzare le immagini statiche trovate all'interno di Flickr e utilizzare questi risultati d'analisi per propagare tag utente pertinenti a nuove immagini elaborate.
 
 Un esempio di utilizzo del social tagging più complesso può consistere nell'utilizzare tecniche di apprendimento automatico, tenendo traccia dei cambiamenti applicati sui metadati associati a una risorsa da parte degli utenti e migliorare quindi i meccanismi di learning del database sulla base di queste modifiche.
@@ -208,4 +220,105 @@ Una volta terminata la sessione di training, Kea utilizza il modello per calcola
 \includegraphics[scale=1]{res/kea_diagram.png}
 \caption{Schema di Kea}
 \label{fig:kea}
+\end{figure}
+
+\section{Metadati di accessibilità per risorse educative}
+I progressi nelle tecnologie dell'informazione e della comunicazione, e in particolare nell'ingegneria multimediale, di rete e del software, hanno promosso una nuova generazione di ambienti di apprendimento online.
+Molte organizzazioni, sia pubbliche che private, sfruttano le nuove tecnologie per offrire prodotti e servizi educativi e formativi a tutti i livelli. In particolare, l'ampia disponibilità di risorse educative è un obiettivo comune per università, biblioteche, archivi e altre istituzioni ad alta intensità di conoscenza. C'è anche una crescente capacità dei docenti di collaborare con i loro studenti e altri docenti al fine di produrre, condividere e riutilizzare le risorse educative.
+
+In questo contesto, i metadati educativi sono stati riconosciuti come uno dei campi più fruttuosi nella standardizzazione delle tecnologie educative. Tuttavia, l'emergere di grandi raccolte di risorse di apprendimento create attraverso la raccolta e l'aggregazione di metadati ha sollevato importanti preoccupazioni sull'idoneità delle descrizioni delle risorse educative fornite negli schemi di metadati.
+
+Pertanto, la capacità di gestire efficacemente le risorse educative in termini di reperibilità, riutilizzabilità, interoperabilità e accessibilità risiede nell'adozione di uno schema di metadati appropriato, in grado di descriverle adeguatamente. Nonostante ciò, in quest'area è stata fatta solo una piccola ricerca e ancora di più, per quanto a nostra conoscenza, non esiste una soluzione completa per la gestione dei metadati di accessibilità. L'accessibilità è una caratteristica chiave per promuovere l'istruzione e la formazione inclusive in ambienti di apprendimento virtuali e distribuiti in cui esiste una grande diversità nelle esigenze e nelle preferenze di accessibilità degli studenti.
+
+Storicamente, la tecnologia e la sua funzionalità nel processo di insegnamento e apprendimento hanno offerto agli studenti una varietà di possibilità riguardo alle esperienze di interazione in base alle loro esigenze e preferenze di apprendimento. Il primo tentativo all'utilizzo delle risorse educative nell'ambito della formazione a distanza risale al 1728. Si trattava di corrispondenza stampata. Nel 1971, la British Broadcasting Corporation (BBC) iniziò a trasmettere in televisione i materiali didattici della Open University sotto forma di conferenze registrate. Negli anni '90, diverse università hanno sviluppato tecnologie per gestire le risorse educative digitali dando vita ai Learning Content Management Systems (LCMS) e successivamente ai Learning Management Systems (LMS).
+
+Nel 2002, il Massachusetts Institute of Technology (MIT) ha lanciato l'iniziativa OpenCourseWare, ora Open Education Consortium, per fornire accesso online gratuito alle risorse educative dei corsi del MIT. Nello stesso anno, l'Organizzazione delle Nazioni Unite per l'Educazione, la Scienza e la Cultura (UNESCO) ha coniato Risorse Educative Aperte (OER) per fare riferimento a materiali di apprendimento rilasciati con una licenza aperta che consente l'accesso, l'uso, l'adattamento e la ridistribuzione gratuiti.
+
+Nel 2012, sono stati introdotti i Massive Open Online Courses (MOOC) per integrare i normali corsi universitari. I MOOC differiscono dai tradizionali corsi online ospitati nelle piattaforme LMS in quanto possono avere un numero illimitato di partecipanti, non hanno requisiti di iscrizione e possono essere seguiti gratuitamente pagando facoltativamente solo per certificati ufficiali o servizi extra, come il feedback dell'istruttore.
+
+Nel 2018, l'offerta MOOC globale comprendeva 11.400 corsi online offerti da 900 istituzioni, con 101 milioni di studenti. La natura massiccia e aperta del MOOC implica eterogeneità negli studenti. L'accessibilità dei MOOC e delle risorse educative in essi contenute deve essere garantita, poiché la probabilità che studenti con diverse tipologie di disabilità partecipino a un MOOC è molto maggiore rispetto ai tradizionali corsi in presenza, a distanza o online. 
+
+I MOOC possono facilitare notevolmente l'istruzione delle persone con qualche tipo di disabilità. Tuttavia, affinché uno studente con una disabilità specifica sia in grado di utilizzare un MOOC, le risorse educative devono essere disponibili in formati accessibili e devono esserci meccanismi di metadati per identificare quale risorsa educativa accessibile è più adatta alle diverse esigenze e preferenze di accessibilità, così come diversi stili di apprendimento. Nonostante le opportunità che la tecnologia educativa presenta, è ancora utilizzata per supportare obiettivi, metodi e valutazioni di un curriculum tradizionale. Questo esclude gli studenti che sono ai margini, come le persone con disabilità.
+
+Il processo di descrizione delle risorse educative attraverso alcune specifiche di metadati è solo uno dei passaggi per rendere tali risorse comprensibili agli studenti con disabilità. Affinché le risorse educative siano localizzate, devono essere incorporate in un repository o una piattaforma di apprendimento virtuale (ad esempio Moodle). In entrambi i casi, le risorse educative possono essere caricate per essere condividise con la comunità educativa o per creare un corso. In generale, uno degli strumenti più importanti che ha un repository o una piattaforma di apprendimento virtuale è portare la possibilità di ricerca nei propri contenuti educativi. Se la risorsa educativa è stata descritta con metadati di accessibilità e lo studente ha una descrizione delle sue esigenze e preferenze personali, lo strumento può scegliere le risorse educative più adeguate in modo che lo studente possa comprenderne il contenuto.
+
+Una piattaforma di apprendimento virtuale utilizza una tecnologia che si concentra sullo sviluppo, la gestione e la pubblicazione dei contenuti e delle attività che contribuiscono al processo di insegnamento-apprendimento. Le piattaforme di apprendimento virtuale funzionano con la tecnologia web attraverso un modello client-server e attualmente con la tendenza a fornire servizi distribuiti attraverso il "cloud". Se si tratta di una piattaforma di apprendimento virtuale accessibile, deve essere garantito che tutte le funzionalità possano essere utilizzate da qualsiasi utente, compresi gli utenti con diversità funzionale\cite{edures}.
+
+\subsection{WCAG}
+La consapevolezza della diffusa inaccessibilità dei contenuti web ha portato  allo sviluppo di linee guida per gli autori e altri per assicurarsi che i contenuti fossero più accessibili alle persone con disabilità. 
+
+Il World Wide Web Consortium (\textbf{W3C}) ha risposto fondando il programma Web Accessibility Initiative (\textbf{WAI}) al fine di migliorare l'accessibilità dei contenuti web. Il W3C WAI ha sviluppato ampie linee guida su come rendere i contenuti accessibili a tutti i dispositivi, in modo che coloro che utilizzano dispositivi e browser non-standard possano accedervi ugualmente.
+
+Le linee guida per l'accessibilità dei contenuti Web (Web Content Accessibility Guidelines, \textbf{WCAG}), attualmente alla versione 2.1, sono sviluppate attraverso il processo W3C in collaborazione con individui e organizzazioni in tutto il mondo, con l'obiettivo di fornire un unico standard condiviso per l'accessibilità dei contenuti Web che soddisfi le esigenze di individui, organizzazioni e governi a livello internazionale\cite{wcag}.
+
+Al fine di soddisfare le diverse esigenze di questo pubblico, vengono forniti diversi livelli di orientamento:
+\begin{itemize}
+\item \textbf{Principi}: vi sono innanzitutto quattro principi che forniscono le basi per l'accessibilità del Web:
+\begin{itemize}
+\item \textit{percepibile}: l'informazione del contenuto non è invisibile a tutti i sensi dell'utente
+\item \textit{operabile}: l'interfaccia non deve richiedere un'interazione che un utente non può effettuare
+\item \textit{comprensibile}: il contenuto non può essere al di là della comprensione del fruitore
+\item \textit{robusto}: il contenuto resta accessibile all'avanzare della tecnologia
+\end{itemize}
+\item \textbf{Linee guida}: tredici linee guida forniscono gli obiettivi di base verso i quali gli autori dovrebbero lavorare per rendere i contenuti più accessibili agli utenti con disabilità diverse. Le linee guida non sono testabili, ma forniscono il quadro e gli obiettivi generali per aiutare gli autori a comprendere i criteri di successo e a implementare meglio le tecniche.
+\item \textbf{Criteri di successo}: per ciascuna linea guida, vengono forniti criteri di successo verificabili per consentire l'utilizzo delle WCAG 2.0 laddove sono necessari requisiti e test di conformità, ad esempio nelle specifiche di progettazione, negli acquisti, nei regolamenti e negli accordi contrattuali. Per soddisfare le esigenze dei diversi gruppi e delle diverse situazioni, vengono definiti tre livelli di conformità: A (minimo), AA e AAA (massimo).
+\item \textbf{Tecniche sufficienti e consultive}: per ciascuna delle linee guida e dei criteri di successo nel documento WCAG 2.0 stesso, il gruppo di lavoro ha anche documentato un'ampia varietà di tecniche. Le tecniche sono informative e si dividono in due categorie: quelle sufficienti per soddisfare i \textit{criteri di successo} e quelle \textit{consultive}. Le tecniche consultive vanno oltre quanto richiesto dai singoli criteri di successo e consentono agli autori di affrontare meglio le linee guida. Alcune tecniche consultive affrontano gli ostacoli all'accessibilità che non sono coperti dai criteri di successo verificabili. Laddove sono noti errori comuni, anche questi vengono documentati.
+\end{itemize}
+
+\subsection{LOM}
+Lo standard \textbf{IEEE LOM} o \textbf{LOM} (Learning Object Metadata) è uno standard aperto che
+specifica la sintassi e la semantica degli attributi richiesti per i metadati dei learning object. Lo standard LOM include regole per controllare l'identificazione degli elementi dei dati e dei loro attributi. Fornisce inoltre principi, regole e strutture per la specificazione di quelle stesse risorse. Il suo obiettivo è facilitare la ricerca, la valutazione, il recupero e l'uso dei learning object. Inoltre, IEEE LOM è considerato lo standard più accettato e implementato in più repository di learning objects. Esistono numerose versioni ed estensioni di LOM che sono state sviluppate da IEEE LOM. È organizzato in 9 categorie, ognuna delle quali contiene sottocategorie che possono condividere caratteristiche di base.
+
+\subsection{LRMI}
+Questa iniziativa è iniziata nel 2011, il suo scopo era quello di sviluppare una specifica come estensione educativa per Schema.org. Le proprietà LRMI hanno lo scopo di descrivere le risorse educative aggiungendo proprietà specifiche in modo che possano essere facilmente individuate attraverso motori di ricerca e servizi. Le specifiche si basano sul vocabolario fornito da Schema.org e da altri standard. Pertanto, ci sono termini LRMI non inclusi in Schema.org. Con il supporto di Association of Educational Publishers (AEP), Association of American Publishers, Creative Commons (CC), division 501, Bill \& Melinda Gates e William and Flora Hewlett Foundation, LRMI ha sviluppato un framework di metadati per taggare le risorse di apprendimento web. Lo schema LRMI 1.1 è stato adottato da Schema.org nel 2013, che consente alle risorse, attraverso i loro metadati LRMI, di essere riconosciute dai principali motori di ricerca.
+
+\subsection{IMS AfA}
+L'obiettivo principale di IMS Access for All (\textbf{AfA}) v3.0 era quello di semplificare lo standard ISO/IEC 24751 a causa delle difficoltà sorte nella pratica. Entrambi, lo standard ISO/IEC 24751 e AfA v3.0, coprono l'intero processo dalla lettura delle esigenze dell'utente al meccanismo di ricerca necessario per trovare i learning object che soddisfano tali esigenze o preferenze. Ha due modelli di dati:
+\begin{itemize}
+\item Personal Needs and Preferences (PNP): un modello per la descrizione dei bisogni e delle preferenze degli utenti per accedere e interagire con le risorse digitali.
+\item Digital Resource Description (DRD): un modello per la descrizione dei metadati di accessibilità per le risorse didattiche digitali.
+\end{itemize}
+
+La specifica AfA DRD definisce i metadati di accessibilità per una risorsa che verrà utilizzata per la ricerca e l'uso della risorsa di apprendimento più adatta per ciascun utente secondo i PNP. Lo strumento LOMPAD è stato abilitato per introdurre metadati di accessibilità (oltre ai metadati ordinari) secondo la specifica IMS 3.0.
+
+Il modo di lavorare con oggetti di apprendimento accessibili richiede la creazione di oggetti di apprendimento originali e adattati. Esistono diversi strumenti che ne facilitano la creazione. Una risorsa originale corrisponde a una risorsa iniziale, mentre una risorsa adattata presenta le stesse informazioni educative della risorsa iniziale o originale ma con caratteristiche diverse, come la modalità sensoriale di accesso alla risorsa, la lingua, ecc. Ad esempio, un file in formato pdf come risorsa originale e una descrizione audio del suo contenuto come risorsa adattata. Il primo presenta l'accesso testuale mentre l'adattamento presenta l'accesso uditivo allo stesso contenuto educativo. Pertanto, le risorse originali possono avere un numero qualsiasi di adattamenti, totali o parziali.
+
+I metadati possono supportare le informazioni adeguate delle risorse originali, come la modalità di accesso (vista, udito, alfabetizzazione, presentazione, fattibilità della trasformazione, controllo, flessibilità, adattamenti, strumenti di aiuto, ecc.) e informazioni rilevanti sulle risorse adattate, come il tipo di adattamento (sottotitoli, lingua dei segni), l'estensione, e la descrizione. Una fusione di risorse, metadati descrittivi e metadati di accessibilità corrisponde al consolidamento di una fonte di archivi accessibili che rafforzi la ricerca di learning object secondo i bisogni educativi speciali.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{res/drd.png}
+\caption{Proprietà del modello DRD}
+\label{fig:drd}
+\end{figure}
+
+Lo scopo della specifica AfA PNP è quello di consentire la definizione dei bisogni personali degli studenti (o quelli relativi agli ambienti della disabilità). I PNP vengono utilizzati in combinazione con la specifica AfA DRD per fornire risorse digitali che soddisfino le esigenze di un utente e/o le sue preferenze. I PNP dello studente o dell'utente definiscono le sue preferenze nell'utilizzo delle diverse modalità sensoriali per la percezione delle informazioni. Il metodo suggerito per generare i PNP dello studente è la presentazione di un modulo con diverse opzioni sulla modalità sensoriale preferita per l'accesso alle informazioni. I PNP saranno generati dalle risposte dello studente alle domande nel modulo.
+
+I principi di accessibilità sull'e-learning sono focalizzati sulla fornitura di opzioni di personalizzazione basate sulle preferenze dell'utente, sugli equivalenti dei contenuti e sulla compatibilità con l'aiuto tecnico e l'accesso completo alla tastiera, oltre a fornire informazioni sul contesto e offrire supporto in modo che l'utente possa seguire specifiche su direttive e/o norme di organi di governo come IMS.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{res/pnp.png}
+\caption{Proprietà del modello PNP}
+\label{fig:pnp}
+\end{figure}
+
+\subsection{Schema.org}
+\textbf{Schema.org} è una comunità responsabile della creazione, della manutenzione e della promozione di schemi di metadati per dati strutturati pubblicati su Internet. L'aspetto più interessante di Schema.org è che riceve il supporto di grandi aziende come Google, Microsoft e Yahoo. Ciò significa che l'incorporazione di metadati nei contenuti pubblicati su Internet è essenziale per poterli categorizzare e descrivere le loro caratteristiche di accessibilità.
+
+I formati più utilizzati per fare annotazioni semantiche sono microdati, microformati, JSON-LD e RDFa.
+Il formato dei microdati è stato sviluppato nell'ambito della standardizzazione di HTML5 per la marcatura dei contenuti web. I microdati sono costituiti da un gruppo di coppie nome-valore; i gruppi sono chiamati elementi e ogni coppia nome-valore è una proprietà. Gli elementi sono definiti dai seguenti cinque attributi: \textit{itemscope}, \textit{itemtype}, \textit{itemid}, \textit{itemprop} e \textit{itemref}. Queste annotazioni forniscono la semantica attraverso la terminologia e le proprietà di un dominio di rappresentazione della conoscenza, comprese le sue relazioni.
+
+La specifica Schema.org stabilisce una raccolta di vocabolari condivisi che includono proprietà per descrivere alcune caratteristiche di diversi tipi di contenuto web. Queste descrizioni possono essere comprese dai principali motori di ricerca. Nel caso di Google, il suo motore di ricerca utilizza i microdati HTML5 di Schema.org per migliorare i risultati delle sue ricerche e consente a chiunque di effettuare una ricerca personalizzata utilizzando i diversi schemi di Schema.org per limitare le ricerche.
+
+Per definire i metadati di accessibilità in Schema.org, sono definiti diversi tipi di contenuto web e possono essere
+classificati utilizzando schemi di metadati.
+I tipi possono avere sottotipi, ad esempio "CreativeWork" ha il tipo "MediaObject" e questo ha a sua volta "VideoObject".
+I metadati di accessibilità definiti da Schema.org si basano su quelli specificati per IMS AfA v3.0 DRD, ma ne è stato selezionato un sottoinsieme significativo. Ciascuno di questi metadati può avere un possibile valore definito nella specifica. In questo modo si possono determinare le caratteristiche di accessibilità di qualsiasi risorsa digitale pubblicata sul web.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{res/schemaorg.png}
+\caption{Metadati di accessibilità di CreativeWork da Schema.org}
+\label{fig:schemaorg}
 \end{figure}
