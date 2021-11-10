@@ -22,7 +22,7 @@ let User = new Schema({
   },
   user_gender: {
     type: String,
-    enum : ['male','female','other'],
+    enum : ['Gender_Male','Gender_Female','Gender_Others'],
     default: 'other'
   },
   user_password: {
@@ -32,9 +32,6 @@ let User = new Schema({
   user_birthDate: {
     type: Date,
     required: true
-  },
-  user_avatar: {
-    type: String
   },
   user_registrationDate: {
     type: Date,
@@ -46,43 +43,41 @@ let User = new Schema({
     default: 'user'
   },
   user_profile: {
-    user_language: {
-      type: String
+    user_education: {
+      type: String,
+      required: true
     },
+    user_languages: [
+      {
+        type: String
+      }
+    ],
     user_degree: {
       type: String
     },
     user_future_degree: {
       type: String
     },
-    user_passion: {
-      type: String
-    },
-    user_learning_style: {
-      active_reflective: {
-        type: String,
-        enum : ['Active','Reflective']
-      },
-      sensing_intuitive: {
-        type: String,
-        enum : ['Sensing','Intuitive']
-      },
-      visual_veral: {
-        type: String,
-        enum : ['Visual','Veral']
-      },
-      sequential_global: {
-        type: String,
-        enum : ['Sequential','Global']
+    user_passions: [
+      {
+        type: String
       }
-    },
+    ],
     user_goal: {
       type: String,
-        enum : ['Deadline Driven','Score Driven','Learning Awards','User Competency','Shortest Path']
+        enum : ['Goal_PathDriven','Goal_ScoreDriven','Goal_TimeDriven']
     },
-    user_disability: {
-      type: String
-    }
+    user_disabilities: [
+      {
+        name: {
+          type: String
+        },
+        level: {
+          type: Number,
+          default: 0
+        }
+      }
+    ],
   },
   user_courses: [
     {

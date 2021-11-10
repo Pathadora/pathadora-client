@@ -51,10 +51,19 @@
 
                 <div *ngIf="role ==='user'">
                     <div class="form-group">
-                        <label for="language">Lingua</label>
-                        <input type="text" formControlName="language" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.language.errors }" />
-                        <div *ngIf="submitted && f.language.errors" class="invalid-feedback">
-                            <div *ngIf="f.language.errors.required">Inserisci la lingua</div>
+                        <label for="education">Educazione</label>
+                        <input type="text" formControlName="education" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.education.errors }" />
+                        <div *ngIf="submitted && f.education.errors" class="invalid-feedback">
+                            <div *ngIf="f.education.errors.required">Inserisci l'educazione</div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="languagesFormArray.length > 0" class="form-group">
+                        <p>Seleziona uno o più lingue</p>
+                        <div class="form-check" *ngFor="let language of languagesFormArray.controls; let i = index" formArrayName="languages">
+                            <label class="form-check-label">{{languages[i].label}}</label>
+                            <input class="form-check-input" type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.languages.errors }">
+                            <div *ngIf="submitted && f.languages.errors" class="invalid-feedback"></div>
                         </div>
                     </div>
 
@@ -62,9 +71,7 @@
                         <label for="degree">Laurea</label>
                         <select type="text" formControlName="degree" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && f.degree.errors }" >
                             <option value="null" disabled>Seleziona il tipo di laurea</option>
-                            <option value="Bachelor">Triennale</option>
-                            <option value="Master">Magistrale</option>
-                            <option value="Doctoral">Dottorato</option>
+                            <option *ngFor="let d of degrees" [ngValue]="d.id">{{d.label}}</option>
                         </select>
                         <div *ngIf="submitted && f.degree.errors" class="invalid-feedback">
                             <div *ngIf="f.degree.errors.required">Inserisci la laurea</div>
@@ -75,135 +82,63 @@
                         <label for="future_degree">Futura laurea</label>
                         <select type="text" formControlName="future_degree" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && f.future_degree.errors }" >
                             <option value="null" disabled>Seleziona il tipo di futura laurea</option>
-                            <option value="Bachelor">Triennale</option>
-                            <option value="Master">Magistrale</option>
-                            <option value="Doctoral">Dottorato</option>
+                            <option *ngFor="let d of degrees" [ngValue]="d.id">{{d.label}}</option>
                         </select>
                         <div *ngIf="submitted && f.future_degree.errors" class="invalid-feedback">
                             <div *ngIf="f.future_degree.errors.required">Inserisci la futura laurea</div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="passion">Passione</label>
-                        <input type="text" formControlName="passion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passion.errors }" />
-                        <div *ngIf="submitted && f.passion.errors" class="invalid-feedback">
-                            <div *ngIf="f.passion.errors.required">Inserisci la passione</div>
+                    <div *ngIf="passionsFormArray.length > 0" class="form-group">
+                        <p>Seleziona uno o più passioni</p>
+                        <div class="form-check" *ngFor="let passion of passionsFormArray.controls; let i = index" formArrayName="passions">
+                            <label class="form-check-label">{{passions[i].label}}</label>
+                            <input class="form-check-input" type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.passions.errors }">
+                            <div *ngIf="submitted && f.languages.errors" class="invalid-feedback"></div>
                         </div>
                     </div>
 
-                    <div class="form-group container">
-                        <p>Learning style</p>
-                        <div class="row">
-                            <div class="col-12 col-sm-6 col-md-3">
-                                <div class="form-check">
-                                    <input type="radio" id="active" value="Active" formControlName="active_reflective" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.active_reflective.errors }" />
-                                    <label class="form-check-label" for="active">
-                                        Active
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" id="reflective" value="Reflective" formControlName="active_reflective" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.active_reflective.errors }" />
-                                    <label class="form-check-label" for="reflective">
-                                        Reflective
-                                    </label>
-                                </div>
-                            </div>
-                            
-                            <div class="col-12 col-sm-6 col-md-3">
-                                <div class="form-check">
-                                    <input type="radio" id="sensing" value="Sensing" formControlName="sensing_intuitive" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.sensing_intuitive.errors }" />
-                                    <label class="form-check-label" for="sensing">
-                                        Sensing
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" id="intuitive" value="Intuitive" formControlName="sensing_intuitive" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.sensing_intuitive.errors }" />
-                                    <label class="form-check-label" for="intuitive">
-                                        Intuitive
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-3">
-                                <div class="form-check">
-                                    <input type="radio" id="visual" value="Visual" formControlName="visual_veral" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.visual_veral.errors }" />
-                                    <label class="form-check-label" for="visual">
-                                        Visual
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" id="veral" value="Veral" formControlName="visual_veral" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.visual_veral.errors }" />
-                                    <label class="form-check-label" for="veral">
-                                        Veral
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-sm-6 col-md-3">
-                                <div class="form-check">
-                                    <input type="radio" id="sequential" value="Sequential" formControlName="sequential_global" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.sequential_global.errors }" />
-                                    <label class="form-check-label" for="sequential">
-                                        Sequential
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" id="global" value="Global" formControlName="sequential_global" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.sequential_global.errors }" />
-                                    <label class="form-check-label" for="global">
-                                        Global
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <p>User Goal</p>
-                        <div class="form-check">
-                            <input type="radio" id="deadline_driven" value="Deadline Driven" formControlName="goal" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.goal.errors }" />
-                            <label class="form-check-label" for="deadline_driven">
-                                Deadline driven
+                        <div class="form-check" *ngFor="let goal of goals; let i = index">
+                            <input type="radio" id="{{goal.id}}" value={{goal.id}} formControlName="goal" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.goal.errors }" />
+                            <label class="form-check-label" for="{{goal.id}}">
+                                {{goal.label}}
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input type="radio" id="score_driven" value="Score Driven" formControlName="goal" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.goal.errors }" />
-                            <label class="form-check-label" for="score_driven">
-                                Score driven
+                        
+                    </div>
+                </div>
+
+                <div class="form-group container">
+                    <p>Seleziona una o più disabilità e relativi livelli</p>
+                    <div class="col-6 d-inline-block">
+                        <div class="form-check" *ngFor="let disability of disabilities; let i = index" formArrayName="disabilities">
+                            <input class="form-check-input" id="{{ 'disability-' + i }}" [ngValue]="disability.id" type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.disabilities.errors }">
+                            <label class="form-check-label" for="{{ 'disability-' + i }}">
+                                {{disability.label}}
                             </label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="learning_awards" value="Learning Awards" formControlName="goal" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.goal.errors }" />
-                            <label class="form-check-label" for="learning_awards">
-                                Learning awards
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="user_competency" value="User Competency" formControlName="goal" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.goal.errors }" />
-                            <label class="form-check-label" for="user_competency">
-                                User Competency 
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" id="shortest_path" value="Shortest Path" formControlName="goal" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.goal.errors }" />
-                            <label class="form-check-label" for="shortest_path">
-                                Shortest path
-                            </label>
+                            <div *ngIf="submitted && f.disabilities.errors" class="invalid-feedback"></div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="disability">Disabilità</label>
-                        <input type="text" formControlName="disability" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.disability.errors }" />
-                        <div *ngIf="submitted && f.disability.errors" class="invalid-feedback">
-                            <div *ngIf="f.disability.errors.required">Inserisci una disabilità</div>
+                    <div class="col-6 d-inline-block">
+                        <div class="form-check" *ngFor="let disability of disabilities; let i = index"  formArrayName="disabilityLevels">
+                            <input id="{{ 'disability-level-' + i }}" [ngValue]="disability.level" type="range" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.disabilityLevels.errors }" min="1" max="100" value="0">
+                            <label class="d-none" for="{{ 'disability-level-' + i }}">
+                                {{disability.levelLabel}}
+                            </label>
+                            <div *ngIf="submitted && f.disabilityLevels.errors" class="invalid-feedback"></div>
                         </div>
                     </div>
                 </div>
 
                 <div *ngIf="coursesFormArray.length > 0" class="form-group">
                     <p>Seleziona uno o più corsi</p>
-                    <label formArrayName="courses" *ngFor="let course of coursesFormArray.controls; let i = index">
-                        <input type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.courses.errors }">
-                        {{coursesData[i].course_name}}
-                        <div *ngIf="submitted && f.courses.errors" class="invalid-feedback"></div>
-                      </label>
+                    <div class="form-check" *ngFor="let course of coursesFormArray.controls; let i = index" formArrayName="courses">
+                        <label class="form-check-label">{{coursesData[i].course_name}}</label>
+                        <input class="form-check-input" type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.courses.errors }">
+                        <div *ngIf="submitted && f.languages.errors" class="invalid-feedback"></div>
+                    </div>
                 </div>
 
                 <div class="form-group">

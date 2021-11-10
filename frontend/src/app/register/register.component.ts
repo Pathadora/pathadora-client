@@ -13,13 +13,60 @@ export class RegisterComponent implements OnInit {
     submitted = false;
     returnUrl: string;
     coursesData: Course[] = [];
+    passionsData: string[] = [];
+    languagesData: string[] = [];
     error = '';
     role = '';
 
     genders = [
-        {id: "male", label: "Maschio"},
-        {id: "female", label: "Femmina"},
-        {id: "other", label: "Altro"}
+        {id: "Gender_Male", label: "Maschio"},
+        {id: "Gender_Female", label: "Femmina"},
+        {id: "Gender_Other", label: "Altro"}
+    ];
+
+    languages = [
+        {id: "Language_English", label: "Inglese"},
+        {id: "Language_Italian", label: "Italiano"},
+        {id: "Language_Spanish", label: "Spagnolo"},
+        {id: "Language_German", label: "Tedesco"},
+        {id: "Language_Hindu", label: "Hindu"}
+    ];
+
+    goals = [
+        {id: "Goal_PathDriven", label: "Path Driven"},
+        {id: "Goal_ScoreDriven", label: "Score Driven"},
+        {id: "Goal_TimeDriven", label: "Time Driven"},
+    ];
+
+    degrees = [
+        {id: "Degree_Bachelor", label: "Triennale"},
+        {id: "Degree_Master", label: "Magistrale"},
+        {id: "Degree_Doctoral", label: "Dottorato"}
+    ];
+
+    passions = [
+        {id: "Passion_Animals", label: "Animali"},
+        {id: "Passion_Art", label: "Arte"},
+        {id: "Passion_Astrology", label: "Astrologia"},
+        {id: "Passion_Entrepreneurship", label: "Imprenditoria"},
+        {id: "Passion_Fitness", label: "Fitness"},
+        {id: "Passion_Math", label: "Matematica"},
+        {id: "Passion_Nature", label: "Natura"},
+        {id: "Passion_Tech", label: "Tecnologia"}
+    ];
+
+    disabilities = [
+        {id: "Disability_Autism_Spectrum", label: "Spettro di autismo", level: "autismSpectrumLevel", levelLabel: "Spettro di autismo"},
+        {id: "Disability_Blindness", label: "Cecità", level: "blindnessLevel", levelLabel: "Cecità"},
+        {id: "Disability_Brain_Injury", label: "Danni cerebrali", level: "brainInjuryLevel", levelLabel: "Danni cerebrali"},
+        {id: "Disability_Development_Delay", label: "Ritardo nello sviluppo", level: "developmentDelayLevel", levelLabel: "Ritardo nello sviluppo"},
+        {id: "Disability_Down_Syndrome", label: "Sindrome di Down", level: "downSyndromeLevel", levelLabel: "Sindrome di Down"},
+        {id: "Disability_FASD", label: "FASD", level: "FASDLevel", levelLabel: "FASD" },
+        {id: "Disability_Hearing_loss", label: "Perdita di udito", level: "hearingLossLevel", levelLabel: "Perdita di udito"},
+        {id: "Disability_Multiple_Sclerosis", label: "Sclerosi multipla", level: "multipleSclerosisLevel", levelLabel: "Sclerosi multipla"},
+        {id: "Disability_SCI", label: "SCI", level: "SCILevel", levelLabel: "SCI"},
+        {id: "Disability_Sensory_processing", label: "Disturbi sensoriali", level: "sensoryProcessingDisabilityLevel", levelLabel: "Disturbi sensoriali"},
+        {id: "Disability_X_Syndrome", label: "Sindrome X", level: "XSyndromeLevel", levelLabel: "Sindrome X" }
     ];
 
     constructor(
@@ -43,19 +90,24 @@ export class RegisterComponent implements OnInit {
             birthdate: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', Validators.required],
-            language: '',
+            education: ['', Validators.required],
+            languages: new FormArray([], minSelectedCheckboxes(0)),
             degree: null,
             future_degree: null,
-            passion: '',
-            active_reflective: null,
-            sensing_intuitive: null,
-            visual_veral: null,
-            sequential_global: null,
+            passions: new FormArray([], minSelectedCheckboxes(0)),
             goal: null,
-            disability: '',
+            disabilities: new FormArray([]),
+            disabilityLevels: new FormArray([]),
             courses: new FormArray([], minSelectedCheckboxes(0)),
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required]
+        });
+
+        this.languages.forEach(() => this.languagesFormArray.push(new FormControl(false)));
+        this.passions.forEach(() => this.passionsFormArray.push(new FormControl(false)));
+        this.disabilities.forEach(() => {
+            this.disabilitiesFormArray.push(new FormControl(false))
+            this.disabilityLevelsFormArray.push(new FormControl(1))
         });
 
         this.route.data.subscribe(data => {
@@ -85,6 +137,18 @@ export class RegisterComponent implements OnInit {
     get coursesFormArray() {
         return this.registerForm.controls.courses as FormArray;
     }
+    get languagesFormArray() {
+        return this.registerForm.controls.languages as FormArray;
+    }
+    get passionsFormArray() {
+        return this.registerForm.controls.passions as FormArray;
+    }
+    get disabilitiesFormArray() {
+        return this.registerForm.controls.disabilities as FormArray;
+    }
+    get disabilityLevelsFormArray() {
+        return this.registerForm.controls.disabilityLevels as FormArray;
+    }
 
     onSubmit() {
         this.submitted = true;
@@ -101,6 +165,18 @@ export class RegisterComponent implements OnInit {
                 .map((checked, i) => checked ? this.coursesData[i]._id : null)
                 .filter(v => v !== null);
             }
+            let selectedLanguages : string[] = this.registerForm.value.languages
+                .map((checked, i) => checked ? this.languages[i].id : null)
+                .filter(v => v !== null);
+            let selectedPassions : string[] = this.registerForm.value.passions
+                .map((checked, i) => checked ? this.passions[i].id : null)
+                .filter(v => v !== null);
+            let selectedDisabilities : { name?: string; level?: number; }[] = this.registerForm.value.disabilities
+                .map((checked, i) => checked ? {
+                    "name": this.disabilities[i].id,
+                    "level": this.registerForm.value.disabilityLevels.at(i).value
+                } : null)
+                .filter(v => v !== null);
             this.loading = true;
             this.authenticationService.register(
                 this.f.name.value,
@@ -111,16 +187,13 @@ export class RegisterComponent implements OnInit {
                 this.f.email.value,
                 this.f.password.value,
                 data.role,
-                this.f.language.value,
+                this.f.education.value,
+                selectedLanguages,
                 this.f.degree.value,
                 this.f.future_degree.value,
-                this.f.passion.value,
-                this.f.active_reflective.value,
-                this.f.sensing_intuitive.value,
-                this.f.visual_veral.value,
-                this.f.sequential_global.value,
+                selectedPassions,
                 this.f.goal.value,
-                this.f.disability.value,
+                selectedDisabilities,
                 selectedCoursesIds)
                 .pipe(first())
                 .subscribe(

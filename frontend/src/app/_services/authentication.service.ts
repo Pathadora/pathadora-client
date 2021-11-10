@@ -44,16 +44,16 @@ export class AuthenticationService {
         email: string,
         password: string,
         role: string,
-        language: string,
+        education: string,
+        languages: string[],
         degree: string,
         future_degree: string,
-        passion: string,
-        active_reflective: string,
-        sensing_intuitive: string,
-        visual_veral: string,
-        sequential_global: string,
+        passions: string[],
         goal: string,
-        disability: string,
+        disabilities: {
+            name?: string;
+            level?: number;
+        }[],
         courses: string[] = []) {
         return this.http.post<any>(`${environment.apiUrl}/users/register`, { 
             user_name: name,
@@ -65,18 +65,13 @@ export class AuthenticationService {
             user_password: password,
             user_role: role,
             user_profile: {
-                user_language: language,
+                user_education: education,
+                user_languages: languages,
                 user_degree: degree,
                 user_future_degree: future_degree,
-                user_passion: passion,
-                user_learning_style: {
-                    active_reflective: active_reflective,
-                    sensing_intuitive: sensing_intuitive,
-                    visual_veral: visual_veral,
-                    sequential_global: sequential_global,
-                },
+                user_passions: passions,
                 user_goal: goal,
-                user_disability: disability
+                user_disabilities: disabilities
             },
             user_courses: courses
         })
@@ -86,28 +81,35 @@ export class AuthenticationService {
                     "action": "add", 
                     "type": "learner",
                     "class": "Learner",
-                    "annotation_properties":{
-                        "name": name,
-                        "last_name": lastname,
-                        "birthdate": birthdate,
+                    "annotation_properties": {
+                        "id": `Learner_${name}_${lastname}`,
+                        "hasName": name,
+                        "hasSurname": lastname,
+                        "hasEducation": education,
+                        "birthdate": birthdate
+                    },
+                    "object_properties": {
                         "gender": gender,
-                        "language": language,
+                        "speaks": languages,
+                        "hasGoals": goal,
                         "degree": degree,
                         "future_degree": future_degree,
-                        "passion": passion,
-                        "learning_style": {
-                            "1": active_reflective,
-                            "2": sensing_intuitive,
-                            "3": visual_veral,
-                            "4": sequential_global,
-                        },
-                        "goal": goal,
-                        "disability": disability
-                    },
-                    "object_properties":{
-                        "canRead": "yes",
-                        "canWrite": "yes"
-                    } 
+                        "passionateOf": passions,
+                        "hasDisability": disabilities.map(d => d.name)
+                     },
+                     "data_properties": {
+                        "autismSpectrumLevel": disabilities.filter(d => d.name === "Disability_Autism_Spectrum").map(d => d.level).reduce((x,y) => x),
+                        "blindnessLevel": disabilities.filter(d => d.name === "Disability_Blindness").map(d => d.level).reduce((x,y) => x),
+                        "brainInjuryLevel": disabilities.filter(d => d.name === "Disability_Brain_Injury").map(d => d.level).reduce((x,y) => x),
+                        "developmentDelayLevel": disabilities.filter(d => d.name === "Disability_Development_Delay").map(d => d.level).reduce((x,y) => x),
+                        "downSyndromeLevel": disabilities.filter(d => d.name === "Disability_Down_Syndrome").map(d => d.level).reduce((x,y) => x),
+                        "FASDLevel": disabilities.filter(d => d.name === "Disability_FASD").map(d => d.level).reduce((x,y) => x),
+                        "hearingLossLevel": disabilities.filter(d => d.name === "Disability_Hearing_loss").map(d => d.level).reduce((x,y) => x),
+                        "multipleSclerosisLevel": disabilities.filter(d => d.name === "Disability_Multiple_Sclerosis").map(d => d.level).reduce((x,y) => x),
+                        "SCILevel": disabilities.filter(d => d.name === "Disability_SCI").map(d => d.level).reduce((x,y) => x),
+                        "sensoryProcessingDisabilityLevel": disabilities.filter(d => d.name === "Disability_Sensory_processing").map(d => d.level).reduce((x,y) => x),
+                        "XSyndromeLevel": disabilities.filter(d => d.name === "Disability_X_Syndrome").map(d => d.level).reduce((x,y) => x)
+                     }
                 })
             }
             return this.login(username, password);

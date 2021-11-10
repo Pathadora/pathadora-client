@@ -29,29 +29,13 @@ router.post(
     .isLength({ min: 6 }),
     check('user_profile.user_degree', 'Degree must be Bachelor, Master or Doctoral')
     .if(body('user_profile').exists())
-    .isIn([null, 'Bachelor', 'Master', 'Doctoral']),
+    .isIn([null, 'Degree_Bachelor', 'Degree_Master', 'Degree_Doctoral']),
     check('user_profile.user_future_degree', 'Future degree must be Bachelor, Master or Doctoral')
     .if(body('user_profile').exists())
-      .isIn([null, 'Bachelor', 'Master', 'Doctoral']),
-    check('user_profile.user_learning_style.active_reflective', 'Active or reflective')
+      .isIn([null, 'Degree_Bachelor', 'Degree_Master', 'Degree_Doctoral']),
+    check('user_profile.user_goal', 'Goal must be Goal_PathDriven, Goal_ScoreDriven or Goal_TimeDriven')
     .if(body('user_profile').exists())
-    .if(body('user_profile.user_learning_style').exists())
-              .isIn([null, 'Active', 'Reflective']),
-    check('user_profile.user_learning_style.sensing_intuitive', 'Sensing or Intuitive')
-    .if(body('user_profile').exists())
-    .if(body('user_profile.user_learning_style').exists())
-              .isIn([null, 'Sensing', 'Intuitive']),
-    check('user_profile.user_learning_style.visual_veral', 'Visual or Veral')
-    .if(body('user_profile').exists())
-    .if(body('user_profile.user_learning_style').exists())
-              .isIn([null, 'Visual', 'Veral']),
-    check('user_profile.user_learning_style.sequential_global', 'Sequential or Global')
-    .if(body('user_profile').exists())
-    .if(body('user_profile.user_learning_style').exists())
-              .isIn([null, 'Sequential', 'Global']),
-    check('user_profile.user_goal', 'Deadline Driven, Score Driven, Learning Awards, User Competency or Shortest Path')
-    .if(body('user_profile').exists())
-              .isIn([null, 'Deadline Driven','Score Driven','Learning Awards','User Competency','Shortest Path']),
+              .isIn([null, 'Goal_PathDriven','Goal_ScoreDriven','Goal_TimeDriven']),
     oneOf([
       check('user_courses').not().exists(),
       check('user_courses').isArray()
@@ -67,11 +51,11 @@ router.post(
       // Check if user already exists
       let user = await User.findOne({ user_email : req.body.user_email });
       if (user) {
-        return res.status(400).json({ errors: [{ msg: 'L\'indirizzo email inserito è già utilizzato'}] });
+        return res.status(401).json({ errors: [{ msg: 'L\'indirizzo email inserito è già utilizzato'}] });
       }
       user = await User.findOne({ user_username : req.body.user_username });
       if (user) {
-        return res.status(400).json({ errors: [{ msg: 'Il nome utente inserito è già utilizzato'}] });
+        return res.status(402).json({ errors: [{ msg: 'Il nome utente inserito è già utilizzato'}] });
       }
 
       // Get user gravatar
