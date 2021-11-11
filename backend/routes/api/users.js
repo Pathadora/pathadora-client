@@ -27,12 +27,12 @@ router.post(
     .isEmpty(),
     check('user_password', 'La password deve contenere almeno 6 caratteri')
     .isLength({ min: 6 }),
-    check('user_profile.user_degree', 'Degree must be Bachelor, Master or Doctoral')
+    check('user_profile.user_degree', 'Degree must be Bachelor or Master')
     .if(body('user_profile').exists())
-    .isIn([null, 'Degree_Bachelor', 'Degree_Master', 'Degree_Doctoral']),
-    check('user_profile.user_future_degree', 'Future degree must be Bachelor, Master or Doctoral')
+    .isIn([null, 'Degree_Bachelor', 'Degree_Master']),
+    check('user_profile.user_future_degree', 'Future degree must be Bachelor or Master')
     .if(body('user_profile').exists())
-      .isIn([null, 'Degree_Bachelor', 'Degree_Master', 'Degree_Doctoral']),
+      .isIn([null, 'Degree_Bachelor', 'Degree_Master']),
     check('user_profile.user_goal', 'Goal must be Goal_PathDriven, Goal_ScoreDriven or Goal_TimeDriven')
     .if(body('user_profile').exists())
               .isIn([null, 'Goal_PathDriven','Goal_ScoreDriven','Goal_TimeDriven']),
@@ -51,11 +51,11 @@ router.post(
       // Check if user already exists
       let user = await User.findOne({ user_email : req.body.user_email });
       if (user) {
-        return res.status(401).json({ errors: [{ msg: 'L\'indirizzo email inserito è già utilizzato'}] });
+        return res.status(400).json({ errors: [{ msg: 'L\'indirizzo email inserito è già utilizzato'}] });
       }
       user = await User.findOne({ user_username : req.body.user_username });
       if (user) {
-        return res.status(402).json({ errors: [{ msg: 'Il nome utente inserito è già utilizzato'}] });
+        return res.status(400).json({ errors: [{ msg: 'Il nome utente inserito è già utilizzato'}] });
       }
 
       // Get user gravatar

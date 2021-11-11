@@ -5,13 +5,14 @@ import { map, mergeMap } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/_models';
+import { RecommenderService } from '.';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private recommenderService : RecommenderService) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -76,8 +77,21 @@ export class AuthenticationService {
             user_courses: courses
         })
         .pipe(mergeMap(user => {
+            const data_properties = {
+                "autismSpectrumLevel": disabilities.filter(d => d.name === "Disability_Autism_Spectrum").map(d => d.level).reduce((x,y) => x, undefined),
+                "blindnessLevel": disabilities.filter(d => d.name === "Disability_Blindness").map(d => d.level).reduce((x,y) => x, undefined),
+                "brainInjuryLevel": disabilities.filter(d => d.name === "Disability_Brain_Injury").map(d => d.level).reduce((x,y) => x, undefined),
+                "developmentDelayLevel": disabilities.filter(d => d.name === "Disability_Development_Delay").map(d => d.level).reduce((x,y) => x, undefined),
+                "downSyndromeLevel": disabilities.filter(d => d.name === "Disability_Down_Syndrome").map(d => d.level).reduce((x,y) => x, undefined),
+                "FASDLevel": disabilities.filter(d => d.name === "Disability_FASD").map(d => d.level).reduce((x,y) => x, undefined),
+                "hearingLossLevel": disabilities.filter(d => d.name === "Disability_Hearing_loss").map(d => d.level).reduce((x,y) => x, undefined),
+                "multipleSclerosisLevel": disabilities.filter(d => d.name === "Disability_Multiple_Sclerosis").map(d => d.level).reduce((x,y) => x, undefined),
+                "SCILevel": disabilities.filter(d => d.name === "Disability_SCI").map(d => d.level).reduce((x,y) => x, undefined),
+                "sensoryProcessingDisabilityLevel": disabilities.filter(d => d.name === "Disability_Sensory_processing").map(d => d.level).reduce((x,y) => x, undefined),
+                "XSyndromeLevel": disabilities.filter(d => d.name === "Disability_X_Syndrome").map(d => d.level).reduce((x,y) => x, undefined)
+             }
             if (role === "user") {
-                this.http.post<any>(`${environment.recommenderUrl}/pathadora`, {
+                return this.recommenderService.sendRequest({
                     "action": "add", 
                     "type": "learner",
                     "class": "Learner",
@@ -97,22 +111,12 @@ export class AuthenticationService {
                         "passionateOf": passions,
                         "hasDisability": disabilities.map(d => d.name)
                      },
-                     "data_properties": {
-                        "autismSpectrumLevel": disabilities.filter(d => d.name === "Disability_Autism_Spectrum").map(d => d.level).reduce((x,y) => x),
-                        "blindnessLevel": disabilities.filter(d => d.name === "Disability_Blindness").map(d => d.level).reduce((x,y) => x),
-                        "brainInjuryLevel": disabilities.filter(d => d.name === "Disability_Brain_Injury").map(d => d.level).reduce((x,y) => x),
-                        "developmentDelayLevel": disabilities.filter(d => d.name === "Disability_Development_Delay").map(d => d.level).reduce((x,y) => x),
-                        "downSyndromeLevel": disabilities.filter(d => d.name === "Disability_Down_Syndrome").map(d => d.level).reduce((x,y) => x),
-                        "FASDLevel": disabilities.filter(d => d.name === "Disability_FASD").map(d => d.level).reduce((x,y) => x),
-                        "hearingLossLevel": disabilities.filter(d => d.name === "Disability_Hearing_loss").map(d => d.level).reduce((x,y) => x),
-                        "multipleSclerosisLevel": disabilities.filter(d => d.name === "Disability_Multiple_Sclerosis").map(d => d.level).reduce((x,y) => x),
-                        "SCILevel": disabilities.filter(d => d.name === "Disability_SCI").map(d => d.level).reduce((x,y) => x),
-                        "sensoryProcessingDisabilityLevel": disabilities.filter(d => d.name === "Disability_Sensory_processing").map(d => d.level).reduce((x,y) => x),
-                        "XSyndromeLevel": disabilities.filter(d => d.name === "Disability_X_Syndrome").map(d => d.level).reduce((x,y) => x)
-                     }
+                     "data_properties": JSON.stringify(data_properties) !== JSON.stringify({}) ? data_properties : undefined
                 })
-            }
-            return this.login(username, password);
-        }));
+            } else {
+                return new Observable<any>();
+            }}),
+            mergeMap(data => this.login(username, password))
+        );
     }
 }

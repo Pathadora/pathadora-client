@@ -60,4 +60,29 @@
             </form>
         </div>
     </div>
+    <div *ngIf="currentStep === 3" class="card">
+        <h4 class="card-header">Ottieni un learning path</h4>
+        <div class="card-body">
+            <form [formGroup]="thirdStepForm" (ngSubmit)="thirdStepSubmit()">
+                <div class="form-group">
+                    <label for="course">Corso</label>
+                    <select type="text" formControlName="course" id="course" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && thirdStepF.course.errors }" >
+                        <option value="null" disabled>Seleziona il corso</option>
+                        <option *ngFor="let c of coursesData; let i = index" value="{'Course_' + c.course_name}">{{c.course_name}}</option>
+                    </select>
+                    <div *ngIf="submitted && thirdStepF.course.errors" class="invalid-feedback">
+                        <div *ngIf="thirdStepF.course.errors.required">Seleziona un corso</div>
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Richiedi la lista di risorse consigliate
+                    </button>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

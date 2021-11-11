@@ -61,8 +61,8 @@ router.get(
           check('course_name', 'Course name is required')
           .not()
           .isEmpty(),
-          check('course_degree', 'Course degree must be bachelor, master or doctoral')
-              .isIn(['Bachelor', 'Master', 'Doctoral']),
+          check('course_degree', 'Course degree must be bachelor or master')
+              .isIn(['Bachelor', 'Master']),
           check('course_faculty', 'Course faculty is required')
           .not()
           .isEmpty(),
@@ -134,8 +134,8 @@ router.get(
             check('course_name', 'Course name is required')
             .not()
             .isEmpty(),
-            check('course_degree', 'Course degree must be bachelor, master or doctoral')
-                .isIn(['Bachelor', 'Master', 'Doctoral']),
+            check('course_degree', 'Course degree must be bachelor or master')
+                .isIn(['Bachelor', 'Master']),
             check('course_faculty', 'Course faculty is required')
             .not()
             .isEmpty(),

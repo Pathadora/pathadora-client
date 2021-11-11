@@ -40,8 +40,7 @@ export class RegisterComponent implements OnInit {
 
     degrees = [
         {id: "Degree_Bachelor", label: "Triennale"},
-        {id: "Degree_Master", label: "Magistrale"},
-        {id: "Degree_Doctoral", label: "Dottorato"}
+        {id: "Degree_Master", label: "Magistrale"}
     ];
 
     passions = [
