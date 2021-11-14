@@ -1,16 +1,15 @@
-import sys
 import os
 
 try:
     import textract
 except:
-    os.system("pip install textract")
+    os.system("pip install -U textract")
     import textract
 
 try:
     import nltk
 except:
-    os.system("pip install nltk")
+    os.system("pip install -U nltk")
     import nltk
     nltk.download('punkt')
 

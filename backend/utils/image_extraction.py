@@ -1,31 +1,30 @@
-import sys
 import os
 import io
 
 try:
     from PIL import Image
 except:
-    os.system("pip install Pillow")
+    os.system("pip install -U Pillow")
     from PIL import Image
 
 try:
     import pytesseract
     from pytesseract import Output
 except:
-    os.system("pip install pytesseract")
+    os.system("pip install -U pytesseract")
     import pytesseract
     from pytesseract import Output
 
 try:
     import wcag_contrast_ratio as contrast
 except:
-    os.system("pip install wcag_contrast_ratio")
+    os.system("pip install -U wcag_contrast_ratio")
     import wcag_contrast_ratio as contrast
 
 try:
     import fitz
 except:
-    os.system("pip install PyMuPDF")
+    os.system("pip install -U PyMuPDF")
     import fitz
 
 def main(filePath):

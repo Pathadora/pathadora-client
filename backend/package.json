@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "pip install Pillow && pip install pytesseract && pip install wcag_contrast_ratio && pip install PyMuPDF && pip install textract && pip install yake && node server.js",
+    "start": "pip install -U Pillow && pip install -U pytesseract && pip install -U wcag_contrast_ratio && pip install -U PyMuPDF && pip install -U textract && pip install -U yake && pip install -U pdfminer.six && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

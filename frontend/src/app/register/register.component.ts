@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
             birthdate: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', Validators.required],
-            education: ['', Validators.required],
+            education: '',
             languages: new FormArray([], minSelectedCheckboxes(0)),
             degree: null,
             future_degree: null,

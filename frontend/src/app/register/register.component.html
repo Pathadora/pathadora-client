@@ -106,32 +106,30 @@
                                 {{goal.label}}
                             </label>
                         </div>
-                        
                     </div>
-                </div>
 
-                <div class="form-group container">
-                    <p>Seleziona una o più disabilità e relativi livelli</p>
-                    <div class="col-6 d-inline-block">
-                        <div class="form-check" *ngFor="let disability of disabilities; let i = index" formArrayName="disabilities">
-                            <input class="form-check-input" id="{{ 'disability-' + i }}" [ngValue]="disability.id" type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.disabilities.errors }">
-                            <label class="form-check-label" for="{{ 'disability-' + i }}">
-                                {{disability.label}}
-                            </label>
-                            <div *ngIf="submitted && f.disabilities.errors" class="invalid-feedback"></div>
+                    <div class="form-group container">
+                        <p>Seleziona una o più disabilità e relativi livelli</p>
+                        <div class="col-6 d-inline-block">
+                            <div class="form-check" *ngFor="let disability of disabilities; let i = index" formArrayName="disabilities">
+                                <input class="form-check-input" id="{{ 'disability-' + i }}" [ngValue]="disability.id" type="checkbox" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.disabilities.errors }">
+                                <label class="form-check-label" for="{{ 'disability-' + i }}">
+                                    {{disability.label}}
+                                </label>
+                                <div *ngIf="submitted && f.disabilities.errors" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 d-inline-block">
+                            <div class="form-check" *ngFor="let disability of disabilities; let i = index"  formArrayName="disabilityLevels">
+                                <input id="{{ 'disability-level-' + i }}" [ngValue]="disability.level" type="range" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.disabilityLevels.errors }" min="1" max="100" value="0">
+                                <label class="d-none" for="{{ 'disability-level-' + i }}">
+                                    {{disability.levelLabel}}
+                                </label>
+                                <div *ngIf="submitted && f.disabilityLevels.errors" class="invalid-feedback"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6 d-inline-block">
-                        <div class="form-check" *ngFor="let disability of disabilities; let i = index"  formArrayName="disabilityLevels">
-                            <input id="{{ 'disability-level-' + i }}" [ngValue]="disability.level" type="range" [formControlName]="i" [ngClass]="{ 'is-invalid': submitted && f.disabilityLevels.errors }" min="1" max="100" value="0">
-                            <label class="d-none" for="{{ 'disability-level-' + i }}">
-                                {{disability.levelLabel}}
-                            </label>
-                            <div *ngIf="submitted && f.disabilityLevels.errors" class="invalid-feedback"></div>
-                        </div>
-                    </div>
                 </div>
-
                 <div *ngIf="coursesFormArray.length > 0" class="form-group">
                     <p>Seleziona uno o più corsi</p>
                     <div class="form-check" *ngFor="let course of coursesFormArray.controls; let i = index" formArrayName="courses">

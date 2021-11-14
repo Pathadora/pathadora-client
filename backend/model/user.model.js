@@ -44,8 +44,7 @@ let User = new Schema({
   },
   user_profile: {
     user_education: {
-      type: String,
-      required: true
+      type: String
     },
     user_languages: [
       {

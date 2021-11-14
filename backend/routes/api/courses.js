@@ -312,6 +312,7 @@ router.post(
         v = JSON.parse(value)
         readingEase = v.readibility;
         checkRatio = v.check_ratio;
+        fontSize = v.font_size;
       });
 
       pythonProcess.on('close', (code) => {
@@ -320,7 +321,8 @@ router.post(
           metadata: {
             ...originalMetadata,
             readingEase: readingEase,
-            checkRatio: checkRatio
+            checkRatio: checkRatio,
+            fontSize: fontSize
           }
         };
         if (!course.course_resources) {

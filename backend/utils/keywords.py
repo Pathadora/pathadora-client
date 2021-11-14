@@ -4,13 +4,13 @@ import os
 try:
     import textract
 except:
-    os.system("pip install textract")
+    os.system("pip install -U textract")
     import textract
 
 try:
     import yake
 except:
-    os.system("pip install yake")
+    os.system("pip install -U yake")
     import yake
 
 kw_extractor = yake.KeywordExtractor()

@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
@@ -114,7 +114,7 @@ export class AuthenticationService {
                      "data_properties": JSON.stringify(data_properties) !== JSON.stringify({}) ? data_properties : undefined
                 })
             } else {
-                return new Observable<any>();
+                return of({});
             }}),
             mergeMap(data => this.login(username, password))
         );
