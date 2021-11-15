@@ -93,8 +93,15 @@ La difficoltà di lettura dipende da S e da P, rispettivamente il numero medio d
 La scelta dei coefficienti è una conseguenza di un processo di affinamento del grado di istruzione di una persona in grado di leggere e comprendere la lingua inglese, ottimizzati in modo che venga restituito un valore compreso tra 0 e 100. Viene data più importanza al valore di S piuttosto che a P.\cite{readibility}
 
 \subsection{Accessibilità delle immagini in un documento}
-È stato prodotto uno script attraverso in cui viene restituito un indicatore di accessibilità del testo contenuto nelle immagini presenti in un documento PDF.
+È stato prodotto uno script attraverso cui viene restituito un indicatore di accessibilità del testo contenuto nelle immagini presenti in un documento PDF.
 
-Per ciascuna immagine presente nel documento, vengono catturate le aree che contengono testo ed estratto il colore dei caratteri (prelevando il colore più rilevante nella textbox analizzata). Viene poi calcolato il rapporto di contrasto tra questo colore e il colore di sfondo dell'immagine, seguendo i criteri di WCAG 2 dove il range di differenza di luminosità tra i due colori varia da 1 (ad esempio bianco su bianco) a 21 (ad esempio nero su bianco).
+Per ciascuna immagine presente nel documento, estrapolate mediante la libreria Python-tesseract, vengono catturate le aree che contengono testo ed estratto il colore dei caratteri in formato RGB (prelevando il colore più rilevante nella textbox analizzata). Viene poi calcolato il rapporto di contrasto tra questo colore e il colore di sfondo dell'immagine, seguendo i criteri di WCAG 2 dove il range di differenza di luminosità tra i due colori varia da 1 (ad esempio bianco su bianco) a 21 (ad esempio nero su bianco). 
 
 Viene poi calcolata la media dei rapporti relativi alle immagini di ciascun file, e il risultato finale corrisponderà alla media di questi risultati per ogni file.
+
+Il livello minimo per cui il contenuto può essere considerato accessibile è 4.5.
+
+\subsection{Dimensione minima del carattere in un documento}
+È stato prodotto uno script attraverso cui viene restituito il valore della dimensione minima dei caratteri individuata in un documento PDF. Più è basso il valore meno il contenuto è accessibile agli utenti con problemi visivi.
+
+La scansione delle pagine e del relativo contenuto testuale è eseguita mediante la libreria PDFMiner.

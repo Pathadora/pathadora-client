@@ -153,3 +153,22 @@ var adminConnection = mongoose.createConnection(dbURI);
 \textbf{Textract} è una libreria Python atta all'estrazione del testo da un file. Supporta l'estrazione da file di diversi formati comuni appoggiandosi a parser dedicati.
 
 Una volta invocato, il metodo \texttt{texttract.process('path/to/file.extension')} instrada il nome del file al parser appropriato e restituisce il testo estratto come stringa di byte codificata con la codifica specificata.\cite{textract}
+
+\subsection{Tesseract}
+\textbf{Tesseract} è un motore di riconoscimento ottico dei caratteri OCR sviluppato dalla Hewlett-Packard tra il 1985 e il 1995; è stato abbandonato a se stesso per i successivi 10 anni, fino a quando nel 2005 ne è stato rilasciato il codice
+sorgente con una licenza libera. Dal 2006 a novembre 2018 è stato sviluppato da Google.
+
+È considerato uno dei più accurati motori OCR attualmente disponibili, con il vantaggio, non indifferente, che essendo free software è accessibile e utilizzabile da tutti.
+Supporta la codifica Unicode (UTF-8), può riconoscere oltre 100 lingue.
+
+Tesseract 4 aggiunge un nuovo motore OCR basato sulla rete neurale (LSTM) che si concentra sul riconoscimento della linea, ma supporta anche il motore OCR Tesseract legacy di Tesseract 3 che funziona riconoscendo i modelli di caratteri.
+
+\subsubsection{Python-tesseract}
+\textbf{Python-tesseract} è un wrapper per il motore Tesseract-OCR di Google. È utile come script di invocazione autonomo per tesseract, poiché può leggere tutti i tipi di immagine supportati dalle librerie di immagini Pillow e Leptonica, inclusi jpeg, png, gif, bmp, tiff e altri. Inoltre, se usato come script, Python-tesseract stamperà il testo riconosciuto invece di scriverlo su un file.
+
+\subsection{PDFMiner}
+\textbf{PDFMiner} è una libreria per l’analisi di documenti PDF scritta in Python. Oltre al testo, estrae anche le posizioni corrispondenti, i nomi dei caratteri, le dimensioni dei caratteri, la direzione di scrittura (orizzontale o verticale) per ciascun segmento di testo. Non riconosce il testo nelle immagini.
+
+PDFMiner si basa sulla ricostruzione di alcune delle informazioni contenute nel formato PDF, adottando una strategia di parsing lazy, cioè quella di analizzare le istruzioni della struttura del documento PDF solo quando è necessario.
+Per effettuare il parsing è necessario utilizzare almeno le classi \texttt{PDFParser}, che si occupa di recuperare i dati dal file, e \texttt{PDFDocument}, che si occupa di memorizzare i dati recuperati.
+Per elaborare il contenuto della pagine viene utilizzata la classe \texttt{PDFPageInterpreter}. \texttt{PDFDevice} converte il contenuto in formati diversi. \texttt{PDFResourceManager} viene utilizzato per archiviare risorse condivise come caratteri o immagini.
