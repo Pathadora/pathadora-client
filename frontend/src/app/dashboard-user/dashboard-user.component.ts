@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn } from '@angular/forms';
 
 import { User, Course, Faculty, Department } from '@app/_models';
 import { AuthenticationService, UserService, CoursesService } from '@app/_services';
 import { RecommenderService } from '@app/_services/recommender.service';
-import { ObjectUnsubscribedError } from 'rxjs';
 
 @Component({ selector: 'dashboard-user', templateUrl: 'dashboard-user.component.html' })
 export class DashboardUserComponent {
@@ -21,12 +19,12 @@ export class DashboardUserComponent {
     coursesData: Course[] = [];
     //users: User[];
     currentUser: User;
+    selectedFaculty;
+    selectedYear;
     currentStep = 1;
 
     constructor(
         private authenticationService: AuthenticationService,
-        private userService: UserService,
-        private coursesService: CoursesService,
         private recommenderService: RecommenderService,
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -98,19 +96,22 @@ export class DashboardUserComponent {
         this.recommenderService.sendRequest({
             "action": "course_generation",
             "learner": "Learner_"+ this.currentUser.user_name + "_" + this.currentUser.user_lastname,
+            "degree": this.currentUser.user_profile.user_degree,
             "faculty": this.f.faculty.value,
             "department": this.f.department.value,
             "year": this.f.year.value
         }).subscribe(
             data => {
                 this.loading = false;
+                this.selectedFaculty = this.f.faculty.value;
+                this.selectedYear = this.f.year.value;
                 this.currentStep = 3;
                 if (data.courses) {
                     data.courses.forEach((c) => {
                         this.coursesData.push({
                             course_name: c.course,
                             course_degree: data.degree,
-                            course_faculty: this.f.faculty.value,
+                            course_faculty: this.selectedFaculty,
                             course_language: c.language,
                             course_period: c.period,
                             course_cfu: c.cfu,
@@ -130,17 +131,20 @@ export class DashboardUserComponent {
     }
 
     thirdStepSubmit() {
-        /*
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.learningPathForm.invalid) {
+        if (this.thirdStepForm.invalid) {
             return;
         }
 
         this.loading = true;
         this.recommenderService.sendRequest({
-
+            "action": "resource_generation",
+            "learner": "Learner_"+ this.currentUser.user_name + "_" + this.currentUser.user_lastname,
+            "degree": this.currentUser.user_profile.user_degree,
+            "faculty": this.selectedFaculty,
+            "year": this.selectedYear
         }).subscribe(
             data => {
                 this.loading = false;
@@ -150,6 +154,6 @@ export class DashboardUserComponent {
                 this.error = error;
                 this.loading = false;
             }
-        ); */
+        );
     }
 }
