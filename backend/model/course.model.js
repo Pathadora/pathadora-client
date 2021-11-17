@@ -71,6 +71,33 @@ let Course = new Schema({
               type: String,
               required: [true, "Uploaded file must have a name"],
             },
+            resourceTopic: {
+                type: String
+            },
+            adaptionType: [
+                {type: String}
+            ],
+            displayTransformability: [
+                {type: String}
+            ],
+            accessMode: [
+                {type: String}
+            ],
+            resourceType: {
+                type: String
+            },
+            resourceFontSize: {
+                type: Number
+            },
+            resourceExtension: {
+                type: String
+            },
+            resourceReadingEase: {
+                type: Number
+            },
+            resourceCheckRatio: {
+                type: Number
+            },
             metadata: {}
           }
     ]

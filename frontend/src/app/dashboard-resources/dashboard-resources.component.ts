@@ -11,7 +11,7 @@ import { AuthenticationService, CoursesService } from '@app/_services';
 
 @Component({ selector: 'dashboard-resources', templateUrl: 'dashboard-resources.component.html' })
 export class DashboardResourcesComponent implements OnInit {
-    resourceForm: FormGroup;
+    coursesForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
@@ -22,6 +22,56 @@ export class DashboardResourcesComponent implements OnInit {
     apiUrl = environment.apiUrl;
     readOnly = true;
 
+    adaptionTypes = [
+        "alternativeText",
+        "audioDescription",
+        "auditory_caption",
+        "captions",
+        "e-book",
+        "haptic",
+        "highContrast",
+        "longDescription",
+        "signLanguage",
+        "transcript",
+        "visual_alternativeText",
+        "visual_audioDescription"
+    ]
+
+    displayTransformabilities = [
+        "backgroundColour",
+        "cursorPresentation",
+        "fontFace",
+        "fontSize",
+        "fontWeight",
+        "foregroundColour",
+        "highlightPresentation",
+        "layout",
+        "letterSpacing",
+        "lineHeight",
+        "structurePresentation",
+        "wordSpacing"
+    ]
+
+    accessModes = [
+        "auditory",
+        "color",
+        "itemsize",
+        "olfactory",
+        "orientation",
+        "position",
+        "tactile",
+        "textOnImage",
+        "textual",
+        "visual"
+    ]
+
+    resourceTypes = [
+        "Acc_ResourceType_Audio",
+        "Acc_ResourceType_Textual",
+        "Acc_ResourceType_Video",
+        "Acc_ResourceType_Visual",
+    ]
+
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -31,8 +81,8 @@ export class DashboardResourcesComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-         this.resourceForm = this.formBuilder.group({
-            courses: new FormArray([]),
+         this.coursesForm = this.formBuilder.group({
+            resources: new FormArray([]),
          })
 
          this.readOnly = (this.authenticationService.currentUserValue && (this.authenticationService.currentUserValue.user_role === "admin" || this.authenticationService.currentUserValue.user_role === "teacher")) ? false : true
@@ -52,8 +102,19 @@ export class DashboardResourcesComponent implements OnInit {
             data => {
                 this.coursesData = data;
                 data.forEach(c => {
+                    this.resourcesFormArray.push(this.formBuilder.group({
+                        resource: new FormControl(""),
+                        resourceTopic: "",
+                        adaptionType: new FormArray(this.adaptionTypes.map(e => new FormControl(false))),
+                        displayTransformability: new FormArray(this.displayTransformabilities.map(e => new FormControl(false))),
+                        accessMode: new FormArray(this.accessModes.map(e => new FormControl(false))),
+                        resourceType: null,
+                        resourceFontSize: 0,
+                        resourceExtension: '',
+                        resourceReadingEase: 0,
+                        resourceCheckRatio: 0
+                     }))
                     this.files.push( new File([""], "filename", { type: 'text/html' }))
-                    this.coursesFormArray.push(new FormControl(""));
                 });
             },
             error => {
@@ -66,11 +127,24 @@ export class DashboardResourcesComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.resourceForm.controls; }
+    get f() { return this.coursesForm.controls; }
 
-    get coursesFormArray() {
-        return this.resourceForm.controls.courses as FormArray;
+    get resourcesFormArray() {
+        return this.coursesForm.controls.resources as FormArray;
     }
+
+    resourceF(resourceIndex) {
+        return (this.resourcesFormArray.controls[resourceIndex] as FormGroup).controls
+    }
+
+    resourceFValues(resourceIndex) {
+        return (this.resourcesFormArray.controls[resourceIndex] as FormGroup).value
+    }
+
+    /*
+    adaptionF(resourceIndex) {
+        return this.resourcesFormArray.controls[resourceIndex].value.adaptionType as FormArray;
+    }*/
 
     fileChoosen(event: any, i: number) {
         if (event.target.value) {
@@ -83,7 +157,7 @@ export class DashboardResourcesComponent implements OnInit {
         this.submitted = true;
 
         // stop here if form is invalid
-        if (this.resourceForm.invalid) {
+        if (this.coursesForm.invalid) {
             return;
         }
 
@@ -92,6 +166,29 @@ export class DashboardResourcesComponent implements OnInit {
             let fd = new FormData();
             if (this.files[i]) {
                 fd.append('file', this.files[i], this.files[i].name);
+
+                let selectedAdaptionTypes = this.resourceFValues(i).adaptionType
+                .map((checked, i) => checked ? this.adaptionTypes[i] : null)
+                .filter(v => v !== null);
+                let selectedDisplayTransformabilities = this.resourceFValues(i).displayTransformability
+                .map((checked, i) => checked ? this.displayTransformabilities[i] : null)
+                .filter(v => v !== null);
+                let selectedAccessModes = this.resourceFValues(i).accessMode
+                .map((checked, i) => checked ? this.accessModes[i] : null)
+                .filter(v => v !== null);
+
+                fd.append('courseName', c.course_name)
+                fd.append('fileName', this.files[i].name)
+                fd.append('resourceTopic', this.resourceFValues(i).resourceTopic)
+                fd.append('adaptionType', selectedAdaptionTypes)
+                fd.append('displayTransformability', selectedDisplayTransformabilities)
+                fd.append('accessMode', selectedAccessModes)
+                fd.append('resourceType', this.resourceFValues(i).resourceType)
+                fd.append('resourceFontSize', this.resourceFValues(i).resourceFontSize)
+                fd.append('resourceExtension', this.resourceFValues(i).resourceExtension)
+                fd.append('resourceReadingEase', this.resourceFValues(i).resourceReadingEase)
+                fd.append('resourceCheckRatio', this.resourceFValues(i).resourceCheckRatio)
+
                 this.coursesService.addResource(c._id, fd)
                 .subscribe(
                     data => {
