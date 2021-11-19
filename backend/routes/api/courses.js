@@ -69,13 +69,13 @@ router.get(
           check('course_language', 'Course language is required')
           .not()
           .isEmpty(),
-          check('course_period', 'Course period must be I or II')
-              .isIn(['I', 'II']),
+          check('course_period', 'Course period must be 1 or 2')
+              .isIn([1,2]),
           check('course_cfu', 'Course CFU is required')
           .not()
           .isEmpty(),
-          check('course_year', 'Course year must be I, II, III, IV or V')
-              .isIn(['I', 'II', 'III', 'IV', 'V']),
+          check('course_year', 'Course year must be 1, 2, 3, 4 or 5')
+              .isIn([1,2,3,4,5]),
           check('course_type', 'Course type is required')
           .not()
           .isEmpty(),
@@ -142,13 +142,13 @@ router.get(
             check('course_language', 'Course language is required')
             .not()
             .isEmpty(),
-            check('course_period', 'Course period must be I or II')
-                .isIn(['I', 'II']),
+            check('course_period', 'Course period must be 1 or 2')
+                .isIn([1, 2]),
             check('course_cfu', 'Course CFU is required')
             .not()
             .isEmpty(),
-            check('course_year', 'Course year must be I, II, III, IV or V')
-                .isIn(['I', 'II', 'III', 'IV', 'V']),
+            check('course_year', 'Course year must be 1, 2, 3, 4 or 5')
+                .isIn([1,2,3,4,5]),
             check('course_type', 'Course type is required')
             .not()
             .isEmpty(),

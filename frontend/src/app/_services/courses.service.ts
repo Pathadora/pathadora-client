@@ -63,6 +63,27 @@ export class CoursesService {
     }
 
     createCourse(body: any) {
-        return this.http.post<Course[]>(`${environment.apiUrl}/courses`, body);
+        return this.http.post<Course[]>(`${environment.apiUrl}/courses`, body)
+            .pipe(mergeMap(course => {
+                return this.recommenderService.sendRequest({
+                        "action": "add", 
+                        "type": "course",
+                        "class": body.course_name.replaceAll(' ', '_'),
+                        "annotation_properties":{
+                            "id": body.course_name.replaceAll(' ', '_'),
+                        },
+                        "object_properties": {
+                            "isCourseObligatory" : body.course_mandatory ? "yes" : "no",
+                            "courseType": body.course_type,
+                            "courseSSD": body.course_scientific_area,
+                            "courseLanguage": body.course_language
+                         },
+                        "data_properties":{
+                            "courseYear": body.course_year,
+                            "coursePeriod": body.course_period,
+                            "courseCFU": body.course_cfu
+                        } 
+                });
+            }));
     }
 }

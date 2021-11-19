@@ -1,3 +1,5 @@
+import { Resource } from '@app/_models';
+
 export class Course {
     _id?: string;
     course_name?: string;
@@ -13,17 +15,5 @@ export class Course {
     course_start_date?: string;
     course_end_date?: string;
     course_description?: string;
-    course_resources?: [{
-        createdAt?: Date,
-        name?: string,
-        adaptionType?: string[],
-        displayTransformability?: string[],
-        accessMode?: string[],
-        resourceType?: string,
-        resourceFontSize?: number,
-        resourceExtension?: string,
-        resourceReadingEase?: number,
-        resourceCheckRatio?: number,
-        metadata?: {};
-    }];
+    course_resources?: Resource[];
 }

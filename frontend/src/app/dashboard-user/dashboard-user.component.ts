@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ValidatorFn } from '@angular/forms';
 
-import { User, Course, Faculty, Department } from '@app/_models';
-import { AuthenticationService, UserService, CoursesService } from '@app/_services';
+import { User, Course, Faculty, Department, Resource } from '@app/_models';
+import { AuthenticationService } from '@app/_services';
 import { RecommenderService } from '@app/_services/recommender.service';
 
 @Component({ selector: 'dashboard-user', templateUrl: 'dashboard-user.component.html' })
@@ -17,6 +17,7 @@ export class DashboardUserComponent {
     facultiesData: Faculty[] = [];
     departmentsData: Department[] = [];
     coursesData: Course[] = [];
+    resourcesData: Resource[] = [];
     //users: User[];
     currentUser: User;
     selectedFaculty;
@@ -146,9 +147,21 @@ export class DashboardUserComponent {
             "faculty": this.selectedFaculty,
             "year": this.selectedYear
         }).subscribe(
-            data => {
+            data => {                
                 this.loading = false;
                 this.currentStep = 4;
+                if (data.resources) {
+                    data.resources.forEach(r => {
+                        this.resourcesData.push({
+                            resourceExtension: r.extension,
+                            name: r.resource,
+                            resourceCheckRatio: r.checkRatio,
+                            resourceFontSize: r.fontSize,
+                            resourceType: r.type,
+                            resourceReadingEase: r.readingEase
+                        })
+                    })
+                }
             },
             error => {
                 this.error = error;

@@ -23,9 +23,9 @@ let Course = new Schema({
         required: true
     },
     course_period: {
-        type: String,
-        enum: ['I', 'II'],
-        default: 'I',
+        type: Number,
+        enum: [1,2],
+        default: 1,
         required: true
     },
     course_cfu: {
@@ -33,9 +33,9 @@ let Course = new Schema({
         required: true
     },
     course_year: {
-        type: String,
-        enum: ['I', 'II', 'III', 'IV', 'V'],
-        default: 'I',
+        type: Number,
+        enum: [1,2,3,4,5],
+        default: 1,
         required: true
     },
     course_type: {
