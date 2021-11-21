@@ -33,7 +33,7 @@ Il metodo \texttt{login()} rimuove dal local storage le informazioni relative al
 
 Il metodo \texttt{register()} invia al server una richiesta POST per la registrazione dell'utente, per poi proseguire con la chiamata di \texttt{login()}.
 
-\subsection{Classi di utilità}
+\subsection{Classi di utility}
 
 L'\textbf{Auth Guard} è un Route Guard usato per limitare l'accesso a determinati route a utenti autorizzati, passato come parametro \texttt{canActivate} ai percorsi di route interessati. Il metodo \texttt{canActivate()}, invocato ogni volta che qualcuno tenterà di accedere al route associato, restituisce un valore booleano che indica se consentire o meno la navigazione. Se l’utente non è autenticato, verrà reindirizzato alla route di login.
 
@@ -57,7 +57,7 @@ Le route sono suddivise nei seguenti moduli, ciascuno dei quali fa riferimento a
 		\item \texttt{/me} (get): restituisce i dati dell'utente loggato
 		\item \texttt{/courses} (get): restituisce i dati dei corsi associati all'utente autenticato, nel caso quest'ultimo abbia il ruolo \texttt{teacher}
 		\item \texttt{/courses} (post): riceve come input un array di id di corsi e li associa al docente autenticato
-		\item \texttt{/courses/:id} (delete): rimuove il corso con id specificato dall'elenco dei corsi associati al docente autenticato autenticato
+		\item \texttt{/courses/:id} (delete): rimuove il corso con id specificato dall'elenco dei corsi associati al docente autenticato
 	\end{itemize}
 	\item \texttt{auth}
 	\begin{itemize}

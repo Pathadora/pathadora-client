@@ -15,9 +15,20 @@ Una volta definiti, i metadati possono essere condivisi e riutilizzati in più o
 
 I metadati possono essere raggruppati o strutturati come “schemi di metadati”, un insieme di metadati progettati per uno scopo specifico, come la descrizione di un tipo di informazioni su una risorsa. La definizione o il significato degli elementi in sé è noto come semantica dello schema. I valori dati agli elementi dei metadati sono il suo contenuto. Gli schemi di metadati di solito specificano i nomi degli elementi e la loro semantica.
 
-Facoltativamente, possono specificare regole di contenuto su come stabilire il loro contenuto (come stabilire il titolo principale) e i possibili valori per il contenuto. Così, ad esempio, i termini possono provenire da uno specifico vocabolario controllato. Potrebbero anche esserci regole di sintassi su come gli elementi e il loro contenuto dovrebbero essere codificati. Uno schema di metadati senza regole di sintassi stabilite è chiamato sintassi indipendente.
+Per garantire un alto livello di consistenza dei contenuti, è possibile specificare regole di contenuto, ovvero linee guida che prescrivono quale tipo di informazione è registrata in ogni elemento di metadati, dove trovare le informazioni (es. da un'intestazione di pagina web, una didascalia di una fotografia, ecc.) e come l'informazione è formattata. 
+
+Uno schema di metadati senza regole di sintassi stabilite è chiamato sintassi indipendente.
 
 I metadati possono essere codificati in qualsiasi sintassi definibile come SGML, XML o JSON.
+
+Gli schemi di metadati sviluppati e mantenuti da organizzazioni standard (come ISO) o organizzazioni che hanno assunto tale responsabilità (come la Dublin Core Metadata Initiative) sono chiamati standard di metadati.
+
+I metadati sono generalmente classificati in tre tipi:
+\begin{itemize}
+\item \textit{metadati descrittivi}, descrivono una risorsa informativa per l'identificazione e il recupero attraverso elementi come titolo, autore e abstract.
+\item \textit{metadati strutturali}, documentano le relazioni tra gli oggetti attraverso elementi come i collegamenti ad altri componenti (ad esempio, come le pagine vengono messe insieme per formare i capitoli).
+\item \textit{metadati amministrativi}, aiutano a gestire le risorse informative attraverso elementi quali il numero di versione, la data di archiviazione e altre informazioni tecniche ai fini della gestione dei file, della gestione dei diritti e della conservazione.
+\end{itemize}
 
 \section{Metodi di generazione automatica di metadati}
 Generare metadati di buona qualità in modo efficiente è essenziale per organizzare e rendere accessibile la grande quantità di risorse presente sul web. Il successo di biblioteche digitali, il sostenimento dell'interoperabilità e l'evoluzione del web semantico dipendono da una generazione di metadati efficiente\cite{metadata}.
@@ -63,18 +74,18 @@ I \textbf{metodi statistici} sono i più semplici. Calcolano le statistiche per 
 
 \textbf{TF-IDF} (Term Frequency–Inverse Document Frequency) stima l'importanza della parola nel documento rispetto all'intero corpus (insieme di più documenti). Calcola la frequenza di ogni termine nel documento e la pondera con l'inverso della frequenza del termine nell'intero corpus. Le parole chiave verranno selezionate tra i termini con i punteggi più alti. Questo algoritmo favorisce i termini frequenti nel documento di testo e non frequenti negli altri documenti. Il vantaggio di TF-IDF è che è veloce e lo svantaggio è che necessita di un corpus di almeno qualche dozzina di documenti. TF-IDF è indipendente dalla lingua.
 
-\textbf{YAKE!} (Yet Another Keyword Extractor) è un metodo di estrazione di parole chiave che utilizza funzionalità statistiche ricavate da un singolo documento per estrarre le parole chiave. Estrae le parole chiave in cinque passaggi:
+\textbf{YAKE!} (Yet Another Keyword Extractor) è un metodo di estrazione di parole chiave che utilizza feature statistiche ricavate da un singolo documento per estrarre le parole chiave. Estrae le parole chiave in cinque passaggi:
 \begin{enumerate}
 \item \textbf{Pre-elaborazione e identificazione del termine candidato}: il testo è suddiviso in frasi, blocchi (parte della frase separata da punteggiatura) e token. Il testo viene pulito, etichettato e vengono identificate le stop words.
-\item \textbf{Estrazione delle caratteristiche}: calcola le seguenti cinque caratteristiche statistiche per i termini (parole) nel documento:
+\item \textbf{Estrazione delle caratteristiche}: calcola le seguenti cinque feature statistiche per i termini (parole) nel documento:
 \begin{itemize}
 \item Casing: conta il numero di volte (in proporzionale al numero complessivo di volte in cui compare) in cui il termine appare in maiuscolo o come acronimo nel testo. Un termine significativo di solito appare più spesso in maiuscolo.
 \item Posizione del termine: posizione mediana della frase del termine nel testo. I termini più vicini all'inizio tendono a essere i più significativi.
 \item Normalizzazione della frequenza dei termini: misura la frequenza bilanciata dei termini nel documento.
-\item Relazione del termine al contesto: misura con quanti termini diversi il termine candidato coesiste. Termini più significativi coesistono con termini meno diversi. 
+\item Relazione del termine al contesto: misura con quanti termini diversi il termine candidato coesiste. Termini più significativi coesistono con meno termini diversi. 
 \item Termine in frasi diverse: misura quante volte i termini compaiono in frasi diverse. Un punteggio più alto indica un termine più significativo.
 \end{itemize}
-\item \textbf{Calcolo del punteggio del termine}: le funzioni del passaggio precedente vengono combinate in un unico punteggio con l'equazione creata dall'uomo.
+\item \textbf{Calcolo del punteggio del termine}: le funzioni del passaggio precedente vengono combinate in un unico punteggio.
 \item \textbf{Generazione di n-grammi e calcolo dei punteggi delle parole chiave}: l'algoritmo identifica tutti gli n-grammi validi. Le parole negli n-grammi devono appartenere allo stesso blocco e non devono iniziare o terminare con una stopword. Successivamente, ogni n-gramma viene valutato moltiplicando i punteggi dei suoi membri e normalizzato per ridurre l'impatto della lunghezza dell'n-gramma. Le stopword vengono trattate in modo diverso per ridurre al minimo il loro impatto.
 \item \textbf{Deduplicazione e ranking dei dati}: vengono rimosse le parole chiavi simili tra loro.
 \end{enumerate}
@@ -91,7 +102,7 @@ I metodi basati su grafi generano un grafo dei termini correlati presenti nei do
 \begin{equation}
 S(Vi)=(1 - d) + d\left (\sum_{j \in In(Vi)} \frac{S(Vj)}{|Out(Vj)|}\right )
 \end{equation}
-Il peso \textit{S(Vi)} di un vertice \textit{Vi} è calcolato considerando i pesi dei vertici connessi al nodo \textit{Vi}. Nell'equazione, \textit{d} è il fattore di smorzamento impostato su 0,85. Gli \textit{In(Vi)} corrispondono ai collegamenti in entrata al vertice \textit{Vi} e gli \textit{Out(Vj)} ai collegamenti in uscita dal vertice \textit{Vj}. Poiché stiamo considerando grafi non orientati, un collegamenti in entrata verso un nodo è anche un collegamento in uscita dallo stesso nodo. L'algoritmo viene eseguito su ciascun nodo in diverse iterazioni fino a quando i pesi sui nodi convergono: la variazione tra le iterazioni è inferiore a 0,0001.
+Il peso \textit{S(Vi)} di un vertice \textit{Vi} è calcolato considerando i pesi dei vertici connessi al nodo \textit{Vi}. Nell'equazione, \textit{d} è il fattore di smorzamento impostato su 0,85. Gli \textit{In(Vi)} corrispondono ai collegamenti in entrata al vertice \textit{Vi} e gli \textit{Out(Vj)} ai collegamenti in uscita dal vertice \textit{Vj}. Poiché stiamo considerando grafi non orientati, un collegamento in entrata verso un nodo è anche un collegamento in uscita dallo stesso nodo. L'algoritmo viene eseguito su ciascun nodo in diverse iterazioni fino a quando i pesi sui nodi convergono: la variazione tra le iterazioni è inferiore a 0,0001.
 \item \textbf{Selezione delle parole con il punteggio più alto}: le parole (quindi i vertici) sono ordinate per punteggio, dal più alto al più basso. Viene poi selezionato il primo terzo delle parole.
 \item \textbf{Estrazione delle parole chiave}: in questo passaggio, le parole selezionate nella fase precedente vengono unite in parole chiave composte da più parole se compaiono in una stessa frase. Il punteggio delle parole composte corrisponde alla somma dei punteggi delle parole singole che le compongono.
 \end{itemize}
@@ -123,7 +134,14 @@ La comparsa del deep learning ha consentito metodi basati sull'embedding, un ins
 Questi metodi trovano principalmente un elenco di parole chiave candidate (ad esempio, Bennani et al. considerano solo parole chiave costituite da nomi e aggettivi). Incorporano il documento e le parole chiave candidate nello stesso spazio di inclusione e misurano la similarità (ad es. similarità del coseno) tra i valori del documento e delle parole chiave. Selezionano le parole chiave più simili al testo del documento in base alla misura di similarità.
 
 \subsection{Indicizzazione automatica}
-Così come la content extraction, l'\textbf{indicizzazione automatica} prevede l'utilizzo di machine learning e algoritmi rule-based per estrarre metadati dalle risorse. La differenza sta nel fatto che i termini estratti vengono successivamente mappati in vocabolari controllati come Library of Congress Subject Headings (LCSH), Getty Thesaurus of Geographic Names (TGN), Library of Congress Name Authority (LCNA) o ontologie relative a un dominio specifico.
+Così come la content extraction, l'\textbf{indicizzazione automatica} prevede l'utilizzo di machine learning e algoritmi rule-based per estrarre metadati dalle risorse. La differenza sta nel fatto che i termini estratti vengono successivamente mappati in vocabolari controllati come Library of Congress Subject Headings (LCSH), Getty Thesaurus of Geographic Names (TGN), Library of Congress Name Authority (LCNA) o ontologie relative a un dominio specifico. I termini determineranno possibili punti di accesso sotto i quali i documenti associati possono essere cercati e identificati.
+
+Il processo di indicizzazione si compone di tre fasi:
+\begin{itemize}
+\item analisi del documento e individuazione del suo tema di base (il contenuto concettuale).
+\item identificazione dei concetti principali presenti in tale contenuto (l'insieme di tali concetti costituisce il "soggetto" del documento stesso).
+\item traduzione nei termini di un linguaggio di indicizzazione, utilizzando termini estratti dal documento stesso (indicizzazione derivata, o estratta) oppure avvalendosi di un dizionario controllato ("indicizzazione assegnata")
+\end{itemize}
 
 \subsection{Text e data mining}
 A causa della complessità delle tecniche utilizzate per l'estrazione di metadati, la maggior parte degli usi di queste tecniche sono stati sviluppati per risolvere i problemi della generazione automatica di metadati nel contesto di specifici progetti di ricerca.
