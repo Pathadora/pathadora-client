@@ -17,7 +17,7 @@
         <div class="card-body">
             <form [formGroup]="secondStepForm" (ngSubmit)="secondStepSubmit()">
                 <div class="form-group">
-                    <label for="faculty">Facoltà</label>
+                    <label for="faculty">Facoltà consigliate</label>
                     <select type="text" formControlName="faculty" id="course_faculty" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && f.faculty.errors }" >
                         <option value="null" disabled>Seleziona la facoltà</option>
                         <option *ngFor="let f of facultiesData; let i = index" [ngValue]="f.faculty_name">{{f.faculty_name}}</option>
@@ -27,14 +27,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="department">Dipartimento</label>
-                    <select type="text" formControlName="department" id="department" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && f.department.errors }" >
-                        <option value="null" disabled>Seleziona il dipartimento</option>
-                        <option *ngFor="let d of departmentsData; let i = index" [ngValue]="d.department_name">{{d.department_name}}</option>
-                    </select>
-                    <div *ngIf="submitted && f.department.errors" class="invalid-feedback">
-                        <div *ngIf="f.department.errors.required">Seleziona un dipartimento</div>
-                    </div>
+                    <label for="department">Dipartimenti consigliati</label>
+                    <ul class="list-group">
+                        <li *ngFor="let d of departmentsData; let i = index" class="list-group-item">{{d.department_name}}</li>
+                    </ul>
                 </div>
                 <div class="form-group">
                     <label for="year">Anno</label>
@@ -65,7 +61,7 @@
         <div class="card-body">
             <form [formGroup]="thirdStepForm" (ngSubmit)="thirdStepSubmit()">
                 <div class="form-group">
-                    <label for="course">Corso</label>
+                    <label for="course">Corsi consigliati</label>
                     <select type="text" formControlName="course" id="course" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && thirdStepF.course.errors }" >
                         <option value="null" disabled>Seleziona il corso</option>
                         <option *ngFor="let c of coursesData; let i = index" value="{'Course_' + c.course_name}">{{c.course_name}}</option>
@@ -89,12 +85,12 @@
         <h4 class="card-header">Ottieni un learning path</h4>
         <div *ngFor="let r of resourcesData; let i = index" class="card">
             <div class="card-body">
-                <h5 class="card-title">{{r.name}}</h5>
+                <a href="{{apiUrl}}/public/{{r.name}}.{{r.resourceExtension}}"><h5 class="card-title">{{r.name}}</h5></a>
                 <p class="card-text">
                     Estensione: {{r.resourceExtension}}
                 </p>
                 <p class="card-text">
-                    Rapporto di contrasto: {{r.resourceCheckRatio}}
+                    Rapporto di contrasto: {{r.resourceCheckRatio}}/21
                 </p>
                 <p class="card-text">
                     Dimensione minima del font: {{r.resourceFontSize}}
@@ -103,7 +99,7 @@
                     Tipo: {{r.resourceType}}
                 </p>
                 <p class="card-text">
-                    Facilità di lettura: {{r.resourceReadingEase}}
+                    Facilità di lettura: {{r.resourceReadingEase}}/100
                 </p>
             </div>
         </div>

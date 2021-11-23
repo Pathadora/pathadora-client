@@ -36,7 +36,6 @@ export class DashboardUserComponent {
 
         this.secondStepForm = this.formBuilder.group({
             "faculty": [null, Validators.required],
-            "department": [null, Validators.required],
             "year": [null, Validators.required],
         }); 
         
@@ -99,7 +98,6 @@ export class DashboardUserComponent {
             "learner": "Learner_"+ this.currentUser.user_name + "_" + this.currentUser.user_lastname,
             "degree": this.currentUser.user_profile.user_degree,
             "faculty": this.f.faculty.value,
-            "department": this.f.department.value,
             "year": this.f.year.value
         }).subscribe(
             data => {

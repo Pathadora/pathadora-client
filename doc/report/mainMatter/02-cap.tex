@@ -25,6 +25,13 @@ Per permettere le interrogazioni su una grande quantità di dati è stato proget
 \label{fig:diag-layers}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{res/pathadora-engine.jpg}
+\caption{Casi d'uso sul Pathadora Recommender Engine}
+\label{fig:pathadora-engine}
+\end{figure}
+
 \subsection{Richieste}
 Il sistema dovrà gestire le richieste che arrivano da parte del client e istanziare il componente adeguato a computare la risposta.
 
@@ -35,9 +42,23 @@ loro. Nel caso della richiesta di inserimento tutti gli elementi verranno aggiun
 \subsubsection{Generazione di dipartimenti e facoltà}
 A seguito della registrazione, lo studente può richiedere la generazione dei dipartimenti e delle facoltà suggerite, specificando il tipo di laurea (triennale, magistrale, dottorato) a cui fare riferimento. La generazione terrà conto delle informazioni dichiarate dallo studente durante la registrazione.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{res/faculties-generation.png}
+\caption{Form di richiesta dipartimenti e facoltà suggeriti}
+\label{fig:faculties-generation}
+\end{figure}
+
 \subsubsection{Generazione di corsi}
 Una volta generate le facoltà, lo studente può richiedere la generare dei corsi suggeriti selezionando la facoltà e l'anno preferiti. 
 Una volta ricevuto tale scelta, il sistema inizializzerà il knowledge graph e lo interrogherà parametrizzando la query con le informazioni dello studente.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{res/courses-generation.png}
+\caption{Form di richiesta corsi suggeriti}
+\label{fig:courses-generation}
+\end{figure}
 
 \subsubsection{Generazione di risorse}
 L'ultima richiesta da gestire consiste nella raccomandazione delle risorse relative a un corso specifico tra quelli suggeriti, risultati della richiesta precedente.
@@ -45,7 +66,14 @@ La raccomandazione terrà conto delle disabilità dello studente per determinare
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{res/pathadora-engine.jpg}
-\caption{Casi d'uso sul Pathadora Recommender Engine}
-\label{fig:pathadora-engine}
+\includegraphics[scale=0.4]{res/resources-generation.png}
+\caption{Form di richiesta risorse suggerite}
+\label{fig:resources-generation}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{res/path-result.png}
+\caption{Risultato risorse suggerite}
+\label{fig:resources-generation}
 \end{figure}
