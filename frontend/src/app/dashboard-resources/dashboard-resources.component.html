@@ -68,30 +68,6 @@
                                         <div *ngIf="submitted && resourceF(j).resourceType.errors" class="invalid-feedback">
                                         </div>
                                     </div>
-                                    <div class="form-group" *ngIf="!readOnly">
-                                        <label for="resourceFontSize">Dimensione del font</label>
-                                        <input type="number" formControlName="resourceFontSize" class="form-control" [ngClass]="{ 'is-invalid': submitted && resourceF(j).resourceFontSize.errors }" />
-                                        <div *ngIf="submitted && resourceF(j).resourceFontSize.errors" class="invalid-feedback">
-                                        </div>
-                                    </div>
-                                    <div class="form-group" *ngIf="!readOnly">
-                                        <label for="resourceExtension">Estensione</label>
-                                        <input type="text" formControlName="resourceExtension" class="form-control" [ngClass]="{ 'is-invalid': submitted && resourceF(j).resourceExtension.errors }" />
-                                        <div *ngIf="submitted && resourceF(j).resourceExtension.errors" class="invalid-feedback">
-                                        </div>
-                                    </div>
-                                    <div class="form-group" *ngIf="!readOnly">
-                                        <label for="resourceReadingEase">Facilità di lettura</label>
-                                        <input type="number" formControlName="resourceReadingEase" class="form-control" [ngClass]="{ 'is-invalid': submitted && resourceF(j).resourceReadingEase.errors }" />
-                                        <div *ngIf="submitted && resourceF(j).resourceReadingEase.errors" class="invalid-feedback">
-                                        </div>
-                                    </div>
-                                    <div class="form-group" *ngIf="!readOnly">
-                                        <label for="resourceCheckRatio">Rapporto di contrasto</label>
-                                        <input type="number" formControlName="resourceCheckRatio" class="form-control" [ngClass]="{ 'is-invalid': submitted && resourceF(j).resourceCheckRatio.errors }" />
-                                        <div *ngIf="submitted && resourceF(j).resourceCheckRatio.errors" class="invalid-feedback">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 

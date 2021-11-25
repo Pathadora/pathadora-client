@@ -108,11 +108,7 @@ export class DashboardResourcesComponent implements OnInit {
                         adaptionType: new FormArray(this.adaptionTypes.map(e => new FormControl(false))),
                         displayTransformability: new FormArray(this.displayTransformabilities.map(e => new FormControl(false))),
                         accessMode: new FormArray(this.accessModes.map(e => new FormControl(false))),
-                        resourceType: null,
-                        resourceFontSize: 0,
-                        resourceExtension: '',
-                        resourceReadingEase: 0,
-                        resourceCheckRatio: 0
+                        resourceType: null
                      }))
                     this.files.push( new File([""], "filename", { type: 'text/html' }))
                 });
@@ -184,10 +180,6 @@ export class DashboardResourcesComponent implements OnInit {
                 fd.append('displayTransformability', selectedDisplayTransformabilities)
                 fd.append('accessMode', selectedAccessModes)
                 fd.append('resourceType', this.resourceFValues(i).resourceType)
-                fd.append('resourceFontSize', this.resourceFValues(i).resourceFontSize)
-                fd.append('resourceExtension', this.resourceFValues(i).resourceExtension)
-                fd.append('resourceReadingEase', this.resourceFValues(i).resourceReadingEase)
-                fd.append('resourceCheckRatio', this.resourceFValues(i).resourceCheckRatio)
 
                 this.coursesService.addResource(c._id, fd)
                 .subscribe(

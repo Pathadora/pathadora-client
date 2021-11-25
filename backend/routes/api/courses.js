@@ -323,10 +323,6 @@ router.post(
           displayTransformability: req.body.displayTransformability,
           accessMode: req.body.accessMode,
           resourceType: req.body.resourceType,
-          resourceFontSize: req.body.resourceFontSize,
-          resourceExtension: req.body.resourceExtension,
-          resourceReadingEase: req.body.resourceReadingEase,
-          resourceCheckRatio: req.body.resourceCheckRatio,
           metadata: {
             ...originalMetadata,
             readingEase: readingEase,
@@ -340,7 +336,7 @@ router.post(
           course.course_resources.unshift(newResource);
         }
         course.save();
-        res.json({msg: "Resource uploaded"})
+        res.json(newResource)
       });
     } catch (err) {
       console.error(err.message);

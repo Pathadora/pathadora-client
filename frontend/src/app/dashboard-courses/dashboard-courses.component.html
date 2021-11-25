@@ -46,8 +46,8 @@
                                     <div class="form-group">
                                         <label for="{{c.course_id}} course_period">Semestre</label>
                                         <select type="text" [attr.disabled]="readOnly ? 'disabled' : null" formControlName="course_period" id="{{c.course_id}} course_period" class="form-control form-select" [ngClass]="{ 'is-invalid': submitted && courseFormGroup(i).course_period.errors }" >
-                                            <option value="I">I</option>
-                                            <option value="II">II</option>  
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>  
                                         </select>
                                     </div>
 

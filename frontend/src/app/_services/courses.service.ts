@@ -53,10 +53,10 @@ export class CoursesService {
         			"resourceType": formData.get('resourceType'),
      			},
                 "data_properties":{
-                    "resourceFontSize" : formData.get('resourceFontSize'),
-                    "resourceExtension": formData.get('resourceExtension'),
-                    "resourceReadingEase" : formData.get('resourceReadingEase'),
-                    "resourceCheckRatio" : formData.get('resourceCheckRatio'),
+                    "resourceFontSize" : resource.metadata.fontSize,
+                    "resourceExtension": resource.metadata.extension,
+                    "resourceReadingEase" : resource.metadata.readingEase,
+                    "resourceCheckRatio" : resource.metadata.checkRatio
                 } 
 		  })
         }));

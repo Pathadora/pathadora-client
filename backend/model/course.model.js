@@ -86,18 +86,6 @@ let Course = new Schema({
             resourceType: {
                 type: String
             },
-            resourceFontSize: {
-                type: Number
-            },
-            resourceExtension: {
-                type: String
-            },
-            resourceReadingEase: {
-                type: Number
-            },
-            resourceCheckRatio: {
-                type: Number
-            },
             metadata: {}
           }
     ]

@@ -1,6 +1,5 @@
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \chapter{Contesto del progetto}
-
 \textbf{Pathadora} è un sistema di raccomandazione progettato per suggerire agli studenti le facoltà e i corsi più idonei per loro sulla base delle informazioni specificate, sia personali che relative a eventuali disabilità possedute. 
 
 Pathadora può essere suddiviso in due sottosistemi: 
@@ -33,11 +32,13 @@ Per permettere le interrogazioni su una grande quantità di dati è stato proget
 \end{figure}
 
 \subsection{Richieste}
-Il sistema dovrà gestire le richieste che arrivano da parte del client e istanziare il componente adeguato a computare la risposta.
+L'interfaccia web permette l'invio di richieste da sottomettere al Pathadora Engine attraverso appositi form.
 
 \subsubsection{Inserimento}
 La prima tipologia di richiesta da gestire è l’inserimento di nuove istanze nell'ontologia. In questa richiesta dovranno essere specificate tutte le informazioni che serviranno all’engine per aggiornare il knowledge graph. La richiesta potrebbe dichiarare relazioni tra elementi che non sono presenti e in tal caso, l’engine prima creerà questi elementi per poi definire la relazione tra
 loro. Nel caso della richiesta di inserimento tutti gli elementi verranno aggiunti nell’ontologia, indipendentemente se esistono, se rispettano il formato giusto oppure se le relazioni sono semanticamente corrette.
+
+Le informazioni inserite riguardano le lingue conosciute, i titoli di laurea corrente e futuro, le passioni per determinati settori, gli obiettivi dello studente e il possedimento di determinate disabilità con relativi livelli associati.
 
 \subsubsection{Generazione di dipartimenti e facoltà}
 A seguito della registrazione, lo studente può richiedere la generazione dei dipartimenti e delle facoltà suggerite, specificando il tipo di laurea (triennale, magistrale, dottorato) a cui fare riferimento. La generazione terrà conto delle informazioni dichiarate dallo studente durante la registrazione.
