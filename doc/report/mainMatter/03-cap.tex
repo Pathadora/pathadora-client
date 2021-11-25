@@ -149,6 +149,18 @@ var dbURI = "mongodb://localhost/myadmindatabase";
 var adminConnection = mongoose.createConnection(dbURI);
 \end{lstlisting}
 
+\subsection{Stardog}
+Il focus principale di Stardog è la costruzione di Enterprise Knowledge Graph, attraverso cui è possibile visualizzare informazioni e relazioni da molteplici sorgenti di dati eterogenee e rendere i dati accessibili all'interogazione e manipolazione. 
+Per enterprise knowledge graph si intende 
+
+A differenza di un database a grafo pensato unicamente per l'archiviazione dei dati, una piattaforma Enterprise Knowledge Graph ha anche funzionalità che supportano la rappresentazione della conoscenza nel grafo e consentono, tra le altre cose, la comprensione da parte della macchina. Ad esempio, mentre un database a grafo sa che esiste un'interrelazione tra un nodo persona nel database A e un nodo organizzazione nel database B, un Enterprise Knowledge Graph comprende anche la natura di tale interrelazione. 
+
+È una raccolta di riferimenti alle risorse di conoscenza, ai contenuti e ai dati della tua organizzazione che sfrutta un modello di dati per descrivere le persone, i luoghi e le cose e il modo in cui sono correlati.
+
+Stardog permette l'interrogazione con query SPARQL mediante linea di comando SSH o richieste HTTP. È possibile utilizzare l'editor Stardog Studio per importare, visualizzare e interrogare ontologie OWL salvate in Stardog; non è supportata tuttavia la modellazione di ontologie, possibile nel tool Protegé. 
+
+È possibile effettuare path query, ovvero ottenere come output l'insieme di archi che legano due nodi del grafo\cite{stardog}.
+
 \subsection{Textract}
 \textbf{Textract} è una libreria Python atta all'estrazione del testo da un file. Supporta l'estrazione da file di diversi formati comuni appoggiandosi a parser dedicati.
 

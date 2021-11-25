@@ -154,7 +154,7 @@ contenute nella risorsa stessa.
 Tra i tool che implementano questa tecnica di estrazione di metadati vi sono Dspace e JHove.
 
 \subsection{Social Tagging}
-Il social tagging è una forma di generazione di metadati, sebbene non propriamente automatica, che permette agli utenti di creare e assegnare tag alle risorse di un sito web. A causa del costo relativamente basso della generazione e del mantenimento dei metadati attraverso il social tagging e della sua attuale popolarità diffusa, alcuni progetti hanno tentato di utilizzare questi dati per migliorare i repository di archiviazione di metadati. Ad esempio, Linstaedt et al. usa sofisticati programmi per computer per analizzare le immagini statiche trovate all'interno di Flickr e utilizzare questi risultati d'analisi per propagare tag utente pertinenti a nuove immagini elaborate.
+Il social tagging è una forma di generazione di metadati, sebbene non propriamente automatica, che permette agli utenti di creare e assegnare tag alle risorse di un sito web. A causa del costo relativamente basso della generazione e del mantenimento dei metadati attraverso il social tagging e della sua attuale popolarità diffusa, alcuni progetti hanno tentato di utilizzare questi dati per migliorare i repository di archiviazione di metadati. Ad esempio, Linstaedt et al. usa programmi per analizzare le immagini statiche trovate all'interno di Flickr e utilizzare questi risultati d'analisi per propagare tag utente pertinenti a nuove immagini elaborate.
 
 Un esempio di utilizzo del social tagging più complesso può consistere nell'utilizzare tecniche di apprendimento automatico, tenendo traccia dei cambiamenti applicati sui metadati associati a una risorsa da parte degli utenti e migliorare quindi i meccanismi di learning del database sulla base di queste modifiche.
 Tra i tool che supportano il social tagging vi sono Dspace e Omeka.
@@ -240,11 +240,31 @@ Una volta terminata la sessione di training, Kea utilizza il modello per calcola
 \label{fig:kea}
 \end{figure}
 
-\section{Metadati di accessibilità per risorse educative}
-I progressi nelle tecnologie dell'informazione e della comunicazione, e in particolare nell'ingegneria multimediale, di rete e del software, hanno promosso una nuova generazione di ambienti di apprendimento online.
-Molte organizzazioni, sia pubbliche che private, sfruttano le nuove tecnologie per offrire prodotti e servizi educativi e formativi a tutti i livelli. In particolare, l'ampia disponibilità di risorse educative è un obiettivo comune per università, biblioteche, archivi e altre istituzioni ad alta intensità di conoscenza. C'è anche una crescente capacità dei docenti di collaborare con i loro studenti e altri docenti al fine di produrre, condividere e riutilizzare le risorse educative.
+\subsection{Estrazione del testo da risorse multimediali}
+Di seguito viene descritto un possibile approccio per estrarre automaticamente il testo da un file multimediale al fine di analizzarlo con le tecniche viste in precedenza\cite{video}:
+\begin{enumerate}
+\item \textit{Estrazione audio}: nel caso di un file video, viene eseguita una conversione di formato tra MPEG e WAV tramite uno strumento di conversione per separare l'audio dal video;
+\item \textit{Suddivisione dell'audio}: il file WAV viene suddiviso in frammenti da 1 a 2 minuti, in base alla dimensione del file risultante, per evitare un carico computazionale eccessivo;
+\item \textit{Segmentazione audio e rimozione del silenzio}: ogni frammento è sottoposto a un algoritmo per la rimozione del silenzio e la segmentazione delle frasi. In questo metodo, sono utilizzate due feature per l'intero segnale audio: \textit{energia del segnale} e \textit{centroide spettrale}. Dati xi(n), n=1,…,N i campioni audio del segmento i-esimo di lunghezza N, per ogni segmento i si calcola l'energia del segnale secondo la seguente equazione:
 
-In questo contesto, i metadati educativi sono stati riconosciuti come uno dei campi più fruttuosi nella standardizzazione delle tecnologie educative. Tuttavia, l'emergere di grandi raccolte di risorse di apprendimento create attraverso la raccolta e l'aggregazione di metadati ha sollevato importanti preoccupazioni sull'idoneità delle descrizioni delle risorse educative fornite negli schemi di metadati.
+\begin{equation}
+E(i) = \sum^{N}_{n=1} \frac{1}{N}| x_i (n)|^{2}
+\end{equation}
+
+Questa funzione può essere utilizzata non solo per identificare gli intervalli silenziosi nei segnali audio, ma anche per distinguere tra le classi audio. D'altra parte, il centroide spettrale, Ci, del segmento i-esimo è definito come il centro di gravità del suo spettro:
+
+\begin{equation}
+C(i) = \frac{\sum^{N}_{k=1}(k+1)X_i (k)}{\sum^{N}_{k=1}X_i (k)}
+\end{equation}
+
+dove Xi(k) per k=1,…,N sono i coefficienti della trasformata discreta di Fourier (DFT) del segmento i-esimo e N è la lunghezza del segmento. Questa feature è una misura della posizione spettrale, con valori alti corrispondenti a suoni più chiari.
+La motivazione alla base delle due feature presentate è che quando il livello del rumore di fondo è basso, l'energia dei segmenti con voce è maggiore dell'energia dei segmenti silenziosi; inoltre, se i segmenti afoni contengono suoni ambientali, allora il centroide spettrale per i segmenti sonori è di nuovo maggiore, poiché questi suoni rumorosi tendono ad avere frequenze e valori inferiori per esso. Con questi presupposti, le parti del segnale che rappresentano il silenzio vengono utilizzate come separatori per isolare le frasi.
+
+\item \textit{Riconoscimento vocale}: i segmenti audio che rappresentano singole frasi vengono infine immessi in uno strumento di sintesi del testo. Analizza le parole pronunciate e genera il testo corrispondente, traducendo effettivamente i suoni in parole. Il risultato viene memorizzato in un file di testo normale.
+\end{enumerate}
+
+\section{Metadati di accessibilità per risorse educative}
+I metadati educativi sono stati riconosciuti come uno dei campi più fruttuosi nella standardizzazione delle tecnologie educative. Tuttavia, l'emergere di grandi raccolte di risorse di apprendimento create attraverso la raccolta e l'aggregazione di metadati ha sollevato importanti preoccupazioni sull'idoneità delle descrizioni delle risorse educative fornite negli schemi di metadati.
 
 Pertanto, la capacità di gestire efficacemente le risorse educative in termini di reperibilità, riutilizzabilità, interoperabilità e accessibilità risiede nell'adozione di uno schema di metadati appropriato, in grado di descriverle adeguatamente. Nonostante ciò, in quest'area è stata fatta solo una piccola ricerca e non esiste una soluzione completa per la gestione dei metadati di accessibilità. L'accessibilità è una caratteristica chiave per promuovere l'istruzione e la formazione inclusive in ambienti di apprendimento virtuali e distribuiti in cui esiste una grande diversità nelle esigenze e nelle preferenze di accessibilità degli studenti.
 
@@ -285,7 +305,19 @@ Al fine di soddisfare le diverse esigenze di questo pubblico, vengono forniti di
 
 \subsection{LOM}
 Lo standard \textbf{IEEE LOM} o \textbf{LOM} (Learning Object Metadata) è uno standard aperto che
-specifica la sintassi e la semantica degli attributi richiesti per i metadati dei learning object. Lo standard LOM include regole per controllare l'identificazione degli elementi dei dati e dei loro attributi. Fornisce inoltre principi, regole e strutture per la specificazione di quelle stesse risorse. Il suo obiettivo è facilitare la ricerca, la valutazione, il recupero e l'uso dei learning object. Inoltre, IEEE LOM è considerato lo standard più accettato e implementato in più repository di learning objects. Esistono numerose versioni ed estensioni di LOM che sono state sviluppate da IEEE LOM. È organizzato in 9 categorie, ognuna delle quali contiene sottocategorie che possono condividere caratteristiche di base.
+specifica la sintassi e la semantica degli attributi richiesti per i metadati dei learning object. Lo standard LOM include regole per controllare l'identificazione degli elementi dei dati e dei loro attributi. Fornisce inoltre principi, regole e strutture per la specificazione di quelle stesse risorse. Il suo obiettivo è facilitare la ricerca, la valutazione, il recupero e l'uso dei learning object. Inoltre, IEEE LOM è considerato lo standard più accettato e implementato in più repository di learning objects. Esistono numerose versioni ed estensioni di LOM che sono state sviluppate da IEEE LOM. È organizzato in 9 categorie, ognuna delle quali contiene sottocategorie che possono condividere caratteristiche di base:
+
+\begin{itemize}
+\item Generale (general) - 11 campi: racchiude le informazioni generali sui learning object;
+\item \textit{Ciclo di vita (lifecycle)} - 6 campi: racchiude le informazioni sulla vita del learning object (versione, data di creazione, ecc.);
+\item \textit{Meta-metadati (meta-metadata)} - 9 campi: fornisce informazioni sullo schema di metadati adottato;
+\item \textit{Tecnico (technical)} - 12 campi: contiene informazioni sui requisiti e le caratteristiche tecniche del learning object;
+\item \textit{Didattico (educational)} - 11 campi: racchiude informazioni sulle proprietà didattiche del learning object;
+\item \textit{Diritti (rights)} - 3 campi: fornisce informazioni sui diritti intellettuali e simili del learning object;
+\item \textit{Relazioni (relation)} - 7 campi: contiene indicazioni sul legame tra l'oggetto e altri oggetti o risorse;
+\item \textit{Annotazioni (annotation)} - 3 campi: contiene commenti sull'uso didattico del learning object;
+\item \textit{Classificazioni (classification)} - 8 campi: fornisce informazioni sul soggetto o la materia curricolare affrontata nel learning object.
+\end{itemize}
 
 \subsection{LRMI}
 Questa iniziativa è iniziata nel 2011, il suo scopo era quello di sviluppare una specifica come estensione educativa per Schema.org. Le proprietà LRMI hanno lo scopo di descrivere le risorse educative aggiungendo proprietà specifiche in modo che possano essere facilmente individuate attraverso motori di ricerca e servizi. Le specifiche si basano sul vocabolario fornito da Schema.org e da altri standard. Pertanto, ci sono termini LRMI non inclusi in Schema.org. Con il supporto di Association of Educational Publishers (AEP), Association of American Publishers, Creative Commons (CC), division 501, Bill \& Melinda Gates e William and Flora Hewlett Foundation, LRMI ha sviluppato un framework di metadati per taggare le risorse di apprendimento web. Lo schema LRMI 1.1 è stato adottato da Schema.org nel 2013, che consente alle risorse, attraverso i loro metadati LRMI, di essere riconosciute dai principali motori di ricerca.

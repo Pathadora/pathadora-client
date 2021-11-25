@@ -4,7 +4,7 @@
 
 Pathadora può essere suddiviso in due sottosistemi: 
 \begin{itemize}
-\item \textbf{Pathadora Web App}, permette all'utente di interfacciarsi con il sistema di raccomandazione creando un proprio profilo per poi sottomere richieste per ottenere risultati su facoltà, corsi e risorse didattiche suggerite. Permette inoltre ai docenti di caricare le risorse didattiche relative ai propri corsi per le quali, quando possibile, verranno generati metadati relativi all'accessibilità del contenuto; queste verranno poi utilizzati dal sistema di raccomandazione per determinare se suggerire o meno la risorsa associata a utenti con determinate disabilità.
+\item \textbf{Pathadora Web App}, permette all'utente di interfacciarsi con il sistema di raccomandazione creando un proprio profilo per poi sottomere richieste per ottenere risultati su facoltà, corsi e risorse didattiche suggerite. Permette inoltre la registrazione di profili per docenti, i quali possono caricare le risorse didattiche relative ai propri corsi per cui, quando possibile, verranno generati metadati relativi all'accessibilità del contenuto; queste verranno poi utilizzati dal sistema di raccomandazione per determinare se suggerire o meno la risorsa associata a utenti con determinate disabilità.
 \item \textbf{Pathadora Recommender}, che memorizza le entità del dominio in un'ontologia del web semantico (\textit{Pathadora Ontology}) e produrrà i risultati relative a facoltà, corsi e risorse suggeriti utilizzando regole SWRL e SPARQL (\textit{Pathadora Rule Model}). Le operazioni vengono eseguite a seguito delle richieste HTTP ricevute dalla web app, intercettate mediante un server back-end (\textit{Pathadora Engine}).
 
 Per permettere le interrogazioni su una grande quantità di dati è stato progettato un knowledge graph mediante la piattaforma \textbf{Stardog}. Un knowledge graph consiste nell'applicazione del modello descritto dall'ontologia su un insieme di istanze, \textit{individual}, collegati tra loro mediante relazioni.
@@ -38,7 +38,22 @@ L'interfaccia web permette l'invio di richieste da sottomettere al Pathadora Eng
 La prima tipologia di richiesta da gestire è l’inserimento di nuove istanze nell'ontologia. In questa richiesta dovranno essere specificate tutte le informazioni che serviranno all’engine per aggiornare il knowledge graph. La richiesta potrebbe dichiarare relazioni tra elementi che non sono presenti e in tal caso, l’engine prima creerà questi elementi per poi definire la relazione tra
 loro. Nel caso della richiesta di inserimento tutti gli elementi verranno aggiunti nell’ontologia, indipendentemente se esistono, se rispettano il formato giusto oppure se le relazioni sono semanticamente corrette.
 
+\paragraph{Inserimento learner}
+Alla registrazione di uno studente corrisponderà l'inserimento di un individual Learner nell'ontologia, le cui proprietà verranno utilizzate dal sistema per suggerire facoltà, corsi e risorse allo studente.
+
 Le informazioni inserite riguardano le lingue conosciute, i titoli di laurea corrente e futuro, le passioni per determinati settori, gli obiettivi dello studente e il possedimento di determinate disabilità con relativi livelli associati.
+
+\paragraph{Inserimento corsi}
+Un docente registrato può personalizzare il suo profilo modificando le informazioni associate ai corsi di cui è titolare. I corsi inseriti saranno visualizzablii dagli studenti in una finestra dedicata.
+
+Le informazioni associate al corso riguardano la lingua, il semestre di appartenenza, i CFU, l'anno, la tipologia (triennale, magistrale, dottorato), l'area scientifica di appartenenza e l'obbligatorietà del corso.
+
+\paragraph{Inserimento risorse}
+I docenti possono aggiungere risorse didattiche ai corsi a cui sono associati, descrivendoli con informazioni relative alla loro accessibilità.
+
+ Le informazioni sono relative al tipo di adattamento, al grado di trasformazione applicabile su determinati elementi del contenuto (dimensione del testo), alla modalità di accesso e al tipo di risorsa. Verranno inoltre generati automaticamente indicatori numerici relativi al grado di leggibilità del testo contenuto in una risorsa, del rapporto di contrasto tra il colore del testo contenuto nelle immagini di un documento e relativo colore di sfondo, e della dimensione dei caratteri minima presente nel documento.
+
+Le risorse potranno essere consultabili dagli studenti nella schermata dedicata ai corsi.
 
 \subsubsection{Generazione di dipartimenti e facoltà}
 A seguito della registrazione, lo studente può richiedere la generazione dei dipartimenti e delle facoltà suggerite, specificando il tipo di laurea (triennale, magistrale, dottorato) a cui fare riferimento. La generazione terrà conto delle informazioni dichiarate dallo studente durante la registrazione.
@@ -51,7 +66,7 @@ A seguito della registrazione, lo studente può richiedere la generazione dei di
 \end{figure}
 
 \subsubsection{Generazione di corsi}
-Una volta generate le facoltà, lo studente può richiedere la generare dei corsi suggeriti selezionando la facoltà e l'anno preferiti. 
+Una volta generate le facoltà, lo studente può richiedere la generazione dei corsi suggeriti selezionando la facoltà e l'anno preferiti. 
 Una volta ricevuto tale scelta, il sistema inizializzerà il knowledge graph e lo interrogherà parametrizzando la query con le informazioni dello studente.
 
 \begin{figure}[H]
