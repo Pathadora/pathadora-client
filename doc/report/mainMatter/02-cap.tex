@@ -93,3 +93,39 @@ La raccomandazione terrà conto delle disabilità dello studente per determinare
 \caption{Risultato risorse suggerite}
 \label{fig:resources-generation}
 \end{figure}
+
+\subsection{Ontologia}
+L’ontologia pathadora-ontology racchiude tutti i concetti del sistema, importando altre ontologie pubbliche come LOM e AccessibleOCW, in modo da offrire un modello completo per la rappresentazione della conoscenza.
+
+\subsubsection{Learner}
+L'entità \texttt{Learner} modellata in Pathadora è lo stesso concetto rappresentato nell'ontologia \texttt{AccessibleOCW}. A tale entità vengono aggiunte altre proprietà per definire semanticamente le sue caratteristiche.
+
+Tramite la proprietà \texttt{hasDegree}, l'ontologia permette di modellare i diplomi conferiti dallo studente. La proprietà \texttt{futureDegree} mette in relazione lo studente con il tipo di diploma che vorrebbe conferire nel futuro. Tramite \texttt{hasGoals}, l'ontologia modella gli obbiettivi dello studente e fornisce anche delle sottoproprietà basandosi sul tipo dell'obbiettivo (ad esempio \texttt{isPathDriven}, \texttt{isScoreDriven}, \texttt{isTimeDriven}, etc). Lo stile d'apprendimento di uno studente viene specificato tramite la proprietà \texttt{learningStyle}. Come nel caso degli obbiettivi, anche le passioni vengono modellate tramite la proprietà \texttt{passionateOf} e le sottoproprietà in base alla tipo della passione. Le informazioni che riguardano le lingue che uno studente potrebbe parare vengono inserite tramite la proprietà \texttt{speaks}.
+La proprietà \texttt{hasDisability} rappresenta le informazioni che riguardano le disabilità dello studente e come range di valori aspetta un istanza della classe \texttt{Disabilities}.
+
+\subsubsection{University}
+L'organizzazione di tale istituzione viene rappresentata tramite una gerarchia di classi. I dipartimenti associati ad una scuola vengono messi in relazione tramite la proprietà \texttt{departmentOf}, mentre le facoltà di un dipartimento vengono specificate tramite \texttt{facultyOfDepartment}. Seguendo la stessa logica, i corsi vengono associati ad una facoltà tramite la proprietà \texttt{courseOfFaculty}. La proprietà \texttt{courseLanguage} permette di specificare in quale lingue verranno tenute le lezione di un corso. Un determinato corso viene dichiarato come obbligatorio oppure opzionale tramite la proprietà \texttt{isCourseObligatory} avendo come range un tipo di dato \texttt{boolean}. Le proprietà \texttt{courseSSD} e \texttt{courseType} mettono in relazione rispettivamente un corso con il suo tipo e il suo settore scientifico. Il range di queste due proprietà deve essere un istanza delle classi \texttt{CourseSSD} e \texttt{CourseType}. 
+
+Per le istanze che rappresentano i corsi, sono state definite un insieme di proprietà dei dati tra le quali:
+\begin{itemize}
+    \item \texttt{coursePeriod}: specifica il periodo del corso;
+    \item \texttt{courseCFU}: specifica i CFU del corso;
+    \item \texttt{courseYear}: specifica l'anno del corso;
+\end{itemize}
+
+\subsubsection{LearningObject}
+Nella spiegazione delle ontologie \texttt{LOM} e \texttt{AccessibleOCW}, abbiamo visto la modellazione delle risorsa da due punti di vista diversi basandosi sui metadati e sull'accessibilità. Pathadora tende di sincronizzare questi due punti di vista, aggiungendo nuovi concetti nella rappresentazione delle informazioni che riguardano le risorse.
+
+Alla modellazioni \texttt{AccessibleOCW} vengono inserite delle proprietà che descrivono il livello dell'accessibilità, mappando la modalità d'accesso ad un risorsa con in tipo di dato numerico. Le tre proprietà da prendere in considerazione sono:
+\begin{itemize}
+    \item \texttt{resourceContrastRatio}: coefficiente che rappresenta il contrasto visivo della risorsa in un range da $\{1,...,100\}$;
+    \item \texttt{resourceReadingEase}: coefficiente che specifica la leggibilità di una risorsa in base al numero di parole in una frase, la lunghezza del testo, in numero di sillabi, etc. Il range del coefficiente va da $\{1,...,100\}$;
+    \item \texttt{resourceFontSize}: specifica la dimensione del font del testo e lo mappa in un coefficiente d'accessibilità;
+\end{itemize}
+
+L'ontologia tramite la proprietà \texttt{resourceType} associa ad una risorsa un il tipo che potrebbe essere testuale, video, audio, immagine, etc. Tutti gli elementi sviluppati nelle ontologie \texttt{LOM} e \texttt{AccessibleOCW} vengono utilizzati per specificare le caratteristiche delle risorse.
+
+\subsubsection{Disabilities}
+Pathadora si basa principalmente sull'ontologia \texttt{AccessibleOCW} per modellare le disabilità di uno studente, però aggiunge delle proprietà non gestite da tale ontologia. Pathadora definisce un insieme  di proprietà dei dati per rappresentare il livello d'accessibilità di uno studente, ad esempio \texttt{autismSpectrumLevel}, \texttt{blindnessLevel}, \texttt{hearingLossLevel}, etc). Durante la registrazione l'utente dovrebbe specificare questi livelli, anche stimarli in modo non preciso, per permettere al sistema di interpretali e mapparli con i coefficienti d'accessibilità delle risorse.
+
+La proprietà \texttt{hasDisabilites} mette in relazione uno studente con un tipo di disabilità. Pathadora raggruppa le disabilità in diverse categorie che saranno istanze delle classi \texttt{Intellectual}, \texttt{Physical} e \texttt{Sensory}.

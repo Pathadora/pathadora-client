@@ -34,7 +34,6 @@ Il metodo \texttt{login()} rimuove dal local storage le informazioni relative al
 Il metodo \texttt{register()} invia al server una richiesta POST per la registrazione dell'utente, per poi proseguire con la chiamata di \texttt{login()}.
 
 \subsection{Classi di utility}
-
 L'\textbf{Auth Guard} è un Route Guard usato per limitare l'accesso a determinati route a utenti autorizzati, passato come parametro \texttt{canActivate} ai percorsi di route interessati. Il metodo \texttt{canActivate()}, invocato ogni volta che qualcuno tenterà di accedere al route associato, restituisce un valore booleano che indica se consentire o meno la navigazione. Se l’utente non è autenticato, verrà reindirizzato alla route di login.
 
 \vspace{5mm}
@@ -80,7 +79,7 @@ Le route sono suddivise nei seguenti moduli, ciascuno dei quali fa riferimento a
 Per le route che richiedono la verifica dell'identità dell'utente loggato è utilizzata una funzione middleware che accede al token associato all'header della richiesta, decodificandolo con JWT per ottenere come output le informazioni dell'utente che potranno poi essere utilizzate dall'handler associato alla route.
 
 \section{Estrazione e generazione dei metadati}
-Al caricamento di una risorsa associata a un corso, vengono calcolati una serie di metadati relativi alle proprietà della risorsa e del suo contenuto di cui il modello di profilazione farà uso nel calcolo del suggerimento delle risorse consigliate.
+Al caricamento di una risorsa associata a un corso, viene invocato un processo Python che calcola una serie di metadati relativi alle proprietà della risorsa e del suo contenuto di cui il modello di profilazione farà uso nel calcolo del suggerimento delle risorse consigliate.
 
 \subsection{Estrazione dei metadati intrinseci del file}
 Al caricamento di una risorsa associata a un corso, i metadati a essa associati vengono estratti mediante la libreria \texttt{metadata-extract}, che a sua volta fa uso di diversi estrattori per più estensioni.
@@ -95,7 +94,7 @@ La difficoltà di lettura dipende da S e da P, rispettivamente il numero medio d
 La scelta dei coefficienti è una conseguenza di un processo di affinamento del grado di istruzione di una persona in grado di leggere e comprendere la lingua inglese, ottimizzati in modo che venga restituito un valore compreso tra 0 e 100. Viene data più importanza al valore di S piuttosto che a P.\cite{readibility}
 
 \subsection{Accessibilità delle immagini in un documento}
-È stato prodotto uno script attraverso cui viene restituito un indicatore di accessibilità del testo contenuto nelle immagini presenti in un documento PDF.
+È stato prodotto uno script Python attraverso cui viene restituito un indicatore di accessibilità del testo contenuto nelle immagini presenti in un documento PDF.
 
 Per ciascuna immagine presente nel documento, estrapolate mediante la libreria Python-tesseract, vengono catturate le aree che contengono testo ed estratto il colore dei caratteri in formato RGB (prelevando il colore più rilevante nella textbox analizzata). Viene poi calcolato il rapporto di contrasto tra questo colore e il colore di sfondo dell'immagine, seguendo i criteri di WCAG 2 dove il range di differenza di luminosità tra i due colori varia da 1 (ad esempio bianco su bianco) a 21 (ad esempio nero su bianco). 
 
@@ -104,6 +103,6 @@ Viene poi calcolata la media dei rapporti relativi alle immagini di ciascun file
 Il livello minimo per cui il contenuto può essere considerato accessibile è 4.5.
 
 \subsection{Dimensione minima del carattere in un documento}
-È stato prodotto uno script attraverso cui viene restituito il valore della dimensione minima dei caratteri individuata in un documento PDF. Più è basso il valore meno il contenuto è accessibile agli utenti con problemi visivi.
+È stato prodotto uno script Python attraverso cui viene restituito il valore della dimensione minima dei caratteri individuata in un documento PDF. Più è basso il valore meno il contenuto è accessibile agli utenti con problemi visivi.
 
 La scansione delle pagine e del relativo contenuto testuale è eseguita mediante la libreria PDFMiner.

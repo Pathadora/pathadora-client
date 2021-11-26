@@ -129,6 +129,8 @@ Include i seguenti passaggi:
 La differenza principale tra RAKE e TextRank è che RAKE considera le ricorrenze all'interno delle parole chiave candidate invece di una finestra fissa. Utilizza una procedura di punteggio più semplice e statistica: non include l'ottimizzazione. L'algoritmo viene eseguito su ciascun documento separatamente, quindi non necessita di un corpus di documenti.
 
 \subsection{Metodi basati sul deep learning}
+Il deep learning è un’area del machine learning che si basa sull’apprendimento dei dati "in profondità" su più livelli. È caratterizzato dalla creazione di un modello di apprendimento automatico a più strati, nel quale i livelli più profondi prendono in input le uscite dei livelli precedenti, trasformandoli e astraendoli sempre di più.
+
 La comparsa del deep learning ha consentito metodi basati sull'embedding, un insieme di tecniche di modellazione in cui le parole vengono mappate in vettori di numeri reali. 
 
 Questi metodi trovano principalmente un elenco di parole chiave candidate (ad esempio, Bennani et al. considerano solo parole chiave costituite da nomi e aggettivi). Incorporano il documento e le parole chiave candidate nello stesso spazio di inclusione e misurano la similarità (ad es. similarità del coseno) tra i valori del documento e delle parole chiave. Selezionano le parole chiave più simili al testo del documento in base alla misura di similarità.
@@ -303,9 +305,34 @@ Al fine di soddisfare le diverse esigenze di questo pubblico, vengono forniti di
 \item \textbf{Tecniche sufficienti e consultive}: per ciascuna delle linee guida e dei criteri di successo nel documento WCAG 2.0 stesso, il gruppo di lavoro ha anche documentato un'ampia varietà di tecniche. Le tecniche sono informative e si dividono in due categorie: quelle sufficienti per soddisfare i \textit{criteri di successo} e quelle \textit{consultive}. Le tecniche consultive vanno oltre quanto richiesto dai singoli criteri di successo e consentono agli autori di affrontare meglio le linee guida. Alcune tecniche consultive affrontano gli ostacoli all'accessibilità che non sono coperti dai criteri di successo verificabili. Laddove sono noti errori comuni, anche questi vengono documentati.
 \end{itemize}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.1]{res/wcag.png}
+\caption{Linee guida WCAG e relativi livelli di accessibilità}
+\label{fig:wcag}
+\end{figure}
+
+\subsection{Accessibilità di una risorsa}
+Una risorsa accessibile è creata e studiata per essere facilmente fruibile da un utente, indipendentemente dalla sua disabilità o dal formato della risorsa. Rendere accessibile una risorsa è più semplice nelle fasi iniziali della creazione. Quando parliamo di risorse online di diversi tipi (testuali, immagini, video, audio) ci sono alcune considerazioni che dobbiamo verificare in modo da offrire una risorsa accessibile per utenti diversi. Nel caso delle risorse testuali, il livello d'accessibilità di un documento dipende da:
+\begin{itemize}
+    \item \textit{struttura}: una struttura standardizzata di documenti migliora l'accessibilità, perché consente agli utenti di trovare i contenuti in una parte specifica della pagina, senza aver bisogno di leggere tutto il documento;
+    \item \textit{intestazioni}: devono essere descrittivi e in un ordine coerente;
+    \item \textit{floating elements}: vanno inseriti all'interno della sezione di appartenenza;
+    \item \textit{risoluzione}: i documenti dovrebbero essere accessibili ai lettori che utilizzano dispositivi con schermi piccoli o ai lettori che utilizzano monitor a bassa risoluzione;
+    \item \textit{testo}: le dimensioni dei caratteri ridotti o ingranditi, il tipo dei caratteri, l'indentazione e lo spazio sono parametri che dovrebbero essere utilizzati in modo da creare un stile da rispettare per il documento e ciò migliora l'accessibilità della risorsa;
+    \item \textit{colori}: definiscono un alto livello di accessibilità se definiti con accuratezza, ma non utilizzare testo o sfondo colorato perché lettori non vedenti che accedono tale risorsa tramite una stampa o un dispositivo senza schermo a colori non riceveranno tali informazioni;
+    \item \textit{blocchi di elementi}: gli elementi dell'elenco non si devono separare lasciando righe vuote o interruzioni di colonna tabulari tra di loro;
+\end{itemize}
+
+Le immagini che non sono puramente decorative dovrebbero includere un attributo \textit{alt} che sostituisce l'informazione dell'immagine per i lettori non vedenti. Per le immagini è una buona prassi includere una didascalia utilizzando la sintassi dell'immagine incorporata, descrivendo in modo conciso il significato dell'immagine e le informazioni essenziali che trasmette. Il posizionamento delle immagini può essere diverso in base al dispositivo o al formato del documento e per questo motivo si deve evitare il riferimento statico delle immagini basato sulla posizione e utilizzare invece le didascalie per identificarle.
+
+Nel caso di una risorsa multimediale, audio o video, è possibile aumentare l'accessibilità attraverso l'aggiunta dei sottotitoli in un formato di testo temporizzato, scaricabile a parte, contenente la trascrizione delle informazioni sonore.
+
 \subsection{LOM}
 Lo standard \textbf{IEEE LOM} o \textbf{LOM} (Learning Object Metadata) è uno standard aperto che
-specifica la sintassi e la semantica degli attributi richiesti per i metadati dei learning object. Lo standard LOM include regole per controllare l'identificazione degli elementi dei dati e dei loro attributi. Fornisce inoltre principi, regole e strutture per la specificazione di quelle stesse risorse. Il suo obiettivo è facilitare la ricerca, la valutazione, il recupero e l'uso dei learning object. Inoltre, IEEE LOM è considerato lo standard più accettato e implementato in più repository di learning objects. Esistono numerose versioni ed estensioni di LOM che sono state sviluppate da IEEE LOM. È organizzato in 9 categorie, ognuna delle quali contiene sottocategorie che possono condividere caratteristiche di base:
+specifica la sintassi e la semantica degli attributi richiesti per i metadati dei learning object. Lo standard LOM include regole per controllare l'identificazione degli elementi dei dati e dei loro attributi. Fornisce inoltre principi, regole e strutture per la specificazione di quelle stesse risorse. Il suo obiettivo è facilitare la ricerca, la valutazione, il recupero e l'uso dei learning object.
+
+Inoltre, IEEE LOM è considerato lo standard più accettato e implementato in più repository di learning objects. Esistono numerose versioni ed estensioni di LOM che sono state sviluppate da IEEE LOM. È organizzato in 9 categorie, ognuna delle quali contiene sottocategorie che possono condividere caratteristiche di base:
 
 \begin{itemize}
 \item Generale (general) - 11 campi: racchiude le informazioni generali sui learning object;
@@ -319,8 +346,45 @@ specifica la sintassi e la semantica degli attributi richiesti per i metadati de
 \item \textit{Classificazioni (classification)} - 8 campi: fornisce informazioni sul soggetto o la materia curricolare affrontata nel learning object.
 \end{itemize}
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{res/LOM.png}
+\caption{Gerarchia degli elementi del modello LOM}
+\label{fig:lom}
+\end{figure}
+
 \subsection{LRMI}
-Questa iniziativa è iniziata nel 2011, il suo scopo era quello di sviluppare una specifica come estensione educativa per Schema.org. Le proprietà LRMI hanno lo scopo di descrivere le risorse educative aggiungendo proprietà specifiche in modo che possano essere facilmente individuate attraverso motori di ricerca e servizi. Le specifiche si basano sul vocabolario fornito da Schema.org e da altri standard. Pertanto, ci sono termini LRMI non inclusi in Schema.org. Con il supporto di Association of Educational Publishers (AEP), Association of American Publishers, Creative Commons (CC), division 501, Bill \& Melinda Gates e William and Flora Hewlett Foundation, LRMI ha sviluppato un framework di metadati per taggare le risorse di apprendimento web. Lo schema LRMI 1.1 è stato adottato da Schema.org nel 2013, che consente alle risorse, attraverso i loro metadati LRMI, di essere riconosciute dai principali motori di ricerca.
+Questa iniziativa è iniziata nel 2011, il suo scopo era quello di sviluppare una specifica come estensione educativa per Schema.org. Le proprietà LRMI hanno lo scopo di descrivere le risorse educative aggiungendo proprietà specifiche in modo che possano essere facilmente individuate attraverso motori di ricerca e servizi. Le specifiche si basano sul vocabolario fornito da Schema.org e da altri standard. Pertanto, ci sono termini LRMI non inclusi in Schema.org. 
+
+Con il supporto di Association of Educational Publishers (AEP), Association of American Publishers, Creative Commons (CC), division 501, Bill \& Melinda Gates e William and Flora Hewlett Foundation, LRMI ha sviluppato un framework di metadati per taggare le risorse di apprendimento web. Lo schema LRMI 1.1 è stato adottato da Schema.org nel 2013, che consente alle risorse, attraverso i loro metadati LRMI, di essere riconosciute dai principali motori di ricerca.
+
+Utilizza prevalentemente proprietà di risorse di tipo \texttt{Schema.org/CreativeWork} che sono state proposte a Schema.org da LRMI per descrivere le caratteristiche educative delle risorse di apprendimento. Per alcune di queste proprietà utilizza i tipi creati da LRMI \texttt{Schema.org/AligmentObject} e \texttt{Schema.org/EducationalAudience}.
+
+Proprietà aggiunte da LRMI a \texttt{Schema.org/CreativeWork}, che rappresenta un generico lavoro creativo (libro, film, foto, programma software, ecc.):
+\begin{itemize}
+\item \texttt{educationalAligment}: quadro educativo stabilito
+\item \texttt{educationalUse}: scopo del lavoro nel contesto dell'istruzione
+\item \texttt{timeRequired}: tempo approssimativo necessario per lavorare sulla risorsa
+\item \texttt{typicalAgeRange}: fascia di età dell'utente finale
+\item \texttt{interactivityType}: attivo, espositivo o misto
+\item \texttt{learningResourceType}: tipo di risorsa predominante (presentazione, brochure, ecc.)
+\item \texttt{useRightsUrl}: URL in cui vengono stabilite le autorizzazioni per l'utilizzo delle risorse
+\item \texttt{isBasedOnUrl}: risorsa utilizzata per la creazione
+\end{itemize}
+
+Proprietà aggiunte da LRMI a \texttt{Schema.org/Intangibles/AligmentObject}, un elemento immateriale che descrive un allineamento tra una risorsa di apprendimento e un nodo in un framework educativo:
+\begin{itemize}
+\item \texttt{aligmentType}: allineamento tra la risorsa di apprendimento e il nodo del framework. I valori consigliati includono: 'evaluate', 'teach', 'require', 'textComplexity', 'readingLevel', 'educationalSubject', and 'educationLevel'
+\item \texttt{educationalFramework}: framework per la descrizione delle risorse
+\item \texttt{targetDescription}: descrizione del nodo di un framework educativo
+\item \texttt{targetName}: nome del nodo di un framework educativo
+\item \texttt{targetUrl}: URL di un nodo di un framework educativo
+\end{itemize}
+
+Proprietà aggiunte da LRMI a \texttt{Schema.org/Audence/EducationalAudience}:
+\begin{itemize}
+\item \texttt{EducationalRole}: pubblico di destinazione
+\end{itemize}
 
 \subsection{IMS AfA}
 L'obiettivo principale di IMS Access for All (\textbf{AfA}) v3.0 era quello di semplificare lo standard ISO/IEC 24751 a causa delle difficoltà sorte nella pratica. Entrambi, lo standard ISO/IEC 24751 e AfA v3.0, coprono l'intero processo dalla lettura delle esigenze dell'utente al meccanismo di ricerca necessario per trovare i learning object che soddisfano tali esigenze o preferenze. Ha due modelli di dati:
@@ -372,3 +436,18 @@ I metadati di accessibilità definiti da Schema.org si basano su quelli specific
 \caption{Metadati di accessibilità di CreativeWork da Schema.org}
 \label{fig:schemaorg}
 \end{figure}
+
+\subsection{AccessibleOCW}
+AccessibleOCW è un ontologia sviluppata da OCW (\textit{OpenCourseWare}) per rappresentare l'accessibilità e gli adattamenti delle risorse digitali nell'ambito dell'e-learning.
+
+L'ontologia ha specificato un insieme di classi per la modellazione dell'accessibilità e l'adattamento del formato delle risorse, tra le quali:
+\begin{itemize}
+    \item \texttt{AdaptationDetailRequired}: il tipo di adattamento obbligatorio dei dettagli di una risorsa;
+    \item \texttt{AdaptationDetailValue}: diversi tipi di adattamento dei dettagli di una risorsa;
+    \item \texttt{AdaptationMediaRequired}: il tipi adattamento obbligatorio del formato audio-visivo della risorsa;
+    \item \texttt{AdaptationMediaTypeValue}: diversi tipi di adattamento del formato audio-visivo della risorsa;
+    \item \texttt{AdaptationTypeValue}: diversi tipi di adattamento di una risorsa (ad esempio testo alternativo per le immagini, descrizione testuale per le risorse audio, didascalie per le risorse video, etc);
+    \item \texttt{ControlFlexibilityValue}: rappresenta la flessibilità con il controllo dei dispositivi elettronici (ad esempio tastiera, mouse, etc);
+    \item \texttt{DisplayTransformabilityValue}: rappresenta le trasformazioni che si possono effettuare ad una risorsa in modo da aumentare il suo livello d' accessibilità (ad esempio colore del background, font size, font weight, etc);
+    \item \texttt{EducationalComplexityValue}: modella il livello di complessità di una risorsa;
+\end{itemize}

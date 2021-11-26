@@ -26,6 +26,9 @@ Angular inoltre fa uso del pattern dependency injection, che consente di dichiar
 \label{fig:angular}
 \end{figure}
 
+Per comunicare con i servizi di backend tramite HTTP, il servizio \texttt{HttpClient} usa observable e offre il metodo \
+\texttt{HttpClient.get()} per recuperare i dati da un server. Il metodo asincrono invia una richiesta HTTP e restituisce come risposta un observable che emette i dati richiesti.
+
 \subsubsection{Vantaggi e svantaggi}
 
 Essendo basato su TypeScript, un linguaggio di programmazione che differisce da JavaScript e che offre numerose funzionalità aggiuntive come ad esempio la presenza di tipi statici, possono essere implementati numerosi tool per supportare meglio i programmatori e ridurre i bug nelle applicazioni.
