@@ -69,7 +69,7 @@ L'\textbf{estrazione di contenuti} è una forma di estrazione di metadati che sf
 
 I metodi di estrazione di parole chiave possono essere suddivisi in tre categorie: metodi statistici, metodi basati sui grafi e metodi basati sul deep learning\cite{extraction}.
 
-\subsection{Metodi statistici}
+\subsubsection{Metodi statistici}
 I \textbf{metodi statistici} sono i più semplici. Calcolano le statistiche per le parole chiave e utilizzano tali statistiche per valutarle. Tra questi metodi rientrano il calcolo la frequenza delle parole, la collocazione linguistica, la co-occorrenza e tecniche più sofisticate come TF-IDF e YAKE!.
 
 \textbf{TF-IDF} (Term Frequency–Inverse Document Frequency) stima l'importanza della parola nel documento rispetto all'intero corpus (insieme di più documenti). Calcola la frequenza di ogni termine nel documento e la pondera con l'inverso della frequenza del termine nell'intero corpus. Le parole chiave verranno selezionate tra i termini con i punteggi più alti. Questo algoritmo favorisce i termini frequenti nel documento di testo e non frequenti negli altri documenti. Il vantaggio di TF-IDF è che è veloce e lo svantaggio è che necessita di un corpus di almeno qualche dozzina di documenti. TF-IDF è indipendente dalla lingua.
@@ -90,7 +90,7 @@ I \textbf{metodi statistici} sono i più semplici. Calcolano le statistiche per 
 \item \textbf{Deduplicazione e ranking dei dati}: vengono rimosse le parole chiavi simili tra loro.
 \end{enumerate}
 
-\subsection{Metodi basati sui grafi}
+\subsubsection{Metodi basati sui grafi}
 I metodi basati su grafi generano un grafo dei termini correlati presenti nei documenti. Un grafo, ad esempio, può collegare i termini che si verificano contemporaneamente nel testo. I metodi basati su grafi utilizzano metodi di classificazione che considerano la struttura del grafo per valutare l'importanza del vertice. Uno dei metodi di questa categoria più conosciuti è TextRank.
 
 \textbf{TextRank} è un metodo di classificazione basato su grafi utilizzato per estrarre frasi pertinenti o trovare parole chiave. L'estrazione delle parole chiave avviene in cinque passaggi:
@@ -128,7 +128,7 @@ Include i seguenti passaggi:
 
 La differenza principale tra RAKE e TextRank è che RAKE considera le ricorrenze all'interno delle parole chiave candidate invece di una finestra fissa. Utilizza una procedura di punteggio più semplice e statistica: non include l'ottimizzazione. L'algoritmo viene eseguito su ciascun documento separatamente, quindi non necessita di un corpus di documenti.
 
-\subsection{Metodi basati sul deep learning}
+\subsubsection{Metodi basati sul deep learning}
 Il deep learning è un’area del machine learning che si basa sull’apprendimento dei dati "in profondità" su più livelli. È caratterizzato dalla creazione di un modello di apprendimento automatico a più strati, nel quale i livelli più profondi prendono in input le uscite dei livelli precedenti, trasformandoli e astraendoli sempre di più.
 
 La comparsa del deep learning ha consentito metodi basati sull'embedding, un insieme di tecniche di modellazione in cui le parole vengono mappate in vettori di numeri reali. 
@@ -148,6 +148,10 @@ Il processo di indicizzazione si compone di tre fasi:
 \subsection{Text e data mining}
 A causa della complessità delle tecniche utilizzate per l'estrazione di metadati, la maggior parte degli usi di queste tecniche sono stati sviluppati per risolvere i problemi della generazione automatica di metadati nel contesto di specifici progetti di ricerca.
 I principali motivi sono il fatto che l'efficacia di queste tecniche dipende dalla qualità e dalla quantità dei dati di training, e che i vocabolari controllati come LCSH sono troppo complicati e diversificati per essere applicati con mezzi automatici.
+
+Il \textbf{text mining} è un campo interdisciplinare che attinge al recupero delle informazioni, al \textbf{data mining}, all'apprendimento automatico, alle statistiche e alla linguistica computazionale. Una parte sostanziale delle informazioni viene memorizzata come testo come articoli di notizie, documenti tecnici, libri, biblioteche digitali, messaggi di posta elettronica, blog e pagine web. Quindi, la ricerca nel text mining è stata molto attiva. Un obiettivo importante è ricavare informazioni di alta qualità dal testo, ovvero rilevanti e di interesse. Ciò avviene in genere attraverso la scoperta di modelli e tendenze mediante l'apprendimento di modelli statistici, la modellazione di argomenti e la modellazione statistica del linguaggio. Solitamente, il text mining richiede la strutturazione del testo di input (ad esempio, l'analisi, l'aggiunta di alcune caratteristiche linguistiche derivate e la rimozione di altre e il successivo inserimento in un database). Questo è seguito dalla derivazione dei modelli all'interno dei dati strutturati e dalla valutazione e interpretazione dell'output.
+
+Le tipiche attività di text mining includono la categorizzazione del testo, il clustering del testo, l'estrazione di concetti/entità, la produzione di tassonomie granulari, l'analisi del sentiment, il riepilogo dei documenti e la modellazione delle relazioni tra entità (ovvero, relazioni di apprendimento tra entità nominate). Altri esempi includono il data mining multilingue, l'analisi del testo multidimensionale, il text mining contestuale e l'analisi della fiducia e dell'evoluzione nei dati di testo, nonché le applicazioni di text mining in materia di sicurezza, analisi della letteratura biomedica, analisi dei media online e gestione analitica delle relazioni con i clienti. Vari tipi di software e strumenti di analisi e estrazione di testo sono disponibili nelle istituzioni accademiche, nei forum open source e nell'industria. L'estrazione di testo utilizza spesso anche WordNet, Sematic Web, Wikipedia e altre fonti di informazioni per migliorare la comprensione e l'estrazione dei dati di testo.\cite{textmining}
 
 \subsection{Autogenerazione di dati estrinseci}
 La generazione automatica di dati estrinseci è il processo di estrazione dei metadati su una risorsa informativa che non è contenuta all'interno della risorsa stessa. La generazione automatica di dati estrinseci può includere l'estrazione di metadati tecnici come il formato e le dimensioni del file, ma può essere anche l'estrazione di funzionalità più complesse come il livello di classe scolastica a cui è destinata una risorsa educativa o il tipo di lettori per cui è destinato un documento.
@@ -327,6 +331,11 @@ Una risorsa accessibile è creata e studiata per essere facilmente fruibile da u
 Le immagini che non sono puramente decorative dovrebbero includere un attributo \textit{alt} che sostituisce l'informazione dell'immagine per i lettori non vedenti. Per le immagini è una buona prassi includere una didascalia utilizzando la sintassi dell'immagine incorporata, descrivendo in modo conciso il significato dell'immagine e le informazioni essenziali che trasmette. Il posizionamento delle immagini può essere diverso in base al dispositivo o al formato del documento e per questo motivo si deve evitare il riferimento statico delle immagini basato sulla posizione e utilizzare invece le didascalie per identificarle.
 
 Nel caso di una risorsa multimediale, audio o video, è possibile aumentare l'accessibilità attraverso l'aggiunta dei sottotitoli in un formato di testo temporizzato, scaricabile a parte, contenente la trascrizione delle informazioni sonore.
+
+\subsubsection{Leggibilità dei caratteri}
+Durante la lettura del testo, la maggior parte delle persone non legge o analizza le singole parole, ma scansiona rapidamente il testo e analizza schemi e gruppi di caratteri (in genere 6-9 caratteri alla volta) a cui il cervello umano assegna un significato. Questo processo inconscio ci consente di leggere e comprendere il contenuto del testo molto rapidamente con alti gradi di comprensione, anche se non stiamo nemmeno vedendo o pensando a caratteri e parole.
+
+È solo quando i caratteri o le parole non sono familiari o introducono una barriera a questo processo è necessario fermarsi per esaminare o elaborare più da vicino i caratteri o le parole. Per una leggibilità e una comprensibilità ottimali, è fondamentale evitare tali interruzioni.
 
 \subsection{LOM}
 Lo standard \textbf{IEEE LOM} o \textbf{LOM} (Learning Object Metadata) è uno standard aperto che
