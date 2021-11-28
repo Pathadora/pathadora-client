@@ -2,21 +2,21 @@
 \chapter{Implementazione}                %crea il capitolo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%imposta l'intestazione di pagina
 \section{Frontend}
-Il frontend è stato sviluppato utilizzando Angular 8, utilizzando Angular CLI per installare librerie ed eseguire l'applicazione.
+Il frontend è stato sviluppato utilizzando Angular 12, utilizzando Angular CLI per installare librerie ed eseguire l'applicazione. La progettazione dei componenti è stata preceduta dalla realizzazione dei mockup.
 
 L'applicazione è suddivisa in sottocartelle per ciascun componente:
 \begin{itemize}
-	\item \texttt{home}: componente il cui contenuto è accessibile solo a seguito dell'autenticazione. Nel caso l'utente autenticato sia uno studente, verrà renderizzato il componente \texttt{dashboard-user}.
-	\item \texttt{login}: permette l'accesso dell'utente registrato nel sistema, sarà accessibile a chi non ha eseguito l'accesso.
-	\item \texttt{register}: permette la registrazione di un utente. È utilizzato per due route diverse, relative alla registrazione dello studente e alla registrazione del docente, per cui verranno richiesti campi diversi.
+	\item \texttt{home}: componente il cui contenuto è accessibile solo a seguito dell'autenticazione. Nel caso l'utente autenticato sia uno studente, verrà renderizzato il componente \texttt{dashboard-user};
+	\item \texttt{login}: permette l'accesso dell'utente registrato nel sistema, sarà accessibile a chi non ha eseguito l'accesso;
+	\item \texttt{register}: permette la registrazione di un utente. È utilizzato per due route diverse, relative alla registrazione dello studente e alla registrazione del docente, per cui verranno richiesti campi diversi;
 	\item \texttt{dashboard-user}: componente attraverso il quale vengono sottomesse al sistema di raccomandazione le diverse richieste per ottenere il learning path utilizzando come dati di input le informazioni associate all'utente autenticato. L'invio delle richieste avviene attraverso tre form corrispondenti all'invio di informazioni per ciascun step della produzione del learning path:
 \begin{itemize}
-\item \textit{richiesta dei dipartimenti e delle facoltà consigliate}: vengono utilizzate come input le informazioni dello studente associate al momento della registrazione
-\item \textit{richiesta dei corsi consigliati}: una volta ottenuti i dipartimenti e le facoltà consigliate, l'utente può inviare la richiesta per visualizzare i corsi consigliati dal sistema di raccomandazione selezionando il dipartimento, la facoltà e l'anno di interesse
-\item \textit{richiesta delle risorse consigliate}: una volta selezionato il corso di interesse tra quelli consigliati, verranno visualizzate le risorse suggerite sulla base dei dati dello studente
+\item \textit{richiesta dei dipartimenti e delle facoltà consigliate}: vengono utilizzate come input le informazioni dello studente associate al momento della registrazione;
+\item \textit{richiesta dei corsi consigliati}: una volta ottenuti i dipartimenti e le facoltà consigliate, l'utente può inviare la richiesta per visualizzare i corsi consigliati dal sistema di raccomandazione selezionando il dipartimento, la facoltà e l'anno di interesse;
+\item \textit{richiesta delle risorse consigliate}: una volta selezionato il corso di interesse tra quelli consigliati, verranno visualizzate le risorse suggerite sulla base dei dati dello studente.
 \end{itemize}
-	\item \texttt{profile-teacher}: pannello che permette al docente di associare nuovi corsi al suo profilo tra quelli memorizzati nel sistema
-	\item \texttt{dashboard-courses}: vengono visualizzate le informazioni dei corsi. Gli amministratori possono modificarle.
+	\item \texttt{profile-teacher}: pannello che permette al docente di associare nuovi corsi al suo profilo tra quelli memorizzati nel sistema;
+	\item \texttt{dashboard-courses}: vengono visualizzate le informazioni dei corsi. Gli amministratori possono modificarle;
 	\item \texttt{dashboard-resources}: pannello visualizzabile in home dai docenti e dagli amministratori, permette il caricamento di nuove risorse didattiche ai corsi di cui sono titolari.
 \end{itemize}
 
@@ -64,17 +64,34 @@ Le route sono suddivise nei seguenti moduli, ciascuno dei quali fa riferimento a
 	\end{itemize}
 	\item \texttt{auth}
 	\begin{itemize}
-		\item \texttt{/} (get): restituisce le informazioni relative all'utente loggato
-		\item \texttt{/} (post): effettua il login dell'utente con email e password sottomesse generando un token
+		\item \texttt{/} (get): restituisce le informazioni relative all'utente loggato (generalità, lingua, titolo posseduto, tipo di laurea futura, passioni, obiettivo, disabilità, corsi di cui è titolare nel caso abbia il ruolo \texttt{teacher});
+		\item \texttt{/} (post): effettua il login dell'utente con email e password sottomesse generando un token.
 	\end{itemize}
 	\item \texttt{courses}
 	\begin{itemize}
-		\item \texttt{/} (get): restituisce i dati di tutti i corsi registrati nel database
-		\item \texttt{/:id} (get): restituisce le informazioni associate al corso con id specificato
-		\item \texttt{/} (post): se l'utente autenticato ha il ruolo \texttt{admin}, registra un nuovo corso. Viene inoltre eseguito l'inserimento di un individual Course nell'ontologia Pathadora.
-		\item \texttt{/:id} (post): se l'utente autenticato ha il ruolo \texttt{admin}, aggiorna il corso con id specificato
-		\item \texttt{/:id} (delete): se l'utente autenticato ha il ruolo \texttt{admin}, rimuove il corso con id specificato
+		\item \texttt{/} (get): restituisce i dati di tutti i corsi registrati nel database (nome, tipo di laurea, facoltà di appartenenza, lingua, semestre, numero di CFU, anno, tipo di corso, area scientifica, obbligatorietà, filepath delle risorse associate e relativi metadati);
+		\item \texttt{/:id} (get): restituisce le informazioni associate al corso con id specificato;
+		\item \texttt{/} (post): se l'utente autenticato ha il ruolo \texttt{admin}, registra un nuovo corso. Viene inoltre eseguito l'inserimento di un individual Course nell'ontologia Pathadora;
+		\item \texttt{/:id} (post): se l'utente autenticato ha il ruolo \texttt{admin}, aggiorna il corso con id specificato;
+		\item \texttt{/:id} (delete): se l'utente autenticato ha il ruolo \texttt{admin}, rimuove il corso con id specificato;
 		\item \texttt{/resource/:course\_id} (post): se l'utente autenticato ha il ruolo \texttt{teacher}, associa una risorsa al corso con id associato. Il file viene caricato utilizzando il middleware Multer di Express, memorizzato in una directory di file statici accessibili mediante richiesta HTTP. Viene inoltre eseguito l'inserimento di un individual LearningObject nell'ontologia Pathadora.
+	\end{itemize}
+	\item \texttt{faculties}
+	\begin{itemize}
+		\item \texttt{/} (get): restituisce i dati di tutte le facoltà registrate nel database (nome, dipartimento di appartenenza);
+		\item \texttt{/:id} (get): restituisce le informazioni associate alla facoltà con id specificato;
+		\item \texttt{/} (post): se l'utente autenticato ha il ruolo \texttt{admin}, registra una nuova facoltà;
+		\item \texttt{/:id} (post): se l'utente autenticato ha il ruolo \texttt{admin}, aggiorna la facoltà con id specificato;
+		\item \texttt{/:id} (delete): se l'utente autenticato ha il ruolo \texttt{admin}, rimuove la facoltà con id specificato;
+		\item \texttt{/department/:departmentid} (get): viene restituito l'elenco di facoltà appartenenti al dipartimento con l'id specificato.
+	\end{itemize}
+	\item \texttt{departments}
+	\begin{itemize}
+		\item \texttt{/} (get): restituisce i nomi di tutti i dipartimenti registrati nel database;
+		\item \texttt{/:id} (get): restituisce le informazioni associate ai dipartimenti con id specificato;
+		\item \texttt{/} (post): se l'utente autenticato ha il ruolo \texttt{admin}, registra un nuovo dipartimento;
+		\item \texttt{/:id} (post): se l'utente autenticato ha il ruolo \texttt{admin}, aggiorna il dipartimento con id specificato;
+		\item \texttt{/:id} (delete): se l'utente autenticato ha il ruolo \texttt{admin}, rimuove il dipartimento con id specificato.
 	\end{itemize}
 \end{itemize}
 
@@ -107,4 +124,4 @@ Il livello minimo per cui il contenuto può essere considerato accessibile è 4.
 \subsection{Dimensione minima del carattere in un documento}
 È stato prodotto uno script Python attraverso cui viene restituito il valore della dimensione minima dei caratteri individuata in un documento PDF. Più è basso il valore meno il contenuto è accessibile agli utenti con problemi visivi.
 
-La scansione delle pagine e del relativo contenuto testuale è eseguita mediante la libreria PDFMiner.
+Le informazioni relative al font dei caratteri vengono ricavate attraverso il parsing del contenuto del documento con le funzionalità ad alto livello fornite dalla libreria PDFMiner.

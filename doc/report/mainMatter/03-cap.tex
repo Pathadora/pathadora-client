@@ -5,11 +5,11 @@
 \subsection{Angular}
 \textbf{Angular} è un framework open source per lo sviluppo di applicazioni web scritto interamente in TypeScript.
 
-Un elemento fondamentale per la costruzione di applicazioni Angular è il componente, al quale viene affidato il controllo di una porzione dello schermo, acquisendo la responsabilità di visualizzare i dati ricevuti e gestirne l’interazione con l’utente secondo il concetto di view.
+Un elemento fondamentale per la costruzione di applicazioni Angular è il componente, al quale viene affidato il controllo di una porzione dello schermo, acquisendo la responsabilità di visualizzare i dati ricevuti e gestirne l'interazione con l'utente secondo il concetto di view.
 
-Una moderna applicazione Angular è sintetizzabile in un insieme di componenti ordinate in modo gerarchico con le quali vengono fornite le funzionalità con cui far interagire l’utente.
+Una moderna applicazione Angular è sintetizzabile in un insieme di componenti ordinate in modo gerarchico con le quali vengono fornite le funzionalità con cui far interagire l'utente.
 
-Tra i principali motivi che rendono vantaggioso questo modello di programmazione vi è il fatto di poter assemblare applicazioni diverse utilizzando un insieme comune di componenti, favorendo quindi il riutilizzo del codice; al contempo la struttura definita dell’applicazione ne favorisce la suddivisione in moduli e la leggibilità del codice scritto.
+Tra i principali motivi che rendono vantaggioso questo modello di programmazione vi è il fatto di poter assemblare applicazioni diverse utilizzando un insieme comune di componenti, favorendo quindi il riutilizzo del codice; al contempo la struttura definita dell'applicazione ne favorisce la suddivisione in moduli e la leggibilità del codice scritto.
 
 \vspace{5mm}
 
@@ -17,7 +17,7 @@ Ogni componente ha un modello HTML che dichiara come quel componente viene visua
 
 Angular estende l'HTML con una sintassi aggiuntiva che permette di inserire valori dinamici inizializzati nel componente. Angular aggiorna automaticamente il DOM renderizzato a ogni cambiamento dello stato del componente e seguendo le istruzioni fornite dalle cosiddette direttive. Questo modello di progettazione consente di scrivere codice più flessibile e testabile.
 
-Angular inoltre fa uso del pattern dependency injection, che consente di dichiarare le dipendenze delle classi TypeScript lasciando gestire l'istanziazione interamente al framework. Quando Angular crea un componente, chiede all’injector i servizi richiesti. Un injector mantiene un container delle istanze dei servizi che sono stati precedentemente creati. Se un’istanza di un servizio richiesto non è nel container, l’injector ne crea uno e lo aggiunge al container.
+Angular inoltre fa uso del pattern dependency injection, che consente di dichiarare le dipendenze delle classi TypeScript lasciando gestire l'istanziazione interamente al framework. Quando Angular crea un componente, chiede all'injector i servizi richiesti. Un injector mantiene un container delle istanze dei servizi che sono stati precedentemente creati. Se un'istanza di un servizio richiesto non è nel container, l'injector ne crea uno e lo aggiunge al container.
 
 \begin{figure}[H]
 \centering
@@ -33,16 +33,16 @@ Per comunicare con i servizi di backend tramite HTTP, il servizio \texttt{HttpCl
 Essendo basato su TypeScript, un linguaggio di programmazione che differisce da JavaScript e che offre numerose funzionalità aggiuntive come ad esempio la presenza di tipi statici, possono essere implementati numerosi tool per supportare meglio i programmatori e ridurre i bug nelle applicazioni.
 Altra differenza importante è la presenza di numerose funzionalità aggiuntive come RxJS o la presenza stessa di un modello dei dati consistente integrato grazie al linguaggio Typescript, elemento assente ad esempio nel framework rivale React.
 
-Al contempo l’onere di avere molte funzionalità integrate comporta un peso maggiore in termini di spazio di archiviazione in seguito alla prima installazione, mentre in altri concorrenti il peso effettivo del framework è decisamente inferiore, risultando
+Al contempo l'onere di avere molte funzionalità integrate comporta un peso maggiore in termini di spazio di archiviazione in seguito alla prima installazione, mentre in altri concorrenti il peso effettivo del framework è decisamente inferiore, risultando
 migliori per applicazioni meno complesse o che necessitano di meno funzionalità di quelle proposte da Angular.
 
 Infine va rilevata una ridotta flessibilità del framework di Google rispetto ai rivali, con tutti i vantaggi e gli svantaggi derivanti da questa scelta soprattutto a livello progettuale. Un programmatore che sceglie Angular desidera una progettazione meno
-impegnativa e approva tutte le scelte che il framework ha preso al posto suo; un programmatore di un altro framework desidera invece fare delle scelte personalizzate, dettate dalle proprie necessità progettuali, assumendosi poi però la responsabilità di mantenere aggiornate tutte le dipendenze inserite all’interno della propria applicazione.
+impegnativa e approva tutte le scelte che il framework ha preso al posto suo; un programmatore di un altro framework desidera invece fare delle scelte personalizzate, dettate dalle proprie necessità progettuali, assumendosi poi però la responsabilità di mantenere aggiornate tutte le dipendenze inserite all'interno della propria applicazione.
 
 \subsection{Bootstrap}
 \textbf{Bootstrap} è un framework CSS gratuito e open source per la creazione di siti e applicazioni per il web. Contiene modelli di design basati su CSS e estensioni opzionali di JavaScript per tipografia, moduli, pulsanti, navigazione e altri componenti dell'interfaccia.
 
-Tra le principali caratteristiche di questa libreria troviamo la piena compatibilità con tutte le ultime versioni di tutti i principali browser utilizzati, il supporto al responsive web design, l’adozione di una filosofia mobile-first per quanto riguarda il design oltre che un’ottima documentazione a corredo della libreria per rendere più facile la sua diffusione.
+Tra le principali caratteristiche di questa libreria troviamo la piena compatibilità con tutte le ultime versioni di tutti i principali browser utilizzati, il supporto al responsive web design, l'adozione di una filosofia mobile-first per quanto riguarda il design oltre che un'ottima documentazione a corredo della libreria per rendere più facile la sua diffusione.
 
 Gli sviluppatori possono sfruttare le classi CSS definite in Bootstrap per personalizzare ulteriormente l'aspetto dei loro contenuti.\cite{bootstrap}
 
@@ -81,14 +81,14 @@ La funzione \code{process.nextTick()} viene eseguita subito dopo il completament
 
 \subsection{Npm}
 Il package manager \textbf{npm} è una raccolta di pacchetti gratuiti o a pagamento utilizzabili sul proprio progetto di sito web.
-Utilizzabile al seguito dell’installazione di Node.js viene messo a disposizione come strumento da linea di comando con il quale scaricare moduli JavaScript poi disponibili all’interno del proprio progetto. Viene data la possibilità allo sviluppatore di caricare i propri moduli per metterli a disposizione della community.
+Utilizzabile al seguito dell'installazione di Node.js viene messo a disposizione come strumento da linea di comando con il quale scaricare moduli JavaScript poi disponibili all'interno del proprio progetto. Viene data la possibilità allo sviluppatore di caricare i propri moduli per metterli a disposizione della community.
 
 \subsection{Express.js}
 \textbf{Express.js} è un framework per applicazioni web Node.js flessibile e leggero che fornisce una serie di funzioni avanzate per applicazioni web e dispositivi mobili.
 
-Permette di gestire le richieste HTTP tramite middleware, funzioni con accesso all’oggetto richiesta \texttt{req}, all’oggetto risposta \texttt{res} e alla successiva funzione middleware nel ciclo richiesta-risposta dell’applicazione.
+Permette di gestire le richieste HTTP tramite middleware, funzioni con accesso all'oggetto richiesta \texttt{req}, all'oggetto risposta \texttt{res} e alla successiva funzione middleware nel ciclo richiesta-risposta dell'applicazione.
 
-Quando il server riceve una richiesta HTTP la racchiude all’interno di un oggetto ServerRequest. Questo oggetto, insieme all’oggetto ServerResponse, viene passato al primo middleware che ne può modificare il contenuto o aggiungere proprietà.
+Quando il server riceve una richiesta HTTP la racchiude all'interno di un oggetto ServerRequest. Questo oggetto, insieme all'oggetto ServerResponse, viene passato al primo middleware che ne può modificare il contenuto o aggiungere proprietà.
 
 \subsection{MongoDB}
 \textbf{MongoDB} è un DBMS non relazionale open source che utilizza un modello orientato ai documenti, il quale supporta diverse forme di dati. È una delle numerose tecnologie di database non relazionali nate a metà degli anni 2000 sotto il nome di NoSQL per l'utilizzo in applicazioni per big data e altre operazioni di elaborazione di dati che non beneficiano dell'utilizzo di modelli relazionali rigidi. L'architettura MongoDB è composta da collezioni e documenti, piuttosto che da tabelle e righe.
@@ -161,7 +161,9 @@ A differenza di un database a grafo pensato unicamente per l'archiviazione dei d
 
 Stardog permette l'interrogazione con query SPARQL mediante linea di comando SSH o richieste HTTP. È possibile utilizzare l'editor Stardog Studio per importare, visualizzare e interrogare ontologie OWL salvate in Stardog; non è supportata tuttavia la modellazione di ontologie, possibile nel tool Protegé. 
 
-È possibile effettuare path query, ovvero ottenere come output l'insieme di archi che legano due nodi del grafo\cite{stardog}.
+È possibile effettuare path query, ovvero ottenere come output l'insieme di archi che legano due nodi del grafo.
+
+Stardog garantisce la semantica transazionale supportando transazioni ACID\cite{stardog}.
 
 \subsection{Textract}
 \textbf{Textract} è una libreria Python atta all'estrazione del testo da un file. Supporta l'estrazione da file di diversi formati comuni appoggiandosi a parser dedicati.
@@ -181,7 +183,7 @@ Tesseract 4 aggiunge un nuovo motore OCR basato sulla rete neurale (LSTM) che si
 \textbf{Python-tesseract} è un wrapper per il motore Tesseract-OCR di Google. È utile come script di invocazione autonomo per tesseract, poiché può leggere tutti i tipi di immagine supportati dalle librerie di immagini Pillow e Leptonica, inclusi jpeg, png, gif, bmp, tiff e altri. Inoltre, se usato come script, Python-tesseract stamperà il testo riconosciuto invece di scriverlo su un file.
 
 \subsection{PDFMiner}
-\textbf{PDFMiner} è una libreria per l’analisi di documenti PDF scritta in Python. Oltre al testo, estrae anche le posizioni corrispondenti, i nomi dei caratteri, le dimensioni dei caratteri, la direzione di scrittura (orizzontale o verticale) per ciascun segmento di testo. Non riconosce il testo nelle immagini.
+\textbf{PDFMiner} è una libreria per l'analisi di documenti PDF scritta in Python. Oltre al testo, estrae anche le posizioni corrispondenti, i nomi dei caratteri, le dimensioni dei caratteri, la direzione di scrittura (orizzontale o verticale) per ciascun segmento di testo. Non riconosce il testo nelle immagini.
 
 PDFMiner si basa sulla ricostruzione di alcune delle informazioni contenute nel formato PDF, adottando una strategia di parsing lazy, cioè quella di analizzare le istruzioni della struttura del documento PDF solo quando è necessario.
 Per effettuare il parsing è necessario utilizzare almeno le classi \texttt{PDFParser}, che si occupa di recuperare i dati dal file, e \texttt{PDFDocument}, che si occupa di memorizzare i dati recuperati.

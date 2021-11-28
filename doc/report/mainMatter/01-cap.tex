@@ -8,12 +8,12 @@ I \textit{metadati} sono informazioni associate ad una pagina web o ad una porzi
 
 Una volta definiti, i metadati possono essere condivisi e riutilizzati in più occasioni. Questo riutilizzo comporta i seguenti vantaggi:
 \begin{itemize}
-\item aumentare l'interoperabilità tra diversi sistemi che condividono dati e servizi.
-\item ridurre i costi nello sviluppo di sistemi interoperabili, poiché il riutilizzo evita il trattamento delle ambiguità all'interno delle applicazioni.
-\item facilitare il trattamento dei dati nei sistemi informativi in genere, ed in particolare in quelli che integrano e condividono dati, ad esempio, sistemi di supporto per il processo decisionale.
+\item aumentare l'interoperabilità tra diversi sistemi che condividono dati e servizi;
+\item ridurre i costi nello sviluppo di sistemi interoperabili, poiché il riutilizzo evita il trattamento delle ambiguità all'interno delle applicazioni;
+\item facilitare il trattamento dei dati nei sistemi informativi, ed in particolare in quelli che integrano e condividono dati, ad esempio i sistemi di supporto per il processo decisionale.
 \end{itemize}
 
-I metadati possono essere raggruppati o strutturati come “schemi di metadati”, un insieme di metadati progettati per uno scopo specifico, come la descrizione di un tipo di informazioni su una risorsa. La definizione o il significato degli elementi in sé è noto come semantica dello schema. I valori dati agli elementi dei metadati sono il suo contenuto. Gli schemi di metadati di solito specificano i nomi degli elementi e la loro semantica.
+I metadati possono essere raggruppati o strutturati come "schemi di metadati", un insieme di metadati progettati per uno scopo specifico, come la descrizione di un tipo di informazioni su una risorsa. La definizione o il significato degli elementi in sé è noto come semantica dello schema. I valori dati agli elementi dei metadati rappresentano il suo contenuto. Gli schemi di metadati di solito specificano i nomi degli elementi e la loro semantica.
 
 Per garantire un alto livello di consistenza dei contenuti, è possibile specificare regole di contenuto, ovvero linee guida che prescrivono quale tipo di informazione è registrata in ogni elemento di metadati, dove trovare le informazioni (es. da un'intestazione di pagina web, una didascalia di una fotografia, ecc.) e come l'informazione è formattata. 
 
@@ -25,8 +25,8 @@ Gli schemi di metadati sviluppati e mantenuti da organizzazioni standard (come I
 
 I metadati sono generalmente classificati in tre tipi:
 \begin{itemize}
-\item \textit{metadati descrittivi}, descrivono una risorsa informativa per l'identificazione e il recupero attraverso elementi come titolo, autore e abstract.
-\item \textit{metadati strutturali}, documentano le relazioni tra gli oggetti attraverso elementi come i collegamenti ad altri componenti (ad esempio, come le pagine vengono messe insieme per formare i capitoli).
+\item \textit{metadati descrittivi}, descrivono una risorsa informativa per l'identificazione e il recupero attraverso elementi come titolo, autore e abstract;
+\item \textit{metadati strutturali}, documentano le relazioni tra gli oggetti attraverso elementi come i collegamenti ad altri componenti (ad esempio, come le pagine vengono messe insieme per formare i capitoli);
 \item \textit{metadati amministrativi}, aiutano a gestire le risorse informative attraverso elementi quali il numero di versione, la data di archiviazione e altre informazioni tecniche ai fini della gestione dei file, della gestione dei diritti e della conservazione.
 \end{itemize}
 
@@ -58,10 +58,10 @@ Tra i tool che sfruttano questa tecnica vi sono MarcEdit, che mediante appositi 
 L'OAI-PMH fornisce un framework di interoperabilità, indipendente dall'applicazione, basata sul raccoglimento dei metadati. Il framework di OAI-PMH comprende i service provider, che eseguono richieste per effettuare la raccolta dei metadati, e i data provider, che espongono i metadati. OAI-PMH è largamente utilizzato da biblioteche digitali, repository istituzionali e archivi digitali\cite{harvesting}. Alcuni esempi di archivi che implementano OAI-PMH sono:
 
 \begin{itemize}
-\item Digital Public Library of America (DPLA), aggrega metadati relativi a enti istituzionali americani
-\item National Science Digital Library (NSDL), è un libreria digitale ad accesso libero contenente collezioni di metadati inerenti a scienze, tecnologia, ingegneria e matematica
-\item OAIster, un catalogo di milioni di record relativi a risorse di fonti eterogenee
-\item Open Language Archives Community (OLAC), una libreria virtuale di risorse linguistiche
+\item Digital Public Library of America (DPLA), aggrega metadati relativi a enti istituzionali americani;
+\item National Science Digital Library (NSDL), è un libreria digitale ad accesso libero contenente collezioni di metadati inerenti a scienze, tecnologia, ingegneria e matematica;
+\item OAIster, un catalogo di milioni di record relativi a risorse di fonti eterogenee;
+\item Open Language Archives Community (OLAC), una libreria virtuale di risorse linguistiche.
 \end{itemize}
 
 \subsection{Estrazione di contenuti}
@@ -76,18 +76,18 @@ I \textbf{metodi statistici} sono i più semplici. Calcolano le statistiche per 
 
 \textbf{YAKE!} (Yet Another Keyword Extractor) è un metodo di estrazione di parole chiave che utilizza feature statistiche ricavate da un singolo documento per estrarre le parole chiave. Estrae le parole chiave in cinque passaggi:
 \begin{enumerate}
-\item \textbf{Pre-elaborazione e identificazione del termine candidato}: il testo è suddiviso in frasi, blocchi (parte della frase separata da punteggiatura) e token. Il testo viene pulito, etichettato e vengono identificate le stop words.
+\item \textbf{Pre-elaborazione e identificazione del termine candidato}: il testo è suddiviso in frasi, blocchi (parte della frase separata da punteggiatura) e token. Il testo viene pulito, etichettato e vengono identificate le stop words;
 \item \textbf{Estrazione delle caratteristiche}: calcola le seguenti cinque feature statistiche per i termini (parole) nel documento:
 \begin{itemize}
-\item Casing: conta il numero di volte (in proporzionale al numero complessivo di volte in cui compare) in cui il termine appare in maiuscolo o come acronimo nel testo. Un termine significativo di solito appare più spesso in maiuscolo.
-\item Posizione del termine: posizione mediana della frase del termine nel testo. I termini più vicini all'inizio tendono a essere i più significativi.
+\item Casing: conta il numero di volte (in proporzionale al numero complessivo di volte in cui compare) in cui il termine appare in maiuscolo o come acronimo nel testo. Un termine significativo di solito appare più spesso in maiuscolo;
+\item Posizione del termine: posizione mediana della frase del termine nel testo. I termini più vicini all'inizio tendono a essere i più significativi;
 \item Normalizzazione della frequenza dei termini: misura la frequenza bilanciata dei termini nel documento.
-\item Relazione del termine al contesto: misura con quanti termini diversi il termine candidato coesiste. Termini più significativi coesistono con meno termini diversi. 
+\item Relazione del termine al contesto: misura con quanti termini diversi il termine candidato coesiste. Termini più significativi coesistono con meno termini diversi;
 \item Termine in frasi diverse: misura quante volte i termini compaiono in frasi diverse. Un punteggio più alto indica un termine più significativo.
 \end{itemize}
-\item \textbf{Calcolo del punteggio del termine}: le funzioni del passaggio precedente vengono combinate in un unico punteggio.
-\item \textbf{Generazione di n-grammi e calcolo dei punteggi delle parole chiave}: l'algoritmo identifica tutti gli n-grammi validi. Le parole negli n-grammi devono appartenere allo stesso blocco e non devono iniziare o terminare con una stopword. Successivamente, ogni n-gramma viene valutato moltiplicando i punteggi dei suoi membri e normalizzato per ridurre l'impatto della lunghezza dell'n-gramma. Le stopword vengono trattate in modo diverso per ridurre al minimo il loro impatto.
-\item \textbf{Deduplicazione e ranking dei dati}: vengono rimosse le parole chiavi simili tra loro.
+\item \textbf{Calcolo del punteggio del termine}: le funzioni del passaggio precedente vengono combinate in un unico punteggio;
+\item \textbf{Generazione di n-grammi e calcolo dei punteggi delle parole chiave}: l'algoritmo identifica tutti gli n-grammi validi. Le parole negli n-grammi devono appartenere allo stesso blocco e non devono iniziare o terminare con una stopword. Successivamente, ogni n-gramma viene valutato moltiplicando i punteggi dei suoi membri e normalizzato per ridurre l'impatto della lunghezza dell'n-gramma. Le stopword vengono trattate in modo diverso per ridurre al minimo il loro impatto;
+\item \textbf{Deduplicazione e ranking dei dati}: vengono rimosse le parole chiavi simili tra loro e le restanti vengono ordinate per punteggio.
 \end{enumerate}
 
 \subsubsection{Metodi basati sui grafi}
@@ -96,14 +96,14 @@ I metodi basati su grafi generano un grafo dei termini correlati presenti nei do
 \textbf{TextRank} è un metodo di classificazione basato su grafi utilizzato per estrarre frasi pertinenti o trovare parole chiave. L'estrazione delle parole chiave avviene in cinque passaggi:
 
 \begin{itemize}
-\item \textbf{Tokenizzazione e annotazione del testo} con tag di Part of Speech (PoS) (nomi, articoli, verbi...)
-\item \textbf{Costruzione del grafo di co-occorrenza di parole}: i vertici nel grafo sono parole con tag PoS selezionati. Due vertici sono collegati con un arco se compaiono all'interno della finestra di N parole nel testo. Il grafo è non orientato e non ponderato.
+\item \textbf{Tokenizzazione e annotazione del testo} con tag di Part of Speech (PoS) (nomi, articoli, verbi...);
+\item \textbf{Costruzione del grafo di co-occorrenza di parole}: i vertici nel grafo sono parole con tag PoS selezionati. Due vertici sono collegati con un arco se compaiono all'interno della finestra di N parole nel testo. Il grafo è non orientato e non ponderato;
 \item \textbf{Graph ranking}: partendo con il punteggio di ciascun vertice inizializzato a 1, viene applicato sul grafo l'algoritmo di ranking utilizzando la seguente equazione:
 \begin{equation}
 S(Vi)=(1 - d) + d\left (\sum_{j \in In(Vi)} \frac{S(Vj)}{|Out(Vj)|}\right )
 \end{equation}
-Il peso \textit{S(Vi)} di un vertice \textit{Vi} è calcolato considerando i pesi dei vertici connessi al nodo \textit{Vi}. Nell'equazione, \textit{d} è il fattore di smorzamento impostato su 0,85. Gli \textit{In(Vi)} corrispondono ai collegamenti in entrata al vertice \textit{Vi} e gli \textit{Out(Vj)} ai collegamenti in uscita dal vertice \textit{Vj}. Poiché stiamo considerando grafi non orientati, un collegamento in entrata verso un nodo è anche un collegamento in uscita dallo stesso nodo. L'algoritmo viene eseguito su ciascun nodo in diverse iterazioni fino a quando i pesi sui nodi convergono: la variazione tra le iterazioni è inferiore a 0,0001.
-\item \textbf{Selezione delle parole con il punteggio più alto}: le parole (quindi i vertici) sono ordinate per punteggio, dal più alto al più basso. Viene poi selezionato il primo terzo delle parole.
+Il peso \textit{S(Vi)} di un vertice \textit{Vi} è calcolato considerando i pesi dei vertici connessi al nodo \textit{Vi}. Nell'equazione, \textit{d} è il fattore di smorzamento impostato su 0,85. Gli \textit{In(Vi)} corrispondono ai collegamenti in entrata al vertice \textit{Vi} e gli \textit{Out(Vj)} ai collegamenti in uscita dal vertice \textit{Vj}. Poiché stiamo considerando grafi non orientati, un collegamento in entrata verso un nodo è anche un collegamento in uscita dallo stesso nodo. L'algoritmo viene eseguito su ciascun nodo in diverse iterazioni fino a quando i pesi sui nodi convergono: la variazione tra le iterazioni è inferiore a 0,0001;
+\item \textbf{Selezione delle parole con il punteggio più alto}: le parole (quindi i vertici) sono ordinate per punteggio, dal più alto al più basso. Viene poi selezionato il primo terzo delle parole;
 \item \textbf{Estrazione delle parole chiave}: in questo passaggio, le parole selezionate nella fase precedente vengono unite in parole chiave composte da più parole se compaiono in una stessa frase. Il punteggio delle parole composte corrisponde alla somma dei punteggi delle parole singole che le compongono.
 \end{itemize}
 
@@ -113,23 +113,23 @@ L'algoritmo viene eseguito su ciascun documento separatamente e non necessita di
 
 Include i seguenti passaggi:
 \begin{itemize}
-\item \textbf{Estrazione delle parole chiave candidate}: il testo viene suddiviso in base alle parole chiave candidate in base alle parole di arresto e al delimitatore di frase. Una parola chiave candidata è una frase che si trova tra due stop-word o delimitatori di frase. I delimitatori di frase sono, ad esempio, i caratteri di punteggiatura.
-\item \textbf{Costruzione del grafo di co-occorrenza delle parole chiave}: i vertici nel grafo corrispondono a parole. Sono collegati se compaiono insieme nelle parole chiave candidate. Il grafo è ponderato: il peso corrisponde al numero di volte in cui le parole collegate appaiono insieme nelle parole chiave candidate. Un vertice può essere collegato a sé stesso nel caso corrisponda a una parola che appare in una parola chiave candidata insieme a sé stessa.
+\item \textbf{Estrazione delle parole chiave candidate}: il testo viene suddiviso in parole chiave candidate utilizzando come delimitatori stop word e  punteggiatura. Una parola chiave candidata è una frase che si trova tra due stop-word o delimitatori di frase. I delimitatori di frase sono, ad esempio, i caratteri di punteggiatura;
+\item \textbf{Costruzione del grafo di co-occorrenza delle parole chiave}: i vertici nel grafo corrispondono a parole. Sono collegate se compaiono insieme nelle parole chiave candidate. Il grafo è ponderato: il peso corrisponde al numero di volte in cui le parole collegate appaiono insieme nelle parole chiave candidate. Un vertice può essere collegato a sé stesso nel caso corrisponda a una parola che appare in una parola chiave candidata insieme a sé stessa;
 \item \textbf{Punteggio delle parole}: ogni parola nel grafo è valutata con uno dei seguenti punteggi: 
 \begin{itemize}
-\item \textit{Grado della parola} (\texttt{deg(w)}): numero di parole con cui la parola w co-occorre (somma dei pesi degli archi). Il grado favorisce le parole che compaiono più spesso e in parole chiave più lunghe.
-\item \textit{Frequenza della parola} (\texttt{freq(w)}): numero di volte che la parola appare in qualsiasi parola chiave candidata. Questo criterio favorisce le parole che appaiono più frequentemente.
+\item \textit{Grado della parola} (\texttt{deg(w)}): numero di parole con cui la parola w co-occorre (somma dei pesi degli archi). Il grado favorisce le parole che compaiono più spesso e in parole chiave più lunghe;
+\item \textit{Frequenza della parola} (\texttt{freq(w)}): numero di volte che la parola appare in qualsiasi parola chiave candidata. Questo criterio favorisce le parole che appaiono più frequentemente;
 \item \textit{Rapporto tra grado e frequenza} (\texttt{deg(w)/freq(w)}): favorisce le parole che ricorrono principalmente nelle parole chiave candidate più lunghe. Il grado favorirà le parole chiave più brevi.
 \end{itemize}
-\item \textbf{Punteggio delle parole chiave candidate}: il punteggio di ciascuna parola chiave candidata è la somma dei punteggi delle parole che la compongono.
-\item \textbf{Parole chiave adiacenti}: le parole chiave candidate non includono stopword. Poiché a volte le stopword possono essere parte della parola chiave, vengono aggiunte in questo passaggio. L'algoritmo individua le coppie di parole chiave di cui fa parte almeno una stopword e, nel caso quest'ultima sia presente almeno due volte nel testo, le aggiunge all'insieme delle stopword esistenti. Il punteggio della nuova parola chiave è la somma dei punteggi delle parole chiave che la compongono.
+\item \textbf{Punteggio delle parole chiave candidate}: il punteggio di ciascuna parola chiave candidata è la somma dei punteggi delle parole che la compongono;
+\item \textbf{Parole chiave adiacenti}: le parole chiave candidate non includono stopword. Poiché a volte le stopword possono essere parte della parola chiave, vengono aggiunte in questo passaggio. L'algoritmo individua le coppie di parole chiave di cui fa parte almeno una stopword e, nel caso quest'ultima sia presente almeno due volte nel testo, le aggiunge all'insieme delle stopword esistenti. Il punteggio della nuova parola chiave è la somma dei punteggi delle parole chiave che la compongono;
 \item \textbf{Estrazione delle parole chiave}: viene infine estratto il terzo delle parole chiave con il punteggio migliore.
 \end{itemize}
 
 La differenza principale tra RAKE e TextRank è che RAKE considera le ricorrenze all'interno delle parole chiave candidate invece di una finestra fissa. Utilizza una procedura di punteggio più semplice e statistica: non include l'ottimizzazione. L'algoritmo viene eseguito su ciascun documento separatamente, quindi non necessita di un corpus di documenti.
 
 \subsubsection{Metodi basati sul deep learning}
-Il deep learning è un’area del machine learning che si basa sull’apprendimento dei dati "in profondità" su più livelli. È caratterizzato dalla creazione di un modello di apprendimento automatico a più strati, nel quale i livelli più profondi prendono in input le uscite dei livelli precedenti, trasformandoli e astraendoli sempre di più.
+Il deep learning è un'area del machine learning che si basa sull'apprendimento dei dati "in profondità" su più livelli. È caratterizzato dalla creazione di un modello di apprendimento automatico a più strati, nel quale i livelli più profondi prendono in input le uscite dei livelli precedenti, trasformandoli e astraendoli sempre di più.
 
 La comparsa del deep learning ha consentito metodi basati sull'embedding, un insieme di tecniche di modellazione in cui le parole vengono mappate in vettori di numeri reali. 
 
@@ -140,9 +140,9 @@ Così come la content extraction, l'\textbf{indicizzazione automatica} prevede l
 
 Il processo di indicizzazione si compone di tre fasi:
 \begin{itemize}
-\item analisi del documento e individuazione del suo tema di base (il contenuto concettuale).
-\item identificazione dei concetti principali presenti in tale contenuto (l'insieme di tali concetti costituisce il "soggetto" del documento stesso).
-\item traduzione nei termini di un linguaggio di indicizzazione, utilizzando termini estratti dal documento stesso (indicizzazione derivata, o estratta) oppure avvalendosi di un dizionario controllato ("indicizzazione assegnata")
+\item analisi del documento e individuazione del suo tema di base (il contenuto concettuale);
+\item identificazione dei concetti principali presenti in tale contenuto (l'insieme di tali concetti costituisce il "soggetto" del documento stesso);
+\item traduzione nei termini di un linguaggio di indicizzazione, utilizzando termini estratti dal documento stesso (indicizzazione derivata, o estratta) oppure avvalendosi di un dizionario controllato ("indicizzazione assegnata").
 \end{itemize}
 
 \subsection{Text e data mining}
@@ -154,13 +154,13 @@ Il \textbf{text mining} è un campo interdisciplinare che attinge al recupero de
 Le tipiche attività di text mining includono la categorizzazione del testo, il clustering del testo, l'estrazione di concetti/entità, la produzione di tassonomie granulari, l'analisi del sentiment, il riepilogo dei documenti e la modellazione delle relazioni tra entità (ovvero, relazioni di apprendimento tra entità nominate). Altri esempi includono il data mining multilingue, l'analisi del testo multidimensionale, il text mining contestuale e l'analisi della fiducia e dell'evoluzione nei dati di testo, nonché le applicazioni di text mining in materia di sicurezza, analisi della letteratura biomedica, analisi dei media online e gestione analitica delle relazioni con i clienti. Vari tipi di software e strumenti di analisi e estrazione di testo sono disponibili nelle istituzioni accademiche, nei forum open source e nell'industria. L'estrazione di testo utilizza spesso anche WordNet, Sematic Web, Wikipedia e altre fonti di informazioni per migliorare la comprensione e l'estrazione dei dati di testo.\cite{textmining}
 
 \subsection{Autogenerazione di dati estrinseci}
-La generazione automatica di dati estrinseci è il processo di estrazione dei metadati su una risorsa informativa che non è contenuta all'interno della risorsa stessa. La generazione automatica di dati estrinseci può includere l'estrazione di metadati tecnici come il formato e le dimensioni del file, ma può essere anche l'estrazione di funzionalità più complesse come il livello di classe scolastica a cui è destinata una risorsa didattica o il tipo di lettori per cui è destinato un documento.
+La \textbf{generazione automatica di dati estrinseci} è il processo di estrazione dei metadati su una risorsa informativa che non è contenuta all'interno della risorsa stessa. La generazione automatica di dati estrinseci può includere l'estrazione di metadati tecnici come il formato e le dimensioni del file, ma può essere anche l'estrazione di funzionalità più complesse come il livello di classe scolastica a cui è destinata una risorsa didattica o il tipo di lettori per cui è destinato un documento.
 Processi di questo tipo sono difficili da implementare a causa dell'assenza di informazioni sul contesto di una risorsa
 contenute nella risorsa stessa.
 Tra i tool che implementano questa tecnica di estrazione di metadati vi sono Dspace e JHove.
 
 \subsection{Social Tagging}
-Il social tagging è una forma di generazione di metadati, sebbene non propriamente automatica, che permette agli utenti di creare e assegnare tag alle risorse di un sito web. A causa del costo relativamente basso della generazione e del mantenimento dei metadati attraverso il social tagging e della sua attuale popolarità diffusa, alcuni progetti hanno tentato di utilizzare questi dati per migliorare i repository di archiviazione di metadati. Ad esempio, Linstaedt et al. usa programmi per analizzare le immagini statiche trovate all'interno di Flickr e utilizzare questi risultati d'analisi per propagare tag utente pertinenti a nuove immagini elaborate.
+Il \textbf{social tagging} è una forma di generazione di metadati, sebbene non propriamente automatica, che permette agli utenti di creare e assegnare tag alle risorse di un sito web. A causa del costo relativamente basso della generazione e del mantenimento dei metadati attraverso il social tagging e della sua attuale popolarità diffusa, alcuni progetti hanno tentato di utilizzare questi dati per migliorare i repository di archiviazione di metadati. Ad esempio, Linstaedt et al. usa programmi per analizzare le immagini statiche trovate all'interno di Flickr e utilizzare questi risultati d'analisi per propagare tag utente pertinenti a nuove immagini elaborate.
 
 Un esempio di utilizzo del social tagging più complesso può consistere nell'utilizzare tecniche di apprendimento automatico, tenendo traccia dei cambiamenti applicati sui metadati associati a una risorsa da parte degli utenti e migliorare quindi i meccanismi di learning del database sulla base di queste modifiche.
 Tra i tool che supportano il social tagging vi sono Dspace e Omeka.
@@ -183,7 +183,7 @@ I ricercatori che gestiscono il contenuto delle risorse digitali per la generazi
 \subsubsection{Struttura del documento}
 I ricercatori hanno identificato relazioni tra genere, contenuto e struttura del documento. Ad esempio, il genere del documento può dare informazioni sulla densità testuale, che può essere utilizzata per prevedere le prestazioni dell'algoritmo di estrazione dei metadati per determinati tipi di documenti.
 
-Il genere del documento inoltre determina una struttura prevedibile che facilita l'estrazione automatica di metadati. Ad esempio, i documenti di ricerca includono informazioni standard come "titolo", "autore" e "affiliazione dell'autore del documento. Gli esperimenti che sfruttano la struttura del documento in questa seconda sede utilizzando un algoritmo Support Vector Machine (SVM) (ad esempio, Han et al., 2003) e Variable Hidden Markov Model (DVHMM) (Takasu, 2003) hanno avuto un discreto successo per la generazione di metadati.
+Il genere del documento inoltre determina una struttura prevedibile che facilita l'estrazione automatica di metadati. Ad esempio, i documenti di ricerca includono informazioni standard come titolo, autore e affiliazione dell'autore del documento. Gli esperimenti che sfruttano la struttura del documento in questa seconda sede utilizzando un algoritmo Support Vector Machine (SVM) (ad esempio, Han et al., 2003) e Variable Hidden Markov Model (DVHMM) (Takasu, 2003) hanno avuto un discreto successo per la generazione di metadati.
 
 \subsubsection{Sistemi di rappresentazione della conoscenza}
 La memorizzazione di metadati può essere eseguita attraverso l'utilizzo di ontologie, thesauri, sistemi classificatori, file di autorità e altri strumenti di rappresentazione della conoscenza.
@@ -204,21 +204,21 @@ Le applicazioni per la generazione di metadati differiscono dal software per la 
 La quantità di elaborazione automatica e umana richiesta per produrre metadati distingue i generatori, applicazioni che si basano principalmente su tecniche automatiche, dagli editor, che integrano l'elaborazione automatica con quella umana.
 
 \paragraph{Data Fountains}
-Data Fountains è uno strumento utilizzabile non solo per descrivere le risorse Internet, ma in primo luogo per scoprirle. Ha tre funzionalità principali:
+Data Fountains è uno strumento utilizzabile non solo per descrivere le risorse internet, ma in primo luogo per scoprirle. Ha tre funzionalità principali:
 
 \begin{itemize}
-\item generazione di metadati per una determinata pagina web dato il suo URL
-\item generazione di metadati per le risorse inerenti a un argomenti particolare
-\item esecuzione del drill-down dei collegamenti a partire da un URL iniziale al fine di generare record di metadati ed estrarre le parti significative del testo analizzato
+\item generazione di metadati per una determinata pagina web dato il suo URL;
+\item generazione di metadati per le risorse inerenti a un argomento particolare;
+\item esecuzione del drill-down dei collegamenti a partire da un URL iniziale al fine di generare record di metadati ed estrarre le parti significative del testo analizzato.
 \end{itemize}
 
 \paragraph{JHOVE}
 \textbf{JHOVE} (JSTOR/Harvard Object Validation Environment) è un framework utilizzabile per eseguire l'identificazione del formato, la validazione e la caratterizzazione di oggetti digitali:
 
 \begin{itemize}
-\item L'identificazione del formato è il processo atto a determinare il formato a cui è conforme un oggetto digitale
-\item La convalida del formato è il processo di determinazione del livello di conformità di un oggetto digitale alla specifica per il suo presunto formato
-\item La caratterizzazione del formato è il processo di determinazione delle proprietà significative specifiche del formato di un oggetto
+\item l'identificazione del formato è il processo atto a determinare il formato a cui è conforme un oggetto digitale;
+\item la convalida del formato è il processo di determinazione del livello di conformità di un oggetto digitale alla specifica per il suo presunto formato;
+\item la caratterizzazione del formato è il processo di determinazione delle proprietà significative specifiche del formato di un oggetto.
 \end{itemize}
 
 Queste azioni sono spesso necessarie durante il funzionamento di routine degli archivi digitali e per le attività di conservazione digitale.
@@ -228,9 +228,9 @@ JHOVE utilizza un'architettura plug-in estensibile; può essere configurato al m
 \paragraph{Kea}
 \textbf{Kea} estrae dai documenti testuali n-grammi con lunghezza predefinita che non iniziano o terminano con una stop word. Nell'indicizzazione controllata, raccoglie solo gli n-grammi che corrispondono ai termini presenti nel thesaurus (dizionario dei sinonimi). Se il thesaurus definisce relazioni tra termini non consentiti (non descrittori) e termini consentiti (descrittori), sostituisce ciascun descrittore con un non descrittore equivalente. Per ciascuna frase candidata, Kea computa quattro feature:
 \begin{itemize}
-\item{\textbf{TF-IDF}}, misura l'importanza di un termine rispetto a una collezione di documenti. Aumenta al numero di volte che il termine è contenuto nel documento, e diminuisce con la frequenza del termine nella collezione proporzionalmente
-\item{\textbf{First occurrence}}, è computata come la percentuale della quantità di testo che precede la prima occorrenza del termine nel documento. La probabilità che i termini che compaiono all'inizio dei documenti siano elementi chiave è maggiore rispetto a quella degli altri
-\item{\textbf{Lunghezza della locuzione}}, è il numero delle parole che la compongono
+\item{\textbf{TF-IDF}}, misura l'importanza di un termine rispetto a una collezione di documenti. Aumenta al numero di volte che il termine è contenuto nel documento, e diminuisce con la frequenza del termine nella collezione proporzionalmente;
+\item{\textbf{First occurrence}}, è computata come la percentuale della quantità di testo che precede la prima occorrenza del termine nel documento. La probabilità che i termini che compaiono all'inizio dei documenti siano elementi chiave è maggiore rispetto a quella degli altri;
+\item{\textbf{Lunghezza della locuzione}}, è il numero delle parole che la compongono;
 \item{\textbf{Grado del nodo}}, è il numero di frasi nel set candidato collegati semanticamente a una specifica frase candidata. A un grado del nodo alto aumenta la probabilità che sia una espressione chiave.
 \end{itemize}
 
@@ -257,7 +257,7 @@ Di seguito viene descritto un possibile approccio per estrarre automaticamente i
 E(i) = \sum^{N}_{n=1} \frac{1}{N}| x_i (n)|^{2}
 \end{equation}
 
-Questa funzione può essere utilizzata non solo per identificare gli intervalli silenziosi nei segnali audio, ma anche per distinguere tra le classi audio. D'altra parte, il centroide spettrale, Ci, del segmento i-esimo è definito come il centro di gravità del suo spettro:
+Questa funzione può essere utilizzata non solo per identificare gli intervalli silenziosi nei segnali audio, ma anche per permettere una distinzione tra le classi audio. D'altra parte, il centroide spettrale, Ci, del segmento i-esimo è definito come il centro di gravità del suo spettro:
 
 \begin{equation}
 C(i) = \frac{\sum^{N}_{k=1}(k+1)X_i (k)}{\sum^{N}_{k=1}X_i (k)}
@@ -266,7 +266,7 @@ C(i) = \frac{\sum^{N}_{k=1}(k+1)X_i (k)}{\sum^{N}_{k=1}X_i (k)}
 dove Xi(k) per k=1,…,N sono i coefficienti della trasformata discreta di Fourier (DFT) del segmento i-esimo e N è la lunghezza del segmento. Questa feature è una misura della posizione spettrale, con valori alti corrispondenti a suoni più chiari.
 La motivazione alla base delle due feature presentate è che quando il livello del rumore di fondo è basso, l'energia dei segmenti con voce è maggiore dell'energia dei segmenti silenziosi; inoltre, se i segmenti afoni contengono suoni ambientali, allora il centroide spettrale per i segmenti sonori è di nuovo maggiore, poiché questi suoni rumorosi tendono ad avere frequenze e valori inferiori per esso. Con questi presupposti, le parti del segnale che rappresentano il silenzio vengono utilizzate come separatori per isolare le frasi.
 
-\item \textit{Riconoscimento vocale}: i segmenti audio che rappresentano singole frasi vengono infine immessi in uno strumento di sintesi del testo. Analizza le parole pronunciate e genera il testo corrispondente, traducendo effettivamente i suoni in parole. Il risultato viene memorizzato in un file di testo normale.
+\item \textit{Riconoscimento vocale}: i segmenti audio che rappresentano singole frasi vengono infine immessi in uno strumento di sintesi del testo. Analizza le parole pronunciate e genera il testo corrispondente, traducendo effettivamente i suoni in parole. Il risultato viene memorizzato in un semplice file di testo.
 \end{enumerate}
 
 \section{Metadati di accessibilità per risorse didattiche}
@@ -299,13 +299,13 @@ Al fine di soddisfare le diverse esigenze di questo pubblico, vengono forniti di
 \begin{itemize}
 \item \textbf{Principi}: vi sono innanzitutto quattro principi che forniscono le basi per l'accessibilità del Web:
 \begin{itemize}
-\item \textit{percepibile}: l'informazione del contenuto non è invisibile a tutti i sensi dell'utente
-\item \textit{operabile}: l'interfaccia non deve richiedere un'interazione che un utente non può effettuare
-\item \textit{comprensibile}: il contenuto non può essere al di là della comprensione del fruitore
-\item \textit{robusto}: il contenuto resta accessibile all'avanzare della tecnologia
+\item \textit{percepibile}: l'informazione del contenuto non è invisibile a tutti i sensi dell'utente;
+\item \textit{operabile}: l'interfaccia non deve richiedere un'interazione che un utente non può effettuare;
+\item \textit{comprensibile}: il contenuto non può essere al di là della comprensione del fruitore;
+\item \textit{robusto}: il contenuto resta accessibile all'avanzare della tecnologia.
 \end{itemize}
-\item \textbf{Linee guida}: tredici linee guida forniscono gli obiettivi di base verso i quali gli autori dovrebbero lavorare per rendere i contenuti più accessibili agli utenti con disabilità diverse. Le linee guida non sono testabili, ma forniscono il quadro e gli obiettivi generali per aiutare gli autori a comprendere i criteri di successo e a implementare meglio le tecniche.
-\item \textbf{Criteri di successo}: per ciascuna linea guida, vengono forniti criteri di successo verificabili per consentire l'utilizzo delle WCAG 2.0 laddove sono necessari requisiti e test di conformità, ad esempio nelle specifiche di progettazione, negli acquisti, nei regolamenti e negli accordi contrattuali. Per soddisfare le esigenze dei diversi gruppi e delle diverse situazioni, vengono definiti tre livelli di conformità: A (minimo), AA e AAA (massimo).
+\item \textbf{Linee guida}: tredici linee guida forniscono gli obiettivi di base verso i quali gli autori dovrebbero lavorare per rendere i contenuti più accessibili agli utenti con disabilità diverse. Le linee guida non sono testabili, ma forniscono il quadro e gli obiettivi generali per aiutare gli autori a comprendere i criteri di successo e a implementare meglio le tecniche;
+\item \textbf{Criteri di successo}: per ciascuna linea guida, vengono forniti criteri di successo verificabili per consentire l'utilizzo delle WCAG 2.0 laddove sono necessari requisiti e test di conformità, ad esempio nelle specifiche di progettazione, negli acquisti, nei regolamenti e negli accordi contrattuali. Per soddisfare le esigenze dei diversi gruppi e delle diverse situazioni, vengono definiti tre livelli di conformità: A (minimo), AA e AAA (massimo);
 \item \textbf{Tecniche sufficienti e consultive}: per ciascuna delle linee guida e dei criteri di successo nel documento WCAG 2.0 stesso, il gruppo di lavoro ha anche documentato un'ampia varietà di tecniche. Le tecniche sono informative e si dividono in due categorie: quelle sufficienti per soddisfare i \textit{criteri di successo} e quelle \textit{consultive}. Le tecniche consultive vanno oltre quanto richiesto dai singoli criteri di successo e consentono agli autori di affrontare meglio le linee guida. Alcune tecniche consultive affrontano gli ostacoli all'accessibilità che non sono coperti dai criteri di successo verificabili. Laddove sono noti errori comuni, anche questi vengono documentati.
 \end{itemize}
 
@@ -325,12 +325,12 @@ Una risorsa accessibile è creata e studiata per essere facilmente fruibile da u
     \item \textit{risoluzione}: i documenti dovrebbero essere accessibili ai lettori che utilizzano dispositivi con schermi piccoli o ai lettori che utilizzano monitor a bassa risoluzione;
     \item \textit{testo}: le dimensioni dei caratteri ridotti o ingranditi, il tipo dei caratteri, l'indentazione e lo spazio sono parametri che dovrebbero essere utilizzati in modo da creare un stile da rispettare per il documento e ciò migliora l'accessibilità della risorsa;
     \item \textit{colori}: definiscono un alto livello di accessibilità se definiti con accuratezza, ma non utilizzare testo o sfondo colorato perché lettori non vedenti che accedono tale risorsa tramite una stampa o un dispositivo senza schermo a colori non riceveranno tali informazioni;
-    \item \textit{blocchi di elementi}: gli elementi dell'elenco non si devono separare lasciando righe vuote o interruzioni di colonna tabulari tra di loro;
+    \item \textit{blocchi di elementi}: gli elementi dell'elenco non si devono separare lasciando righe vuote o interruzioni di colonna tabulari tra di loro.
 \end{itemize}
 
 Le immagini che non sono puramente decorative dovrebbero includere un attributo \textit{alt} che sostituisce l'informazione dell'immagine per i lettori non vedenti. Per le immagini è una buona prassi includere una didascalia utilizzando la sintassi dell'immagine incorporata, descrivendo in modo conciso il significato dell'immagine e le informazioni essenziali che trasmette. Il posizionamento delle immagini può essere diverso in base al dispositivo o al formato del documento e per questo motivo si deve evitare il riferimento statico delle immagini basato sulla posizione e utilizzare invece le didascalie per identificarle.
 
-Nel caso di una risorsa multimediale, audio o video, è possibile aumentare l'accessibilità attraverso l'aggiunta dei sottotitoli in un formato di testo temporizzato, scaricabile a parte, contenente la trascrizione delle informazioni sonore.
+Nel caso di una risorsa multimediale, audio o video, è possibile aumentare l'accessibilità attraverso l'aggiunta dei sottotitoli in un formato di testo temporizzato, scaricabile a parte, contenente la trascrizione delle informazioni sonore\cite{accessibility}.
 
 \subsubsection{Leggibilità dei caratteri}
 Durante la lettura del testo, la maggior parte delle persone non legge o analizza le singole parole, ma scansiona rapidamente il testo e analizza schemi e gruppi di caratteri (in genere 6-9 caratteri alla volta) a cui il cervello umano assegna un significato. Questo processo inconscio ci consente di leggere e comprendere il contenuto del testo molto rapidamente con alti gradi di comprensione, anche se non stiamo nemmeno vedendo o pensando a caratteri e parole.
@@ -371,40 +371,40 @@ Utilizza prevalentemente proprietà di risorse di tipo \texttt{Schema.org/Creati
 
 Proprietà aggiunte da LRMI a \texttt{Schema.org/CreativeWork}, che rappresenta un generico lavoro creativo (libro, film, foto, programma software, ecc.):
 \begin{itemize}
-\item \texttt{educationalAligment}: quadro educativo stabilito
-\item \texttt{educationalUse}: scopo del lavoro nel contesto dell'istruzione
-\item \texttt{timeRequired}: tempo approssimativo necessario per lavorare sulla risorsa
-\item \texttt{typicalAgeRange}: fascia di età dell'utente finale
-\item \texttt{interactivityType}: attivo, espositivo o misto
-\item \texttt{learningResourceType}: tipo di risorsa predominante (presentazione, brochure, ecc.)
-\item \texttt{useRightsUrl}: URL in cui vengono stabilite le autorizzazioni per l'utilizzo delle risorse
-\item \texttt{isBasedOnUrl}: risorsa utilizzata per la creazione
+\item \texttt{educationalAligment}: quadro educativo stabilito;
+\item \texttt{educationalUse}: scopo del lavoro nel contesto dell'istruzione;
+\item \texttt{timeRequired}: tempo approssimativo necessario per lavorare sulla risorsa;
+\item \texttt{typicalAgeRange}: fascia di età dell'utente finale;
+\item \texttt{interactivityType}: attivo, espositivo o misto;
+\item \texttt{learningResourceType}: tipo di risorsa predominante (presentazione, brochure, ecc.);
+\item \texttt{useRightsUrl}: URL in cui vengono stabilite le autorizzazioni per l'utilizzo delle risorse;
+\item \texttt{isBasedOnUrl}: risorsa utilizzata per la creazione.
 \end{itemize}
 
 Proprietà aggiunte da LRMI a \texttt{Schema.org/Intangibles/AligmentObject}, un elemento immateriale che descrive un allineamento tra una risorsa di apprendimento e un nodo in un framework didattico:
 \begin{itemize}
-\item \texttt{aligmentType}: allineamento tra la risorsa di apprendimento e il nodo del framework. I valori consigliati includono: 'evaluate', 'teach', 'require', 'textComplexity', 'readingLevel', 'educationalSubject', and 'educationLevel'
-\item \texttt{educationalFramework}: framework per la descrizione delle risorse
-\item \texttt{targetDescription}: descrizione del nodo di un framework didattico
-\item \texttt{targetName}: nome del nodo di un framework didattico
-\item \texttt{targetUrl}: URL di un nodo di un framework didattico
+\item \texttt{aligmentType}: allineamento tra la risorsa di apprendimento e il nodo del framework. I valori consigliati includono: 'evaluate', 'teach', 'require', 'textComplexity', 'readingLevel', 'educationalSubject', and 'educationLevel';
+\item \texttt{educationalFramework}: framework per la descrizione delle risorse;
+\item \texttt{targetDescription}: descrizione del nodo di un framework didattico;
+\item \texttt{targetName}: nome del nodo di un framework didattico;
+\item \texttt{targetUrl}: URL di un nodo di un framework didattico.
 \end{itemize}
 
 Proprietà aggiunte da LRMI a \texttt{Schema.org/Audence/EducationalAudience}:
 \begin{itemize}
-\item \texttt{EducationalRole}: pubblico di destinazione
+\item \texttt{educationalRole}: pubblico di destinazione del contenuto.
 \end{itemize}
 
 \subsection{IMS AfA}
 L'obiettivo principale di IMS Access for All (\textbf{AfA}) v3.0 era quello di semplificare lo standard ISO/IEC 24751 a causa delle difficoltà sorte nella pratica. Entrambi, lo standard ISO/IEC 24751 e AfA v3.0, coprono l'intero processo dalla lettura delle esigenze dell'utente al meccanismo di ricerca necessario per trovare i learning object che soddisfano tali esigenze o preferenze. Ha due modelli di dati:
 \begin{itemize}
-\item Personal Needs and Preferences (PNP): un modello per la descrizione dei bisogni e delle preferenze degli utenti per accedere e interagire con le risorse digitali.
+\item Personal Needs and Preferences (PNP): un modello per la descrizione dei bisogni e delle preferenze degli utenti per accedere e interagire con le risorse digitali;
 \item Digital Resource Description (DRD): un modello per la descrizione dei metadati di accessibilità per le risorse didattiche digitali.
 \end{itemize}
 
 La specifica AfA DRD definisce i metadati di accessibilità per una risorsa che verrà utilizzata per la ricerca e l'uso della risorsa di apprendimento più adatta per ciascun utente secondo i PNP. Lo strumento LOMPAD è stato abilitato per introdurre metadati di accessibilità (oltre ai metadati ordinari) secondo la specifica IMS 3.0.
 
-Il modo di lavorare con oggetti di apprendimento accessibili richiede la creazione di oggetti di apprendimento originali e adattati. Esistono diversi strumenti che ne facilitano la creazione. Una risorsa originale corrisponde a una risorsa iniziale, mentre una risorsa adattata presenta le stesse informazioni didattiche della risorsa iniziale o originale ma con caratteristiche diverse, come la modalità sensoriale di accesso alla risorsa, la lingua, ecc. Ad esempio, un file in formato pdf come risorsa originale e una descrizione audio del suo contenuto come risorsa adattata. Il primo presenta l'accesso testuale mentre l'adattamento presenta l'accesso uditivo allo stesso contenuto didattico. Pertanto, le risorse originali possono avere un numero qualsiasi di adattamenti, totali o parziali.
+Il modo di lavorare con oggetti di apprendimento accessibili richiede la creazione di oggetti di apprendimento originali e adattati. Esistono diversi strumenti che ne facilitano la creazione. Una risorsa originale corrisponde a una risorsa iniziale, mentre una risorsa adattata presenta le stesse informazioni didattiche della risorsa iniziale o originale ma con caratteristiche diverse, come la modalità sensoriale di accesso alla risorsa, la lingua, ecc. Ad esempio, un file in formato pdf come risorsa originale e una descrizione audio del suo contenuto come risorsa adattata. Il primo presenta l'accesso testuale mentre l'adattamento presenta l'accesso uditivo allo stesso contenuto didattico. Pertanto, le risorse originali possono avere un qualsiasi numero di adattamenti, totali o parziali.
 
 I metadati possono supportare le informazioni adeguate delle risorse originali, come la modalità di accesso (vista, udito, alfabetizzazione, presentazione, fattibilità della trasformazione, controllo, flessibilità, adattamenti, strumenti di aiuto, ecc.) e informazioni rilevanti sulle risorse adattate, come il tipo di adattamento (sottotitoli, lingua dei segni), l'estensione, e la descrizione. Una fusione di risorse, metadati descrittivi e metadati di accessibilità corrisponde al consolidamento di una fonte di archivi accessibili che rafforzi la ricerca di learning object secondo i bisogni educativi speciali.
 
@@ -434,8 +434,7 @@ Il formato dei microdati è stato sviluppato nell'ambito della standardizzazione
 
 La specifica Schema.org stabilisce una raccolta di vocabolari condivisi che includono proprietà per descrivere alcune caratteristiche di diversi tipi di contenuto web. Queste descrizioni possono essere comprese dai principali motori di ricerca. Nel caso di Google, il suo motore di ricerca utilizza i microdati HTML5 di Schema.org per migliorare i risultati delle sue ricerche e consente a chiunque di effettuare una ricerca personalizzata utilizzando i diversi schemi di Schema.org per limitare le ricerche.
 
-Per definire i metadati di accessibilità in Schema.org, sono definiti diversi tipi di contenuto web e possono essere
-classificati utilizzando schemi di metadati.
+Per definire i metadati di accessibilità in Schema.org, sono definiti diversi tipi di contenuto web e possono essere classificati utilizzando schemi di metadati.
 I tipi possono avere sottotipi, ad esempio "CreativeWork" ha il tipo "MediaObject" e questo ha a sua volta "VideoObject".
 I metadati di accessibilità definiti da Schema.org si basano su quelli specificati per IMS AfA v3.0 DRD, ma ne è stato selezionato un sottoinsieme significativo. Ciascuno di questi metadati può avere un possibile valore definito nella specifica. In questo modo si possono determinare le caratteristiche di accessibilità di qualsiasi risorsa digitale pubblicata sul web.
 
@@ -455,8 +454,8 @@ L'ontologia ha specificato un insieme di classi per la modellazione dell'accessi
     \item \texttt{AdaptationDetailValue}: diversi tipi di adattamento dei dettagli di una risorsa;
     \item \texttt{AdaptationMediaRequired}: il tipi adattamento obbligatorio del formato audio-visivo della risorsa;
     \item \texttt{AdaptationMediaTypeValue}: diversi tipi di adattamento del formato audio-visivo della risorsa;
-    \item \texttt{AdaptationTypeValue}: diversi tipi di adattamento di una risorsa (ad esempio testo alternativo per le immagini, descrizione testuale per le risorse audio, didascalie per le risorse video, etc);
+    \item \texttt{AdaptationTypeValue}: diversi tipi di adattamento di una risorsa (ad esempio testo alternativo per le immagini, descrizione testuale per le risorse audio, didascalie per le risorse video, ecc.);
     \item \texttt{ControlFlexibilityValue}: rappresenta la flessibilità con il controllo dei dispositivi elettronici (ad esempio tastiera, mouse, etc);
-    \item \texttt{DisplayTransformabilityValue}: rappresenta le trasformazioni che si possono effettuare ad una risorsa in modo da aumentare il suo livello d' accessibilità (ad esempio colore del background, font size, font weight, etc);
+    \item \texttt{DisplayTransformabilityValue}: rappresenta le trasformazioni che si possono effettuare ad una risorsa in modo da aumentare il suo livello d' accessibilità (ad esempio colore del background, dimensione e peso del font, ecc.);
     \item \texttt{EducationalComplexityValue}: modella il livello di complessità di una risorsa;
 \end{itemize}
