@@ -117,7 +117,7 @@ La scelta dei coefficienti è una conseguenza di un processo di affinamento del 
 
 Per ciascuna immagine presente nel documento, estrapolate mediante la libreria Python-tesseract, vengono catturate le aree che contengono testo ed estratto il colore dei caratteri in formato RGB (prelevando il colore più rilevante nella textbox analizzata). Viene poi calcolato il rapporto di contrasto tra questo colore e il colore di sfondo dell'immagine, seguendo i criteri di WCAG 2 dove il range di differenza di luminosità tra i due colori varia da 1 (ad esempio bianco su bianco) a 21 (ad esempio nero su bianco). 
 
-Viene poi calcolata la media dei rapporti relativi alle immagini di ciascun file, e il risultato finale corrisponderà alla media di questi risultati per ogni file.
+Il valore minimo tra quelli calcolati rappresenta il valore dell'immagine meno accessibile e quindi più rappresentativa dell'accessibilità della risorsa.
 
 Il livello minimo per cui il contenuto può essere considerato accessibile è 4.5.
 

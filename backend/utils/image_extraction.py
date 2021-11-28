@@ -33,15 +33,12 @@ def main(filePath):
 
         # open the file
         pdf_file = fitz.open(filePath)
-        total_contrast_sum = 0
-        total_image_count = 0
+        contrasts = []
         # iterate over PDF pages
         for page_index in range(len(pdf_file)):
             # get the page itself
             page = pdf_file[page_index]
             image_list = page.get_images()
-            page_image_count = len(image_list)
-            total_image_count = total_image_count + page_image_count
             # printing number of images found in this page
             """
             if image_list:
@@ -64,7 +61,6 @@ def main(filePath):
 
                 d = pytesseract.image_to_data(image, output_type=Output.DICT)
                 n_boxes = len(d['level'])
-                contrast_sum = 0
                 for i in range(n_boxes):
                     (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
                     im_crop = image.crop((x, y, x + w, y + h))
@@ -72,15 +68,11 @@ def main(filePath):
                     # textColor = colors[-1][1]
                     textColor = tuple(ti/255.0 for ti in colors[-1][1]) 
                     contrastValue = contrast.rgb(backgroundColor, textColor)
-                    contrast_sum = contrast_sum + contrastValue
+                    contrasts.append(contrastValue)
                     #print(textColor, contrastValue)
 
-                # average of contrast for text in the image
-                image_contrast = contrast_sum / n_boxes
-                total_contrast_sum = total_contrast_sum + image_contrast
-
         # average of contrast for each image
-        return str(total_contrast_sum / total_image_count)
+        return str(min(contrasts))
     except:
         return str(-1)
 
