@@ -56,7 +56,7 @@ export class CoursesService {
                     "resourceFontSize" : resource.metadata.fontSize,
                     "resourceExtension": resource.metadata.extension,
                     "resourceReadingEase" : resource.metadata.readingEase,
-                    "resourceCheckRatio" : resource.metadata.checkRatio
+                    "resourceContrastRatio" : resource.metadata.contrastRatio
                 } 
 		  })
         }));

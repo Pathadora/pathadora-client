@@ -8,6 +8,6 @@ export class Resource {
     resourceFontSize?: number;
     resourceExtension?: string;
     resourceReadingEase?: number;
-    resourceCheckRatio?: number;
+    resourceContrastRatio?: number;
     metadata?: {};
 }

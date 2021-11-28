@@ -141,11 +141,11 @@ export class DashboardUserComponent {
         this.recommenderService.sendRequest({
             "action": "resource_generation",
             "learner": "Learner_"+ this.currentUser.user_name + "_" + this.currentUser.user_lastname,
-            "degree": this.currentUser.user_profile.user_degree,
             "faculty": this.selectedFaculty,
             "year": this.selectedYear
         }).subscribe(
-            data => {                
+            data => {       
+                console.log(data)         
                 this.loading = false;
                 this.currentStep = 4;
                 if (data.resources) {
@@ -153,7 +153,7 @@ export class DashboardUserComponent {
                         this.resourcesData.push({
                             resourceExtension: r.extension,
                             name: r.resource,
-                            resourceCheckRatio: r.checkRatio,
+                            resourceContrastRatio: r.contrastRatio,
                             resourceFontSize: r.fontSize,
                             resourceType: r.type,
                             resourceReadingEase: r.readingEase

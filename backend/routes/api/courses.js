@@ -311,7 +311,7 @@ router.post(
         // Do something with the data returned from python script
         v = JSON.parse(value)
         readingEase = v.readibility;
-        checkRatio = v.check_ratio;
+        contrastRatio = v.contrast_ratio;
         fontSize = v.font_size;
       });
 
@@ -326,7 +326,7 @@ router.post(
           metadata: {
             ...originalMetadata,
             readingEase: readingEase,
-            checkRatio: checkRatio,
+            contrastRatio: contrastRatio,
             fontSize: fontSize
           }
         };
