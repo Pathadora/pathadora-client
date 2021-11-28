@@ -71,7 +71,7 @@ def main(filePath):
                     contrasts.append(contrastValue)
                     #print(textColor, contrastValue)
 
-        # average of contrast for each image
+        # minimum contrast
         return str(min(contrasts))
     except:
         return str(-1)
