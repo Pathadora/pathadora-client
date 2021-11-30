@@ -318,13 +318,14 @@ router.post(
       pythonProcess.on('close', (code) => {
         const newResource = {
           name: req.files[0].filename,
-          resourceTopic: req.body.resourceTopic,
-          adaptionType: req.body.adaptionType,
-          displayTransformability: req.body.displayTransformability,
-          accessMode: req.body.accessMode,
-          resourceType: req.body.resourceType,
+
           metadata: {
             ...originalMetadata,
+            resourceTopic: req.body.resourceTopic,
+            adaptionType: req.body.adaptionType,
+            displayTransformability: req.body.displayTransformability,
+            accessMode: req.body.accessMode,
+            resourceType: req.body.resourceType,
             readingEase: readingEase,
             contrastRatio: contrastRatio,
             fontSize: fontSize

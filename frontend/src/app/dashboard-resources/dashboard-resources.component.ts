@@ -173,12 +173,27 @@ export class DashboardResourcesComponent implements OnInit {
                 .map((checked, i) => checked ? this.accessModes[i] : null)
                 .filter(v => v !== null);
 
+                var auditoryIndex = selectedAccessModes.indexOf("auditory");
+                if (auditoryIndex === -1 && this.resourceFValues(i).resourceType === "Acc_ResourceType_Audio" || this.resourceFValues(i).resourceType === "Acc_ResourceType_Audio") {
+                    selectedAccessModes.push("auditory");
+                }
+
+                var textualIndex = selectedAccessModes.indexOf("textual");
+                if (textualIndex === -1 && this.resourceFValues(i).resourceType === "Acc_ResourceType_Textual") {
+                    selectedAccessModes.push("textual");
+                }
+
+                var visualIndex = selectedAccessModes.indexOf("visual");
+                if (visualIndex === -1 && this.resourceFValues(i).resourceType === "Acc_ResourceType_Visual" || this.resourceFValues(i).resourceType === "Acc_ResourceType_Video" || this.resourceFValues(i).resourceType === "Acc_ResourceType_Textual") {
+                    selectedAccessModes.push("visual");
+                }
+
                 fd.append('courseName', c.course_name)
                 fd.append('fileName', this.files[i].name)
                 fd.append('resourceTopic', this.resourceFValues(i).resourceTopic)
-                fd.append('adaptionType', selectedAdaptionTypes)
-                fd.append('displayTransformability', selectedDisplayTransformabilities)
-                fd.append('accessMode', selectedAccessModes)
+                fd.append('adaptionType', JSON.stringify(selectedAdaptionTypes))
+                fd.append('displayTransformability', JSON.stringify(selectedDisplayTransformabilities))
+                fd.append('accessMode', JSON.stringify(selectedAccessModes))
                 fd.append('resourceType', this.resourceFValues(i).resourceType)
 
                 this.coursesService.addResource(c._id, fd)

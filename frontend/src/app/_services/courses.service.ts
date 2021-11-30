@@ -47,9 +47,9 @@ export class CoursesService {
        			},                    
     			"object_properties": {
 				    "resourceOfCourse": "Course_" + formData.get('courseName') ? formData.get('courseName').toString().replace(/ /g,"_") : "",
-        			"adaptionType": formData.get('adaptionType'),
-        			"displayTransformability": formData.get('displayTransformability'),
-				    "AccessMode" : formData.get('accessMode'),
+        			"adaptionType": JSON.parse(formData.get('adaptionType').toString()),
+        			"displayTransformability": JSON.parse(formData.get('displayTransformability').toString()),
+				    "AccessMode" : JSON.parse(formData.get('accessMode').toString()),
         			"resourceType": formData.get('resourceType'),
      			},
                 "data_properties":{
