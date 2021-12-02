@@ -101,7 +101,7 @@ let Course = new Schema({
                 },
                 keywords: [
                     {type: String}
-                ],
+                ]
             }
         }
     ]
