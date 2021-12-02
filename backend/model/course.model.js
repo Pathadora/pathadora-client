@@ -98,7 +98,10 @@ let Course = new Schema({
                 },
                 fontSize: {
                     type: Number
-                }
+                },
+                keywords: [
+                    {type: String}
+                ],
             }
         }
     ]

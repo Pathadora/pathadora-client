@@ -1,5 +1,6 @@
 import os
 import io
+import math
 
 try:
     from PIL import Image
@@ -72,7 +73,8 @@ def main(filePath):
                     #print(textColor, contrastValue)
 
         # minimum contrast
-        return str(min(contrasts))
+        return str(math.floor(min(contrasts)))
+        # return str(min(contrasts))
     except:
         return str(-1)
 

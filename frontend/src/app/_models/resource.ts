@@ -9,5 +9,6 @@ export class Resource {
     resourceExtension?: string;
     resourceReadingEase?: number;
     resourceContrastRatio?: number;
+    resourceKeywords?: string[];
     metadata?: {};
 }

@@ -305,14 +305,15 @@ router.post(
 
       const originalMetadata = await extract(req.files[0].path)
       const pythonProcess = spawn('python',[__dirname + '/../../utils/main.py', req.files[0].path])
-      let readingEase;
+      let readingEase, contrastRatio, fontSize, keywords;
 
       pythonProcess.stdout.on('data', (value) => {
         // Do something with the data returned from python script
-        v = JSON.parse(value)
+        let v = JSON.parse(value)
         readingEase = v.readibility;
         contrastRatio = v.contrast_ratio;
         fontSize = v.font_size;
+        keywords = v.keywords;
       });
 
       pythonProcess.on('close', (code) => {
@@ -328,7 +329,8 @@ router.post(
             resourceType: req.body.resourceType,
             readingEase: readingEase,
             contrastRatio: contrastRatio,
-            fontSize: fontSize
+            fontSize: fontSize,
+            keywords: keywords
           }
         };
         if (!course.course_resources) {
