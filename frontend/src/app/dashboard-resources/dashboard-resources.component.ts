@@ -174,7 +174,7 @@ export class DashboardResourcesComponent implements OnInit {
                 .filter(v => v !== null);
 
                 var auditoryIndex = selectedAccessModes.indexOf("auditory");
-                if (auditoryIndex === -1 && this.resourceFValues(i).resourceType === "Acc_ResourceType_Audio" || this.resourceFValues(i).resourceType === "Acc_ResourceType_Audio") {
+                if (auditoryIndex === -1 && (this.resourceFValues(i).resourceType === "Acc_ResourceType_Audio" || this.resourceFValues(i).resourceType === "Acc_ResourceType_Audio")) {
                     selectedAccessModes.push("auditory");
                 }
 
@@ -184,7 +184,7 @@ export class DashboardResourcesComponent implements OnInit {
                 }
 
                 var visualIndex = selectedAccessModes.indexOf("visual");
-                if (visualIndex === -1 && this.resourceFValues(i).resourceType === "Acc_ResourceType_Visual" || this.resourceFValues(i).resourceType === "Acc_ResourceType_Video" || this.resourceFValues(i).resourceType === "Acc_ResourceType_Textual") {
+                if (visualIndex === -1 && (this.resourceFValues(i).resourceType === "Acc_ResourceType_Visual" || this.resourceFValues(i).resourceType === "Acc_ResourceType_Video")) {
                     selectedAccessModes.push("visual");
                 }
 
