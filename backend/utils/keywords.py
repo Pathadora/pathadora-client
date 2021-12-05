@@ -15,7 +15,6 @@ except:
 
 def main(filePath):
     try:
-        kw_extractor = yake.KeywordExtractor()
         text = str(textract.process(filePath)).encode('windows-1252').decode('utf-8')
         language = "en"
         max_ngram_size = 1

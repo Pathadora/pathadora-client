@@ -36,7 +36,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group" *ngIf="!readOnly">
-                                        <p>Seleziona uno o tipi di adattamento</p>
+                                        <p>Seleziona uno o più tipi di adattamento</p>
                                         <div class="form-check" *ngFor="let at of adaptionTypes; let k = index" formArrayName="adaptionType">
                                             <label class="form-check-label">{{at}}</label>
                                             <input class="form-check-input" type="checkbox" [formControlName]="k" [ngClass]="{ 'is-invalid': submitted && resourceF(j).adaptionType.errors }">
